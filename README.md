@@ -8,7 +8,7 @@ All tasks will be inserted into the `pydra.tasks.<yourtaskpackagename>` namespac
 1. Click on new repo.
 1. Select this template from the repository template drop down list.
 1. Give your repo a name.
-1. Once the repo is created and cloned, search for TODO (`grep -rn TODO . `) and
+1. Once the repo is created and cloned, search for freesurfer (`grep -rn TODO . `) and
    replace with appropriate name.
 1. One of the folders is called TODO. This should also be renamed to your package
    name.
