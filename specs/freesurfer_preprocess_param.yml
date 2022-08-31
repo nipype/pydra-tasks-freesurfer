@@ -1,0 +1,8 @@
+ApplyVolTransform:
+  output_requirements:
+  output_templates:
+  doctest:
+    source_file: test.nii.gz
+    cmdline: mri_vol2vol
+  tests_inputs:
+  tests_outputs:
