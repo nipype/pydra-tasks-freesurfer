@@ -1,6 +1,6 @@
 from nipype.interfaces import freesurfer
-import niworkflows.interfaces.freesurfer
-import smriprep.interfaces.freesurfer
+# import niworkflows.interfaces.freesurfer
+# import smriprep.interfaces.freesurfer
 from nipype.interfaces.base import traits_extension
 from pydra.engine import specs
 from pydra.engine.helpers import ensure_list
