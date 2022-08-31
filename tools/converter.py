@@ -196,7 +196,7 @@ class FreesurferConverter:
         spec_str += f"from ..{self.interface_name.lower()} import {self.interface_name} \n\n"
         if run:
             spec_str += (
-                "@pytest.mark.xfail('ANTSPATH' not in os.environ, reason='no Freesurfer found', "
+                "@pytest.mark.xfail('FREESURFER_HOME' not in os.environ, reason='no Freesurfer found', "
                 "raises=FileNotFoundError)\n"
             )
         spec_str += f"@pytest.mark.parametrize('inputs, outputs', {tests_inp_outp})\n"
@@ -472,7 +472,7 @@ class FreesurferConverter:
         return argstr_new
 
 
-ANTS_MODULES = ['longitudinal', 'model', 'petsurfer', 'preprocess',
+FREESURFER_MODULES = ['longitudinal', 'model', 'petsurfer', 'preprocess',
                 'registration', 'utils']
 
 
@@ -486,12 +486,12 @@ ANTS_MODULES = ['longitudinal', 'model', 'petsurfer', 'preprocess',
     "if all is used all interfaces from the spec file will be created",
 )
 @click.option(
-    "-m", "--module_name", required=True, help=f"name of the module from the list {ANTS_MODULES}"
+    "-m", "--module_name", required=True, help=f"name of the module from the list {FREESURFER_MODULES}"
 )
 def create_pydra_spec(interface_name, module_name):
-    if module_name not in ANTS_MODULES:
+    if module_name not in FREESURFER_MODULES:
         raise Exception(
-            f"module name {module_name} not available;" f"should be from the list {ANTS_MODULES}"
+            f"module name {module_name} not available;" f"should be from the list {FREESURFER_MODULES}"
         )
 
     spec_file = Path(os.path.dirname(__file__)) / f"../specs/freesurfer_{module_name}_param.yml"
