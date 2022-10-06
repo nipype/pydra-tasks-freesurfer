@@ -20,8 +20,10 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                "-i", "ApplyVolTransform",
-                "-m", "preprocess"
+                "-i",
+                "ReconAll",
+                "-m",
+                "preprocess"
             ]
         }
     ]
