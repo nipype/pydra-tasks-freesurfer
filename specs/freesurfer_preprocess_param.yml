@@ -1,9 +1,11 @@
-ApplyVolTransform:
-  output_requirements: []
+ReconAll:
+  output_requirements: [T1_files, subjects_dir, subject_id]
   output_templates:
-    transformed_file: "{source_file}_warped"
+    # transformed_file: "{source_file}_warped"
   doctest:
-    source_file: test.nii.gz
-    cmdline: mri_vol2vol
+    T1_files: "structural.nii"
+    subjects_dir: "."
+    subject_id: "foo"
+    cmdline: "recon-all -all -i structural.nii -qcache -subjid foo -sd ."
   tests_inputs: []
   tests_outputs: []
