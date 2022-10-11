@@ -344,7 +344,7 @@ class FreesurferConverter:
                     tp_pdr = str
             elif nm not in self.interface_spec["output_callables"]:
                 raise Exception(
-                    f"the filed {nm} has genfile=True, but no output template or callables provided"
+                    f"the field {nm} has genfile=True, but no output template or callables provided"
                 )
 
         metadata_pdr.update(metadata_extra_spec)
