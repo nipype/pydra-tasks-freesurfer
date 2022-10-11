@@ -1,8 +1,0 @@
-ReconAll:
-  output_requirements: []
-  output_templates: []
-  doctest:
-    source_file: test.nii.gz
-    cmdline: recon-all
-  tests_inputs: []
-  tests_outputs: []
