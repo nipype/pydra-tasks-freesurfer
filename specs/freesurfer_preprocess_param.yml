@@ -1,7 +1,11 @@
 ReconAll:
-  output_requirements: [T1_files, subjects_dir, subject_id]
+  output_requirements:
+    out_file: T1_files
+    out_subjects_dir: subjects_dir
+    out_subject_id: subject_id
   output_templates:
-    # transformed_file: "{source_file}_warped"
+    subjects_dir: "{subjects_dir}_ReconAll"
+
   doctest:
     T1_files: "structural.nii"
     subjects_dir: "."
