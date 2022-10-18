@@ -13,7 +13,7 @@
             "justMyCode": true
         },
         {
-            "name": "Python: Converter",
+            "name": "Python: Convert ReconAll",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/tools/converter.py",
@@ -22,6 +22,20 @@
             "args": [
                 "-i",
                 "ReconAll",
+                "-m",
+                "preprocess"
+            ]
+        },
+        {
+            "name": "Python: Convert ApplyVolTransform",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/converter.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "-i",
+                "ApplyVolTransform",
                 "-m",
                 "preprocess"
             ]
