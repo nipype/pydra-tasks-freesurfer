@@ -7,9 +7,10 @@ ReconAll:
     subjects_dir: "{subjects_dir}_ReconAll"
 
   doctest:
-    T1_files: "structural.nii"
+    T1_files: "test.nii.gz"
     subjects_dir: "."
     subject_id: "foo"
     cmdline: "recon-all -all -i structural.nii -qcache -subjid foo -sd ."
+
   tests_inputs: []
   tests_outputs: []

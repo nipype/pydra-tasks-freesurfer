@@ -311,7 +311,7 @@ class ReconAll(ShellCommandTask):
     Example
     -------
     >>> task = ReconAll()
-    >>> task.inputs.T1_files = "structural.nii"
+    >>> task.inputs.T1_files = "test.nii.gz"
     >>> task.inputs.subjects_dir = "."
     >>> task.inputs.subject_id = "foo"
     >>> task.cmdline
