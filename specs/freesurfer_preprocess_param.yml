@@ -5,7 +5,6 @@ ReconAll:
     out_subject_id: subject_id
   output_templates:
     subjects_dir: "{subjects_dir}_ReconAll"
-
   doctest:
     T1_files: "test.nii.gz"
     subjects_dir: "."
@@ -14,3 +13,12 @@ ReconAll:
 
   tests_inputs: []
   tests_outputs: []
+
+ApplyVolTransform:
+  output_requirements: []
+  output_templates:
+    transformed_file: "{source_file}_warped"
+  doctest:
+    source_file: "test.nii.gz"
+    cmdline: "mri_vol2vol"
+  tests_inputs: []
