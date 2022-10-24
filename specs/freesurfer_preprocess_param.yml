@@ -10,7 +10,7 @@ ReconAll:
     T1_files: "test.nii.gz"
     subjects_dir: "."
     subject_id: "foo"
-    cmdline: "recon-all -all -i structural.nii -qcache -subjid foo -sd ."
+    cmdline: "recon-all -all -subjid foo -i test.nii.gz -sd ."
 
   tests_inputs: []
   tests_outputs: []
