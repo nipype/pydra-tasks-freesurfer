@@ -1,9 +1,10 @@
 ReconAll:
   output_requirements:
-    out_file: T1_files
+    out_file: [in_file]
     out_subjects_dir: subjects_dir
     out_subject_id: subject_id
   output_templates:
+    out_file: "{in_file}_brain"
     subjects_dir: "{subjects_dir}_ReconAll"
 
   doctest:
@@ -12,5 +13,12 @@ ReconAll:
     subject_id: "foo"
     cmdline: "recon-all -all -subjid foo -i test.nii.gz -sd ."
 
-  tests_inputs: []
-  tests_outputs: []
+  tests_inputs:
+    - T1_files: "test.nii.gz"
+    -
+    -
+
+  tests_outputs:
+    - out_file: T1_files
+    - out_subjects_dir: subjects_dir
+    - out_subject_id: subject_id

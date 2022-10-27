@@ -3,7 +3,14 @@ from pathlib import Path
 from ..reconall import ReconAll
 
 
-@pytest.mark.parametrize("inputs, outputs", [])
+@pytest.mark.parametrize(
+    "inputs, outputs",
+    [
+        ({"T1_files": "test.nii.gz"}, [{"out_file": "T1_files"}]),
+        (None, [{"out_subjects_dir": "subjects_dir"}]),
+        (None, [{"out_subject_id": "subject_id"}]),
+    ],
+)
 def test_ReconAll(test_data, inputs, outputs):
     in_file = Path(test_data) / "test.nii.gz"
     if inputs is None:
