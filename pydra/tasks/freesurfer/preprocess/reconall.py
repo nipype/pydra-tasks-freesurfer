@@ -138,7 +138,7 @@ input_fields = [
     ),
     (
         "subjects_dir",
-        ty.Any,
+        str,
         {
             "help_string": "path to subjects directory",
             "argstr": "-sd {subjects_dir}",
