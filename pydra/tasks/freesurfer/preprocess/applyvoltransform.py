@@ -277,9 +277,10 @@ class ApplyVolTransform(ShellCommandTask):
     Example
     -------
     >>> task = ApplyVolTransform()
-    >>> task.inputs.source_file = "test.nii.gz"
+    >>> task.inputs.source_file = "structural.nii.gz"
+    >>> task.inputs.reg_file = "register.dat"
     >>> task.cmdline
-    'mri_vol2vol'
+    ''mri_vol2vol --fstarg --reg register.dat --mov structural.nii --o struct_warped.nii''
     """
 
     input_spec = ApplyVolTransform_input_spec

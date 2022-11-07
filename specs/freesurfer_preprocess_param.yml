@@ -15,11 +15,14 @@ ReconAll:
   tests_outputs: []
 
 ApplyVolTransform:
-  output_requirements: []
+  output_requirements:
+    out_file: source_file
+    out_reg_file: reg_file
   output_templates:
     transformed_file: "{source_file}_warped"
   doctest:
-    source_file: "test.nii.gz"
-    cmdline: "mri_vol2vol"
+    source_file: "structural.nii.gz"
+    reg_file: "register.dat"
+    cmdline: "'mri_vol2vol --fstarg --reg register.dat --mov structural.nii --o struct_warped.nii'"
   tests_inputs: []
   tests_outputs: []
