@@ -21,8 +21,8 @@ ApplyVolTransform:
   output_templates:
     transformed_file: "{source_file}_warped"
   doctest:
-    source_file: "structural.nii.gz"
+    source_file: "../tests/structural.nii.gz"
     reg_file: "register.dat"
-    cmdline: "'mri_vol2vol --fstarg --reg register.dat --mov structural.nii --o struct_warped.nii'"
+    cmdline: "'mri_vol2vol --fstarg --reg register.dat --mov ../tests/structural.nii --o struct_warped.nii'"
   tests_inputs: []
   tests_outputs: []
