@@ -25,7 +25,7 @@ ApplyVolTransform:
     reg_file: "register.dat"
     transformed_file: "./tests/struct_warped.nii"
     target_file: "./tests/structural.nii.gz"
-    inputs.tal: False
+    tal: False
     cmdline: "mri_vol2vol --fstarg --reg register.dat --mov structural.nii --o struct_warped.nii"
   tests_inputs: []
   tests_outputs: []
