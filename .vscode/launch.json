@@ -18,6 +18,7 @@
             "cwd": "${workspaceRoot}/pydra/tasks/freesurfer/",
             "env": {},
             "envFile": "${workspaceRoot}/.env",
+            "justMyCode": false
         },
         {
             "name": "Python: Current File",
