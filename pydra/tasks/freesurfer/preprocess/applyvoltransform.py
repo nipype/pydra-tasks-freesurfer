@@ -86,7 +86,7 @@ input_fields = [
         {
             "help_string": "Linear Transform Array file",
             "argstr": "--lta {lta_file}",
-            "mandatory": True,
+            "mandatory": False,
             "xor": (
                 "reg_file",
                 "lta_file",
@@ -105,7 +105,7 @@ input_fields = [
         {
             "help_string": "LTA, invert",
             "argstr": "--lta-inv {lta_inv_file}",
-            "mandatory": True,
+            "mandatory": False,
             "xor": (
                 "reg_file",
                 "lta_file",
@@ -124,7 +124,7 @@ input_fields = [
         {
             "help_string": "fslRAS-to-fslRAS matrix (FSL format)",
             "argstr": "--fsl {fsl_reg_file}",
-            "mandatory": True,
+            "mandatory": False,
             "xor": (
                 "reg_file",
                 "lta_file",
@@ -143,7 +143,7 @@ input_fields = [
         {
             "help_string": "ScannerRAS-to-ScannerRAS matrix (MNI format)",
             "argstr": "--xfm {xfm_reg_file}",
-            "mandatory": True,
+            "mandatory": False,
             "xor": (
                 "reg_file",
                 "lta_file",
@@ -162,7 +162,7 @@ input_fields = [
         {
             "help_string": "ScannerRAS-to-ScannerRAS matrix = identity",
             "argstr": "--regheader",
-            "mandatory": True,
+            "mandatory": False,
             "xor": (
                 "reg_file",
                 "lta_file",
@@ -181,7 +181,7 @@ input_fields = [
         {
             "help_string": "target MNI152 space",
             "argstr": "--regheader",
-            "mandatory": True,
+            "mandatory": False,
             "xor": (
                 "reg_file",
                 "lta_file",
@@ -200,7 +200,7 @@ input_fields = [
         {
             "help_string": "set matrix = identity and use subject for any templates",
             "argstr": "--s {subject}",
-            "mandatory": True,
+            "mandatory": False,
             "xor": (
                 "reg_file",
                 "lta_file",
