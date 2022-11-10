@@ -280,8 +280,9 @@ class ApplyVolTransform(ShellCommandTask):
     >>> test_dir = os.path.abspath(os.getcwd()) + "/preprocess/tests/"
     >>> task = ApplyVolTransform()
     >>> task.inputs.source_file = test_dir + "structural.nii.gz"
-    >>> task.inputs.reg_file = "register.dat"
+    >>> task.inputs.reg_file = test_dir + "register.dat"
     >>> task.inputs.transformed_file = test_dir + "struct_warped.nii"
+    >>> task.inputs.fs_target = True
     >>> task.cmdline
     'mri_vol2vol --fstarg --reg register.dat --mov structural.nii --o struct_warped.nii'
     """
