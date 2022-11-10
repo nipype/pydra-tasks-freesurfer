@@ -28,7 +28,7 @@ input_fields = [
         {
             "help_string": "Output template volume",
             "argstr": "--targ {target_file}",
-            "mandatory": True,
+            "mandatory": False,
             "xor": ("target_file", "tal", "fs_target"),
         },
     ),
@@ -38,7 +38,7 @@ input_fields = [
         {
             "help_string": "map to a sub FOV of MNI305 (with --reg only)",
             "argstr": "--tal",
-            "mandatory": True,
+            "mandatory": False,
             "xor": ("target_file", "tal", "fs_target"),
         },
     ),
@@ -56,7 +56,7 @@ input_fields = [
         {
             "help_string": "use orig.mgz from subject in regfile as target",
             "argstr": "--fstarg",
-            "mandatory": True,
+            "mandatory": False,
             "requires": ["reg_file"],
             "xor": ("target_file", "tal", "fs_target"),
         },
@@ -282,8 +282,6 @@ class ApplyVolTransform(ShellCommandTask):
     >>> task.inputs.source_file = test_dir + "structural.nii.gz"
     >>> task.inputs.reg_file = "register.dat"
     >>> task.inputs.transformed_file = test_dir + "struct_warped.nii"
-    >>> task.inputs.target_file = test_dir + "structural.nii.gz"
-    >>> task.inputs.tal = False
     >>> task.cmdline
     'mri_vol2vol --fstarg --reg register.dat --mov structural.nii --o struct_warped.nii'
     """
