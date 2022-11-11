@@ -138,7 +138,7 @@ input_fields = [
     ),
     (
         "subjects_dir",
-        ty.Any,
+        str,
         {
             "help_string": "path to subjects directory",
             "argstr": "-sd {subjects_dir}",
@@ -315,7 +315,7 @@ class ReconAll(ShellCommandTask):
     >>> task.inputs.subjects_dir = "."
     >>> task.inputs.subject_id = "foo"
     >>> task.cmdline
-    'recon-all -all -i structural.nii -qcache -subjid foo -sd .'
+    'recon-all -all -subjid foo -i test.nii.gz -sd .'
     """
 
     input_spec = ReconAll_input_spec
