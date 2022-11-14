@@ -8,6 +8,8 @@ from ..reconall import ReconAll
     reason="no Freesurfer found",
     raises=FileNotFoundError,
 )
+
+@pytest.mark.skip("Not convert.py needs work to generate tests")
 @pytest.mark.parametrize("inputs, outputs", [])
 def test_ReconAll(test_data, inputs, outputs):
     in_file = Path(test_data) / "test.nii.gz"

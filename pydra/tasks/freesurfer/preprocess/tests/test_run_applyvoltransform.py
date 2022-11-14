@@ -8,6 +8,8 @@ from ..applyvoltransform import ApplyVolTransform
     reason="no Freesurfer found",
     raises=FileNotFoundError,
 )
+
+@pytest.mark.skip("Not convert.py needs work to generate tests")
 @pytest.mark.parametrize("inputs, outputs", [])
 def test_ApplyVolTransform(test_data, inputs, outputs):
     in_file = Path(test_data) / "test.nii.gz"
