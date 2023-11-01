@@ -130,3 +130,12 @@ dmypy.json
 
 # Pycharm
 .idea
+
+# VS Code
+.vscode
+
+# Mac garbarge
+.DS_store
+
+/pydra/tasks/freesurfer/auto
+/pydra/tasks/freesurfer/_version.py
