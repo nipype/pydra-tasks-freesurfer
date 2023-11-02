@@ -25,7 +25,7 @@
 #     'mris_spherical_average -erode 2 -o 10335 -t 5.0 label lh.entorhinal lh pial . test.out'
 # 
 #     
-task_name: spherical_average
+task_name: SphericalAverage
 nipype_name: SphericalAverage
 nipype_module: nipype.interfaces.freesurfer
 inputs:

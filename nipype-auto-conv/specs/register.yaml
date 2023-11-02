@@ -20,7 +20,7 @@
 #     >>> register.cmdline
 #     'mris_register -curv lh.pial aseg.mgz lh.pial.reg'
 #     
-task_name: register
+task_name: Register
 nipype_name: Register
 nipype_module: nipype.interfaces.freesurfer
 inputs:

@@ -14,7 +14,7 @@
 #     >>> gtmseg.cmdline
 #     'gtmseg --o gtmseg.mgz --s subject_id'
 #     
-task_name: gtm_seg
+task_name: GTMSeg
 nipype_name: GTMSeg
 nipype_module: nipype.interfaces.freesurfer
 inputs:

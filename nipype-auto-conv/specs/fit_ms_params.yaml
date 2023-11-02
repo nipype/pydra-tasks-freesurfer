@@ -17,7 +17,7 @@
 #     'mri_ms_fitparms  flash_05.mgz flash_30.mgz flash_parameters'
 # 
 #     
-task_name: fit_ms_params
+task_name: FitMSParams
 nipype_name: FitMSParams
 nipype_module: nipype.interfaces.freesurfer
 inputs:

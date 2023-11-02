@@ -31,7 +31,7 @@
 #     >>> volmask.cmdline
 #     'mris_volmask --label_left_ribbon 3 --label_left_white 2 --label_right_ribbon 42 --label_right_white 41 --save_ribbon 10335'
 #     
-task_name: volume_mask
+task_name: VolumeMask
 nipype_name: VolumeMask
 nipype_module: nipype.interfaces.freesurfer
 inputs:

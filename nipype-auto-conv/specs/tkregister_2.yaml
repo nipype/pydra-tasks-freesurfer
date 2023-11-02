@@ -35,7 +35,7 @@
 #     'tkregister2 --fsl flirt.mat --mov epi.nii --noedit --reg register.dat'
 #     >>> tk2.run() # doctest: +SKIP
 #     
-task_name: tkregister_2
+task_name: Tkregister2
 nipype_name: Tkregister2
 nipype_module: nipype.interfaces.freesurfer
 inputs:

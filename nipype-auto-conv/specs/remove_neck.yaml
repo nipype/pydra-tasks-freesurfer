@@ -19,7 +19,7 @@
 #     >>> remove_neck.cmdline
 #     'mri_remove_neck norm.mgz trans.mat trans.mat norm_noneck.mgz'
 #     
-task_name: remove_neck
+task_name: RemoveNeck
 nipype_name: RemoveNeck
 nipype_module: nipype.interfaces.freesurfer
 inputs:

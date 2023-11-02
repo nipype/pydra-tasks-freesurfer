@@ -19,7 +19,7 @@
 #     >>> register.cmdline
 #     'mri_em_register -uns 9 -skull norm.mgz aseg.mgz norm_transform.lta'
 #     
-task_name: em_register
+task_name: EMRegister
 nipype_name: EMRegister
 nipype_module: nipype.interfaces.freesurfer
 inputs:

@@ -30,7 +30,7 @@
 #     >>> ca_label.cmdline
 #     'mris_ca_label test lh lh.pial im1.nii lh.aparc.annot'
 #     
-task_name: mr_is_ca_label
+task_name: MRIsCALabel
 nipype_name: MRIsCALabel
 nipype_module: nipype.interfaces.freesurfer
 inputs:

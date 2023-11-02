@@ -42,7 +42,7 @@
 #     >>> curvstats.cmdline
 #     'mris_curvature_stats -m -o lh.curv.stats -F pial -G --writeCurvatureFiles subject_id lh pial pial'
 #     
-task_name: curvature_stats
+task_name: CurvatureStats
 nipype_name: CurvatureStats
 nipype_module: nipype.interfaces.freesurfer
 inputs:

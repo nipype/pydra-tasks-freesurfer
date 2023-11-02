@@ -19,7 +19,7 @@
 #     >>> curv.cmdline
 #     'mris_curvature -w lh.pial'
 #     
-task_name: curvature
+task_name: Curvature
 nipype_name: Curvature
 nipype_module: nipype.interfaces.freesurfer
 inputs:

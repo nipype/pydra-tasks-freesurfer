@@ -16,7 +16,7 @@
 #     'make_average_subject --out average --subjects s1 s2'
 # 
 #     
-task_name: make_average_subject
+task_name: MakeAverageSubject
 nipype_name: MakeAverageSubject
 nipype_module: nipype.interfaces.freesurfer
 inputs:

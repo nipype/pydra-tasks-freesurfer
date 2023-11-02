@@ -18,7 +18,7 @@
 #     'mris_preproc --hemi lh --out concatenated_file.mgz --s subject_id --target fsaverage --iv cont1.nii register.dat --iv cont1a.nii register.dat'
 # 
 #     
-task_name: mris_preproc_recon_all
+task_name: MRISPreprocReconAll
 nipype_name: MRISPreprocReconAll
 nipype_module: nipype.interfaces.freesurfer
 inputs:

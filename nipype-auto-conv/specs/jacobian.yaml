@@ -17,7 +17,7 @@
 #     >>> jacobian.cmdline
 #     'mris_jacobian lh.pial lh.pial lh.jacobian'
 #     
-task_name: jacobian
+task_name: Jacobian
 nipype_name: Jacobian
 nipype_module: nipype.interfaces.freesurfer
 inputs:

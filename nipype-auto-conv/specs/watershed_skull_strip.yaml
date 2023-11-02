@@ -29,7 +29,7 @@
 #     >>> skullstrip.cmdline
 #     'mri_watershed -T1 transforms/talairach_with_skull.lta T1.mgz brainmask.auto.mgz'
 #     
-task_name: watershed_skull_strip
+task_name: WatershedSkullStrip
 nipype_name: WatershedSkullStrip
 nipype_module: nipype.interfaces.freesurfer
 inputs:

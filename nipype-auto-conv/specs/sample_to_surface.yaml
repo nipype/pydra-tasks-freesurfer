@@ -34,7 +34,7 @@
 #     >>> res = sampler.run() # doctest: +SKIP
 # 
 #     
-task_name: sample_to_surface
+task_name: SampleToSurface
 nipype_name: SampleToSurface
 nipype_module: nipype.interfaces.freesurfer
 inputs:

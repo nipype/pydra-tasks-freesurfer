@@ -15,7 +15,7 @@
 #     >>> qc.cmdline
 #     'tal_QC_AZS dirs.txt'
 #     
-task_name: talairach_qc
+task_name: TalairachQC
 nipype_name: TalairachQC
 nipype_module: nipype.interfaces.freesurfer
 inputs:

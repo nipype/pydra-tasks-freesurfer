@@ -30,7 +30,7 @@
 #     >>> res = shots.run() # doctest: +SKIP
 # 
 #     
-task_name: surface_snapshots
+task_name: SurfaceSnapshots
 nipype_name: SurfaceSnapshots
 nipype_module: nipype.interfaces.freesurfer
 inputs:

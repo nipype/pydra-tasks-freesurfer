@@ -18,7 +18,7 @@
 #     >>> tess.inputs.out_file = 'lh.hippocampus'
 #     >>> tess.run() # doctest: +SKIP
 #     
-task_name: mri_tessellate
+task_name: MRITessellate
 nipype_name: MRITessellate
 nipype_module: nipype.interfaces.freesurfer
 inputs:

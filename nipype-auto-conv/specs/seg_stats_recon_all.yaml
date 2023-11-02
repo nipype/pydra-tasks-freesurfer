@@ -42,7 +42,7 @@
 #     'mri_segstats --annot PWS04 lh aparc --avgwf ./avgwf.txt --brain-vol-from-seg --surf-ctx-vol --empty --etiv --euler --excl-ctxgmwm --excludeid 0 --subcortgray --subject 10335 --supratent --totalgray --surf-wm-vol --sum ./summary.stats'
 # 
 #     
-task_name: seg_stats_recon_all
+task_name: SegStatsReconAll
 nipype_name: SegStatsReconAll
 nipype_module: nipype.interfaces.freesurfer
 inputs:

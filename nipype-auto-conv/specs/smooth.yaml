@@ -25,7 +25,7 @@
 #     'mris_volsmooth --i functional.nii --reg register.dat --o foo_out.nii --fwhm 10.000000 --vol-fwhm 6.000000'
 # 
 #     
-task_name: smooth
+task_name: Smooth
 nipype_name: Smooth
 nipype_module: nipype.interfaces.freesurfer
 inputs:

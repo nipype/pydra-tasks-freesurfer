@@ -20,7 +20,7 @@
 #     >>> l2a.cmdline
 #     'mris_label2annot --hemi lh --l lh.aparc.label --a test --s 10335'
 #     
-task_name: label_2_annot
+task_name: Label2Annot
 nipype_name: Label2Annot
 nipype_module: nipype.interfaces.freesurfer
 inputs:

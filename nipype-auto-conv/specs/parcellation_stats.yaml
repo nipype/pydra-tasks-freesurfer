@@ -31,7 +31,7 @@
 #     >>> parcstats.cmdline # doctest: +SKIP
 #     'mris_anatomical_stats -c test.ctab -f lh.test.stats 10335 lh white'
 #     
-task_name: parcellation_stats
+task_name: ParcellationStats
 nipype_name: ParcellationStats
 nipype_module: nipype.interfaces.freesurfer
 inputs:

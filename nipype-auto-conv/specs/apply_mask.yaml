@@ -12,7 +12,7 @@
 #     space with an LTA matrix.
 # 
 #     
-task_name: apply_mask
+task_name: ApplyMask
 nipype_name: ApplyMask
 nipype_module: nipype.interfaces.freesurfer
 inputs:

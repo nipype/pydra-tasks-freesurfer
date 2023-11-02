@@ -24,7 +24,7 @@
 #     'mri_ca_label norm.mgz trans.mat Template_6.nii out.mgz'
 # 
 #     
-task_name: ca_label
+task_name: CALabel
 nipype_name: CALabel
 nipype_module: nipype.interfaces.freesurfer
 inputs:

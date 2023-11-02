@@ -20,7 +20,7 @@
 #     >>> SegmentWM_node.cmdline
 #     'mri_segment norm.mgz wm.seg.mgz'
 #     
-task_name: segment_wm
+task_name: SegmentWM
 nipype_name: SegmentWM
 nipype_module: nipype.interfaces.freesurfer
 inputs:

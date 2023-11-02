@@ -21,7 +21,7 @@
 #     'apas2aseg --i aseg.mgz --o output.mgz'
 # 
 #     
-task_name: apas_2_aseg
+task_name: Apas2Aseg
 nipype_name: Apas2Aseg
 nipype_module: nipype.interfaces.freesurfer
 inputs:

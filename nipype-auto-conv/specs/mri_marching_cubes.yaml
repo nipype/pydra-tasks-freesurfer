@@ -18,7 +18,7 @@
 #     >>> mc.inputs.out_file = 'lh.hippocampus'
 #     >>> mc.run() # doctest: +SKIP
 #     
-task_name: mri_marching_cubes
+task_name: MRIMarchingCubes
 nipype_name: MRIMarchingCubes
 nipype_module: nipype.interfaces.freesurfer
 inputs:

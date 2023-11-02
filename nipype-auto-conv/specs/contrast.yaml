@@ -23,7 +23,7 @@
 #     >>> contrast.cmdline # doctest: +SKIP
 #     'pctsurfcon --lh-only --s 10335'
 #     
-task_name: contrast
+task_name: Contrast
 nipype_name: Contrast
 nipype_module: nipype.interfaces.freesurfer
 inputs:

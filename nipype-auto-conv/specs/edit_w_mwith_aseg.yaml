@@ -20,7 +20,7 @@
 #     >>> editwm.cmdline
 #     'mri_edit_wm_with_aseg -keep-in T1.mgz norm.mgz aseg.mgz wm.asegedit.mgz'
 #     
-task_name: edit_w_mwith_aseg
+task_name: EditWMwithAseg
 nipype_name: EditWMwithAseg
 nipype_module: nipype.interfaces.freesurfer
 inputs:

@@ -17,7 +17,7 @@
 #     >>> inflate.cmdline # doctest: +SKIP
 #     'mris_inflate -no-save-sulc lh.pial lh.inflated'
 #     
-task_name: mr_is_inflate
+task_name: MRIsInflate
 nipype_name: MRIsInflate
 nipype_module: nipype.interfaces.freesurfer
 inputs:

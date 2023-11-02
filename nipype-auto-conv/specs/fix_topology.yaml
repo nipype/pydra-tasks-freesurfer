@@ -24,7 +24,7 @@
 #     >>> ft.cmdline # doctest: +SKIP
 #     'mris_fix_topology -ga -mgz -sphere qsphere.nofix 10335 lh'
 #     
-task_name: fix_topology
+task_name: FixTopology
 nipype_name: FixTopology
 nipype_module: nipype.interfaces.freesurfer
 inputs:

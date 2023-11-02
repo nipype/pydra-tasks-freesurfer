@@ -14,7 +14,7 @@
 #     'mri_binarize --o foo_out.nii --i structural.nii --min 10.000000'
 # 
 #     
-task_name: binarize
+task_name: Binarize
 nipype_name: Binarize
 nipype_module: nipype.interfaces.freesurfer
 inputs:

@@ -19,7 +19,7 @@
 #     'mris_preproc --hemi lh --out concatenated_file.mgz --target fsaverage --iv cont1.nii register.dat --iv cont1a.nii register.dat'
 # 
 #     
-task_name: mris_preproc
+task_name: MRISPreproc
 nipype_name: MRISPreproc
 nipype_module: nipype.interfaces.freesurfer
 inputs:

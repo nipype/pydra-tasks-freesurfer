@@ -23,7 +23,7 @@
 #     >>> paint.cmdline
 #     'mrisp_paint -a 5 aseg.mgz lh.pial lh.avg_curv'
 #     
-task_name: paint
+task_name: Paint
 nipype_name: Paint
 nipype_module: nipype.interfaces.freesurfer
 inputs:

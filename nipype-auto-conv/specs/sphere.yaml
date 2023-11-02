@@ -16,7 +16,7 @@
 #     >>> sphere.cmdline
 #     'mris_sphere lh.pial lh.sphere'
 #     
-task_name: sphere
+task_name: Sphere
 nipype_name: Sphere
 nipype_module: nipype.interfaces.freesurfer
 inputs:

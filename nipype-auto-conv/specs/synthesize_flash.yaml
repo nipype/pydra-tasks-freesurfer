@@ -18,7 +18,7 @@
 #     'mri_synthesize 20.00 30.00 3.000 T1.mgz PD.mgz flash_30syn.mgz'
 # 
 #     
-task_name: synthesize_flash
+task_name: SynthesizeFLASH
 nipype_name: SynthesizeFLASH
 nipype_module: nipype.interfaces.freesurfer
 inputs:

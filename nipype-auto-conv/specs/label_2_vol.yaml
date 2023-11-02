@@ -14,7 +14,7 @@
 #     'mri_label2vol --fillthresh 0.5 --label cortex.label --reg register.dat --temp structural.nii --o foo_out.nii'
 # 
 #     
-task_name: label_2_vol
+task_name: Label2Vol
 nipype_name: Label2Vol
 nipype_module: nipype.interfaces.freesurfer
 inputs:

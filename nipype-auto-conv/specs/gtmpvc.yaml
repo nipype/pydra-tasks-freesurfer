@@ -33,7 +33,7 @@
 #     >>> gtmpvc.cmdline  # doctest: +NORMALIZE_WHITESPACE
 #     'mri_gtmpvc --i sub-01_ses-baseline_pet.nii.gz --mg 0.5 ROI1 ROI2 --o pvc --regheader --seg gtmseg.mgz'
 #     
-task_name: gtmpvc
+task_name: GTMPVC
 nipype_name: GTMPVC
 nipype_module: nipype.interfaces.freesurfer
 inputs:

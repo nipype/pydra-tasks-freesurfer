@@ -19,7 +19,7 @@
 #     'mri_parse_sdcmdir --d . --o dicominfo.txt --sortbyrun --summarize'
 # 
 #     
-task_name: parse_dicom_dir
+task_name: ParseDICOMDir
 nipype_name: ParseDICOMDir
 nipype_module: nipype.interfaces.freesurfer
 inputs:

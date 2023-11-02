@@ -6,7 +6,7 @@
 # Docs
 # ----
 # 
-task_name: one_sample_t_test
+task_name: OneSampleTTest
 nipype_name: OneSampleTTest
 nipype_module: nipype.interfaces.freesurfer
 inputs:
