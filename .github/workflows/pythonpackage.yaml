@@ -95,7 +95,7 @@ jobs:
         path: pydra/tasks/freesurfer/auto
     - name: Check directory structure
       run: |
-        apt install tree
+        sudo apt install tree
         tree .
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
