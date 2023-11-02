@@ -16,7 +16,7 @@
 #     'mris_extract_main_component lh.pial lh.maincmp'
 # 
 #     
-task_name: extract_main_component
+task_name: ExtractMainComponent
 nipype_name: ExtractMainComponent
 nipype_module: nipype.interfaces.freesurfer
 inputs:

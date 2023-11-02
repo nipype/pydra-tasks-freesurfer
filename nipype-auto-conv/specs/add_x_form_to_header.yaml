@@ -32,7 +32,7 @@
 #     [https://surfer.nmr.mgh.harvard.edu/fswiki/mri_add_xform_to_header]
 # 
 #     
-task_name: add_x_form_to_header
+task_name: AddXFormToHeader
 nipype_name: AddXFormToHeader
 nipype_module: nipype.interfaces.freesurfer
 inputs:

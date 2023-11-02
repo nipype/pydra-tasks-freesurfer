@@ -28,7 +28,7 @@
 #     >>> example.cmdline # doctest: +SKIP
 #     'mris_calc -o lh.area.mid lh.area add lh.area.pial'
 #     
-task_name: mr_is_calc
+task_name: MRIsCalc
 nipype_name: MRIsCalc
 nipype_module: nipype.interfaces.freesurfer
 inputs:

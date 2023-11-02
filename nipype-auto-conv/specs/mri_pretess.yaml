@@ -24,7 +24,7 @@
 #     >>> pretess.run() # doctest: +SKIP
 # 
 #     
-task_name: mri_pretess
+task_name: MRIPretess
 nipype_name: MRIPretess
 nipype_module: nipype.interfaces.freesurfer
 inputs:

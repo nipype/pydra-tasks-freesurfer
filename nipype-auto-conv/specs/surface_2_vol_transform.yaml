@@ -22,7 +22,7 @@
 #     >>> res = xfm2vol.run()# doctest: +SKIP
 # 
 #     
-task_name: surface_2_vol_transform
+task_name: Surface2VolTransform
 nipype_name: Surface2VolTransform
 nipype_module: nipype.interfaces.freesurfer
 inputs:

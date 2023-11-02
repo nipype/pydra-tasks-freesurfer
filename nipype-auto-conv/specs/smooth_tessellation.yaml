@@ -21,7 +21,7 @@
 #     >>> smooth.run() # doctest: +SKIP
 # 
 #     
-task_name: smooth_tessellation
+task_name: SmoothTessellation
 nipype_name: SmoothTessellation
 nipype_module: nipype.interfaces.freesurfer
 inputs:

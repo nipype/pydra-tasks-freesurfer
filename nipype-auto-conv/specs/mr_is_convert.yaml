@@ -17,7 +17,7 @@
 #     >>> mris.inputs.out_datatype = 'gii'
 #     >>> mris.run() # doctest: +SKIP
 #     
-task_name: mr_is_convert
+task_name: MRIsConvert
 nipype_name: MRIsConvert
 nipype_module: nipype.interfaces.freesurfer
 inputs:

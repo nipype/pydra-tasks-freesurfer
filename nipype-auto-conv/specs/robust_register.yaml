@@ -25,7 +25,7 @@
 #         Consistent Registration: A Robust Approach.  Neuroimage 53(4) 1181-96.
 # 
 #     
-task_name: robust_register
+task_name: RobustRegister
 nipype_name: RobustRegister
 nipype_module: nipype.interfaces.freesurfer
 inputs:

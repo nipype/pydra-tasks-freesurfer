@@ -30,7 +30,7 @@
 # 
 #     >>> register.run() # doctest: +SKIP
 #     
-task_name: register_av_ito_talairach
+task_name: RegisterAVItoTalairach
 nipype_name: RegisterAVItoTalairach
 nipype_module: nipype.interfaces.freesurfer
 inputs:

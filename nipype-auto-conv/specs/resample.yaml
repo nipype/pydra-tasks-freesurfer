@@ -19,7 +19,7 @@
 #     'mri_convert -vs 2.10 2.10 2.10 -i structural.nii -o resampled.nii'
 # 
 #     
-task_name: resample
+task_name: Resample
 nipype_name: Resample
 nipype_module: nipype.interfaces.freesurfer
 inputs:

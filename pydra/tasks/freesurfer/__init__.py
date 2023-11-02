@@ -21,11 +21,14 @@ if "nipype" not in __version__:
     try:
         from .auto._version import nipype_version, nipype2pydra_version
     except ImportError:
-        warn(
-            "Nipype interfaces haven't been automatically converted from their specs in "
-            f"`nipype-auto-conv`. Please run `{str(pkg_path / 'nipype-auto-conv' / 'generate')}` "
-            "to generated the converted Nipype interfaces in pydra.tasks.freesurfer.auto"
-        )
+        if "No module named pydra.tasks.freesurfer.auto._version":
+            warn(
+                "Nipype interfaces haven't been automatically converted from their specs in "
+                f"`nipype-auto-conv`. Please run `{str(pkg_path / 'nipype-auto-conv' / 'generate')}` "
+                "to generated the converted Nipype interfaces in pydra.tasks.freesurfer.auto"
+            )
+        else:
+            raise
     else:
         n_ver = nipype_version.replace(".", "_")
         n2p_ver = nipype2pydra_version.replace(".", "_")

@@ -20,7 +20,7 @@
 #     'mri_vol2vol --fstarg --reg register.dat --mov structural.nii --o struct_warped.nii'
 # 
 #     
-task_name: apply_vol_transform
+task_name: ApplyVolTransform
 nipype_name: ApplyVolTransform
 nipype_module: nipype.interfaces.freesurfer
 inputs:

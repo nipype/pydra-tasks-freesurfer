@@ -16,7 +16,7 @@
 #     >>> ri.cmdline
 #     'mris_remove_intersection lh.pial lh.pial'
 #     
-task_name: remove_intersection
+task_name: RemoveIntersection
 nipype_name: RemoveIntersection
 nipype_module: nipype.interfaces.freesurfer
 inputs:

@@ -39,7 +39,7 @@
 #     >>> coreg.cmdline # doctest: +ELLIPSIS
 #     'mri_coreg --s fsaverage --no-ref-mask --lta .../registration.lta --sep 4 --sep 5 --mov moving1.nii --sd .'
 #     
-task_name: mri_coreg
+task_name: MRICoreg
 nipype_name: MRICoreg
 nipype_module: nipype.interfaces.freesurfer
 inputs:

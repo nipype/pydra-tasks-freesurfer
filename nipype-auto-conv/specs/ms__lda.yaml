@@ -17,7 +17,7 @@
 #     'mri_ms_LDA -conform -label label.mgz -lda 2 3 -shift 1 -W -synth synth_out.mgz -weight weights.txt FLASH1.mgz FLASH2.mgz FLASH3.mgz'
 # 
 #     
-task_name: ms__lda
+task_name: MS_LDA
 nipype_name: MS_LDA
 nipype_module: nipype.interfaces.freesurfer
 inputs:

@@ -24,7 +24,7 @@
 #     'mri_ca_normalize T1.mgz atlas.nii.gz trans.mat T1_norm.mgz'
 # 
 #     
-task_name: ca_normalize
+task_name: CANormalize
 nipype_name: CANormalize
 nipype_module: nipype.interfaces.freesurfer
 inputs:

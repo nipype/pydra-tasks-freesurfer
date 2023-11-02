@@ -20,7 +20,7 @@
 #     >>> mris_expand.cmdline
 #     'mris_expand -thickness lh.white 0.5 graymid'
 #     
-task_name: mr_is_expand
+task_name: MRIsExpand
 nipype_name: MRIsExpand
 nipype_module: nipype.interfaces.freesurfer
 inputs:

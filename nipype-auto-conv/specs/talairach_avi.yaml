@@ -24,7 +24,7 @@
 # 
 #     >>> example.run() # doctest: +SKIP
 #     
-task_name: talairach_avi
+task_name: TalairachAVI
 nipype_name: TalairachAVI
 nipype_module: nipype.interfaces.freesurfer
 inputs:

@@ -26,7 +26,7 @@
 #     >>> mprtomni305.run() # doctest: +SKIP
 # 
 #     
-task_name: mp_rto_mni305
+task_name: MPRtoMNI305
 nipype_name: MPRtoMNI305
 nipype_module: nipype.interfaces.freesurfer
 inputs:

@@ -21,7 +21,7 @@
 #     'mri_convert --out_type mgz --input_volume structural.nii --output_volume outfile.mgz'
 # 
 #     
-task_name: mri_convert
+task_name: MRIConvert
 nipype_name: MRIConvert
 nipype_module: nipype.interfaces.freesurfer
 inputs:

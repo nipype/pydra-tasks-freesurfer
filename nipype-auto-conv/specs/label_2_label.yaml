@@ -31,7 +31,7 @@
 #     >>> l2l.cmdline
 #     'mri_label2label --hemi lh --trglabel lh-pial_converted.stl --regmethod surface --srclabel lh-pial.stl --srcsubject fsaverage --trgsubject 10335'
 #     
-task_name: label_2_label
+task_name: Label2Label
 nipype_name: Label2Label
 nipype_module: nipype.interfaces.freesurfer
 inputs:

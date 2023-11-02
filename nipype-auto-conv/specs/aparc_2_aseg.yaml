@@ -41,7 +41,7 @@
 #     'mri_aparc2aseg --labelwm  --o aparc+aseg.mgz --rip-unknown --s subject_id'
 # 
 #     
-task_name: aparc_2_aseg
+task_name: Aparc2Aseg
 nipype_name: Aparc2Aseg
 nipype_module: nipype.interfaces.freesurfer
 inputs:

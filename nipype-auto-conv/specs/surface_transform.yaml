@@ -23,7 +23,7 @@
 #     >>> sxfm.run() # doctest: +SKIP
 # 
 #     
-task_name: surface_transform
+task_name: SurfaceTransform
 nipype_name: SurfaceTransform
 nipype_module: nipype.interfaces.freesurfer
 inputs:

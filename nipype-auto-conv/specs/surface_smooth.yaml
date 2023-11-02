@@ -31,7 +31,7 @@
 #     >>> smoother.run() # doctest: +SKIP
 # 
 #     
-task_name: surface_smooth
+task_name: SurfaceSmooth
 nipype_name: SurfaceSmooth
 nipype_module: nipype.interfaces.freesurfer
 inputs:

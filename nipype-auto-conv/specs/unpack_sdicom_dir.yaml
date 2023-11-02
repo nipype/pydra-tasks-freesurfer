@@ -22,7 +22,7 @@
 #     >>> unpack.cmdline
 #     'unpacksdcmdir -generic -targ . -run 5 mprage nii struct -src .'
 #     
-task_name: unpack_sdicom_dir
+task_name: UnpackSDICOMDir
 nipype_name: UnpackSDICOMDir
 nipype_module: nipype.interfaces.freesurfer
 inputs:

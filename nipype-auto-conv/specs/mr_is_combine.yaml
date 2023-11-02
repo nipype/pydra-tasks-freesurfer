@@ -29,7 +29,7 @@
 #     'mris_convert --combinesurfs lh.pial rh.pial bh.pial'
 #     >>> mris.run()  # doctest: +SKIP
 #     
-task_name: mr_is_combine
+task_name: MRIsCombine
 nipype_name: MRIsCombine
 nipype_module: nipype.interfaces.freesurfer
 inputs:

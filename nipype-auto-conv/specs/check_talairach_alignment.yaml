@@ -21,7 +21,7 @@
 # 
 #     >>> checker.run() # doctest: +SKIP
 #     
-task_name: check_talairach_alignment
+task_name: CheckTalairachAlignment
 nipype_name: CheckTalairachAlignment
 nipype_module: nipype.interfaces.freesurfer
 inputs:

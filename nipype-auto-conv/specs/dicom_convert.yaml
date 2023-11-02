@@ -16,7 +16,7 @@
 #     >>> cvt.inputs.file_mapping = [('nifti', '*.nii'), ('info', 'dicom*.txt'), ('dti', '*dti.bv*')]
 # 
 #     
-task_name: dicom_convert
+task_name: DICOMConvert
 nipype_name: DICOMConvert
 nipype_module: nipype.interfaces.freesurfer
 inputs:

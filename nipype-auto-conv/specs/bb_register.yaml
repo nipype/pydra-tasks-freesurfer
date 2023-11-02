@@ -20,7 +20,7 @@
 #     'bbregister --t2 --init-header --reg structural_bbreg_me.dat --mov structural.nii --s me'
 # 
 #     
-task_name: bb_register
+task_name: BBRegister
 nipype_name: BBRegister
 nipype_module: nipype.interfaces.freesurfer
 inputs:

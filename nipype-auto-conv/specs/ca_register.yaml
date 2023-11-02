@@ -22,7 +22,7 @@
 #     'mri_ca_register norm.mgz talairach.m3z'
 # 
 #     
-task_name: ca_register
+task_name: CARegister
 nipype_name: CARegister
 nipype_module: nipype.interfaces.freesurfer
 inputs:

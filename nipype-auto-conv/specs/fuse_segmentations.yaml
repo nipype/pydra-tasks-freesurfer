@@ -20,7 +20,7 @@
 #     >>> fuse.cmdline
 #     'mri_fuse_segmentations -n norm.mgz -a aseg.mgz -c aseg.mgz tp.long.A.template tp1 tp2'
 #     
-task_name: fuse_segmentations
+task_name: FuseSegmentations
 nipype_name: FuseSegmentations
 nipype_module: nipype.interfaces.freesurfer
 inputs:

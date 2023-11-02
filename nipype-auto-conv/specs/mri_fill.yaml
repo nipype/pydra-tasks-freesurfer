@@ -18,7 +18,7 @@
 #     >>> fill.cmdline # doctest: +SKIP
 #     'mri_fill wm.mgz filled.mgz'
 #     
-task_name: mri_fill
+task_name: MRIFill
 nipype_name: MRIFill
 nipype_module: nipype.interfaces.freesurfer
 inputs:

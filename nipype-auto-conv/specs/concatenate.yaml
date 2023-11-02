@@ -20,7 +20,7 @@
 #     'mri_concat --o bar.nii --i cont1.nii --i cont2.nii'
 # 
 #     
-task_name: concatenate
+task_name: Concatenate
 nipype_name: Concatenate
 nipype_module: nipype.interfaces.freesurfer
 inputs:

@@ -20,7 +20,7 @@
 #     'mri_segstats --annot PWS04 lh aparc --avgwf ./avgwf.txt --i functional.nii --sum ./summary.stats'
 # 
 #     
-task_name: seg_stats
+task_name: SegStats
 nipype_name: SegStats
 nipype_module: nipype.interfaces.freesurfer
 inputs:

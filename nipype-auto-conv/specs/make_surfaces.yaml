@@ -27,7 +27,7 @@
 #     >>> makesurfaces.cmdline
 #     'mris_make_surfaces -T1 T1.mgz -orig pial -orig_pial pial 10335 lh'
 #     
-task_name: make_surfaces
+task_name: MakeSurfaces
 nipype_name: MakeSurfaces
 nipype_module: nipype.interfaces.freesurfer
 inputs:

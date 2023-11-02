@@ -19,7 +19,7 @@
 #     >>> normalize.cmdline
 #     'mri_normalize -g 1 T1.mgz T1_norm.mgz'
 #     
-task_name: normalize
+task_name: Normalize
 nipype_name: Normalize
 nipype_module: nipype.interfaces.freesurfer
 inputs:

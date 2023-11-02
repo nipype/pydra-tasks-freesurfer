@@ -33,7 +33,7 @@
 #     >>> conc_lta.cmdline
 #     'mri_concatenate_lta -invert1 -out_type 1 lta1.lta identity.nofile inv1.lta'
 #     
-task_name: concatenate_lta
+task_name: ConcatenateLTA
 nipype_name: ConcatenateLTA
 nipype_module: nipype.interfaces.freesurfer
 inputs:

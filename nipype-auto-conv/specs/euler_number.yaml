@@ -16,7 +16,7 @@
 #     >>> ft.cmdline
 #     'mris_euler_number lh.pial'
 #     
-task_name: euler_number
+task_name: EulerNumber
 nipype_name: EulerNumber
 nipype_module: nipype.interfaces.freesurfer
 inputs:

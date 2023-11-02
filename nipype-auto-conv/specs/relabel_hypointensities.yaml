@@ -19,7 +19,7 @@
 #     >>> relabelhypos.cmdline
 #     'mri_relabel_hypointensities aseg.mgz . aseg.hypos.mgz'
 #     
-task_name: relabel_hypointensities
+task_name: RelabelHypointensities
 nipype_name: RelabelHypointensities
 nipype_module: nipype.interfaces.freesurfer
 inputs:
