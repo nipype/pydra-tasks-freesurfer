@@ -59,6 +59,9 @@ jobs:
       with:
         name: converted-nipype
         path: pydra/tasks/freesurfer/auto
+    - name: Strip auto package from gitignore so it is included in package
+      run: |
+        sed -i '/\/pydra\/tasks\/freesurfer\/auto/d' .gitignore
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
@@ -93,10 +96,9 @@ jobs:
       with:
         name: converted-nipype
         path: pydra/tasks/freesurfer/auto
-    - name: Check directory structure
+    - name: Strip auto package from gitignore so it is included in package
       run: |
-        sudo apt install tree
-        tree .
+        sed -i '/\/pydra\/tasks\/freesurfer\/auto/d' .gitignore
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
@@ -147,6 +149,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install build tools
       run: python -m pip install build twine
+    - name: Strip auto package from gitignore so it is included in package
+      run: |
+        sed -i '/\/pydra\/tasks\/freesurfer\/auto/d' .gitignore
     - name: Build source and wheel distributions
       run: python -m build
     - name: Check distributions
