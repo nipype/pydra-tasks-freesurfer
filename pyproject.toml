@@ -60,7 +60,7 @@ source = "vcs"
 version-file = "pydra/tasks/freesurfer/_version.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["pydra"]
+packages = ["pydra", "pydra.tasks.freesurfer.auto"]
 include-only = ["pydra/tasks/freesurfer"]
 
 [tool.black]
