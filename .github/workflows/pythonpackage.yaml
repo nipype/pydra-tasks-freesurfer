@@ -142,6 +142,8 @@ jobs:
         python-version: ['3.8', '3.11']
     steps:
     - name: Install Freesurfer
+      env:
+        FREESURFER_LICENCE: ${{ secrets.FREESURFER_LICENCE }}
       run: |
         curl -s -o $HOME/freesurfer.tar.gz https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.4.1/freesurfer-linux-ubuntu22_amd64-7.4.1.tar.gz
         df -h
@@ -150,6 +152,7 @@ jobs:
         popd
         export FREESURFER_HOME=$HOME/freesurfer
         source $FREESURFER_HOME/SetUpFreeSurfer.sh
+        echo $FREESURFER_LICENCE > $FREESURFER_HOME/license.txt
     - uses: actions/checkout@v3
     - name: Revert version to most recent tag on upstream update
       if: github.event_name == 'repository_dispatch'
