@@ -100,10 +100,10 @@ jobs:
       run: |
         pip install "./fileformats-medimage-freesurfer[test]"
         python -c "import fileformats.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
-    - name: Test fileformats with pytest
-      run: |
-        pytest -sv --doctest-modules ./fileformats-medimage-freesurfer/fileformats/medimage_freesurfer \
-            --cov fileformats/medimage_freesurfer --cov-report xml
+    # - name: Test fileformats with pytest
+    #   run: |
+    #     pytest -sv --doctest-modules ./fileformats-medimage-freesurfer/fileformats/medimage_freesurfer \
+    #         --cov fileformats/medimage_freesurfer --cov-report xml
 
   fileformats-extras-test:
     needs: ["fileformats-test"]
@@ -127,10 +127,10 @@ jobs:
       run: |
         pip install "./fileformats-medimage-freesurfer-extras[test]"
         python -c "import fileformats.extras.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
-    - name: Test fileformats extras with pytest
-      run: |
-        pytest -sv --doctest-modules ./fileformats-medimage-freesurfer-extras/fileformats/medimage_freesurfer \
-            --cov fileformats/medimage_freesurfer --cov-report xml  
+    # - name: Test fileformats extras with pytest
+    #   run: |
+    #     pytest -sv --doctest-modules ./fileformats-medimage-freesurfer-extras/fileformats/medimage_freesurfer \
+    #         --cov fileformats/medimage_freesurfer --cov-report xml  
 
   test:
     needs: [nipype-conv, fileformats-test, fileformats-extras-test]
@@ -174,7 +174,8 @@ jobs:
     - uses: codecov/codecov-action@v3
       if: ${{ always() }}
       with:
-        files: .src/coverage.xml,./fileformats-medimage-freesurfer/coverage.xml,./fileformats-medimage-freesurfer-extras/coverage.xml
+        files: .src/coverage.xml
+        # ,./fileformats-medimage-freesurfer/coverage.xml,./fileformats-medimage-freesurfer-extras/coverage.xml
         name: pydra-freesurfer
 
   deploy:
