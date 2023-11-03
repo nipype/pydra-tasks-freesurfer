@@ -137,5 +137,7 @@ dmypy.json
 # Mac garbarge
 .DS_store
 
-/pydra/tasks/freesurfer/_version.py
-/pydra/tasks/freesurfer/auto
+/src/pydra/tasks/freesurfer/_version.py
+/fileformts-medimage-freesurfer/fileformats/medimage_freesurfer/_version.py
+/fileformts-medimage-freesurfer-extras/fileformats/extras/medimage_freesurfer/_version.py
+/src/pydra/tasks/freesurfer/auto
