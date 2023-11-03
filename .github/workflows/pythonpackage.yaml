@@ -81,12 +81,16 @@ jobs:
 
   test:
     needs: [nipype-conv]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         python-version: ['3.8', '3.11']
 
     steps:
+    - name: Install Freesurfer
+      run: |
+        wget https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.4.0/freesurfer_ubuntu22-7.4.0_amd64.deb ~/freesurfer-install.deb
+        sudo apt install ~/freesurfer-install.deb
     - uses: actions/checkout@v3
     - name: Revert version to most recent tag on upstream update
       if: github.event_name == 'repository_dispatch'
