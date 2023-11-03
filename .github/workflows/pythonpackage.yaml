@@ -71,7 +71,9 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install Pydra
       run: |
+        pushd $HOME
         pip install ${{ matrix.pydra }}
+        popd
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     - name: Install task package
       run: |
@@ -125,7 +127,7 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install task package
       run: |
-        pip install "./fileformats-medimage-freesurfer-extras[test]"
+        pip install "./fileformats-medimage-freesurfer" "./fileformats-medimage-freesurfer-extras[test]"
         python -c "import fileformats.extras.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     # - name: Test fileformats extras with pytest
     #   run: |
@@ -141,8 +143,13 @@ jobs:
     steps:
     - name: Install Freesurfer
       run: |
-        wget -q https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.4.0/freesurfer_ubuntu22-7.4.0_amd64.deb ~/freesurfer-install.deb
-        sudo apt install -y ~/freesurfer-install.deb
+        curl -s -o $HOME/freesurfer.tar.gz https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.4.1/freesurfer-linux-ubuntu22_amd64-7.4.1.tar.gz
+        df -h
+        pushd $HOME
+        tar -zxpf freesurfer.tar.gz
+        popd
+        export FREESURFER_HOME=$HOME/freesurfer
+        source $FREESURFER_HOME/SetUpFreeSurfer.sh
     - uses: actions/checkout@v3
     - name: Revert version to most recent tag on upstream update
       if: github.event_name == 'repository_dispatch'
