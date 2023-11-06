@@ -77,11 +77,12 @@ jobs:
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     - name: Install task package
       run: |
-        pip install ${{ matrix.pip-flags }} "./src[dev]" "./src-fileformats[dev]" "./src-fileformats-extras[dev]"
+        pip install "./src-fileformats[dev]" "./src-fileformats-extras[dev]"
+        pip install ${{ matrix.pip-flags }} "./src[dev]"
         python -c "import pydra.tasks.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
-        python -c "import fileformats.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
-        python -c "import fileformats.extras.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
+        python -c "import fileformats.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
+        python -c "import fileformats.extras.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         
 
   fileformats-test:
