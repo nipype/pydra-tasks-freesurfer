@@ -77,9 +77,12 @@ jobs:
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     - name: Install task package
       run: |
-        pip install ${{ matrix.pip-flags }} "./fileformats-medimage-freesurfer" "./src[dev]"
+        pip install ${{ matrix.pip-flags }} "./src-fileformats[dev]" "./src-fileformats-extras[dev]" "./src[dev]"
         python -c "import pydra.tasks.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
+        python -c "import fileformats.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
+        python -c "import fileformats.extras.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
+        
 
   fileformats-test:
     runs-on: ubuntu-latest
@@ -100,12 +103,12 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install task package
       run: |
-        pip install "./fileformats/medimage-freesurfer[test]"
+        pip install "./src-fileformats[test]"
         python -c "import fileformats.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     # - name: Test fileformats with pytest
     #   run: |
-    #     pytest -sv --doctest-modules ./fileformats-medimage-freesurfer/fileformats/medimage_freesurfer \
-    #         --cov fileformats/medimage_freesurfer --cov-report xml
+    #     pytest -sv --doctest-modules ./src-fileformats/fileformats/medimage_freesurfer \
+    #         --cov fileformats.medimage_freesurfer --cov-report xml
 
   fileformats-extras-test:
     needs: ["fileformats-test"]
@@ -127,12 +130,12 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install task package
       run: |
-        pip install "./fileformats/medimage-freesurfer" "./fileformats/medimage-freesurfer-extras[test]"
+        pip install "./src-fileformats" "./src-fileformats-extras[test]"
         python -c "import fileformats.extras.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     # - name: Test fileformats extras with pytest
     #   run: |
-    #     pytest -sv --doctest-modules ./fileformats-medimage-freesurfer-extras/fileformats/medimage_freesurfer \
-    #         --cov fileformats/medimage_freesurfer --cov-report xml  
+    #     pytest -sv --doctest-modules ./src-fileformats-extras/fileformats/medimage_freesurfer \
+    #         --cov fileformats.extras.medimage_freesurfer --cov-report xml  
 
   test:
     needs: [nipype-conv, fileformats-test, fileformats-extras-test]
@@ -167,7 +170,7 @@ jobs:
       run: |
         pushd $HOME/downloads/freesurfer
         tar -zxpf freesurfer-linux-ubuntu22_amd64-7.4.1.tar.gz
-        mv freesurfer-linux-ubuntu22_amd64-7.4.1 $HOME/freesurfer
+        mv freesurfer $HOME/
         popd
         export FREESURFER_HOME=$HOME/freesurfer
         source $FREESURFER_HOME/SetUpFreeSurfer.sh
@@ -194,7 +197,7 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install task package
       run: |
-        pip install "./fileformats-medimage-freesurfer" "./fileformats-medimage-freesurfer-extras" "./src[test]"
+        pip install "./src-fileformats" "./src-fileformats-extras" "./src[test]"
         python -c "import pydra.tasks.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     - name: Test with pytest
@@ -205,7 +208,7 @@ jobs:
       if: ${{ always() }}
       with:
         files: .src/coverage.xml
-        # ,./fileformats-medimage-freesurfer/coverage.xml,./fileformats-medimage-freesurfer-extras/coverage.xml
+        # ,./src-fileformats/coverage.xml,./src-fileformats-extras/coverage.xml
         name: pydra-freesurfer
 
   deploy:
@@ -213,7 +216,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        pkg-dir: [".", "./fileformats/medimage-freesurfer", "./fileformats/medimage-freesurfer-extras"]
+        pkg-dir: [".", "./src-fileformats", "./src-fileformats-extras"]
     steps:
     - uses: actions/checkout@v3
       with:

@@ -137,7 +137,10 @@ dmypy.json
 # Mac garbarge
 .DS_store
 
+# Auto-generated version files
 /src/pydra/tasks/freesurfer/_version.py
-/fileformts-medimage-freesurfer/fileformats/medimage_freesurfer/_version.py
-/fileformts-medimage-freesurfer-extras/fileformats/extras/medimage_freesurfer/_version.py
+/src-fileformats/fileformats/medimage_freesurfer/_version.py
+/src-fileformts-extras/fileformats/extras/medimage_freesurfer/_version.py
+
+# Auto-converted (from Nipype) interfaces directory (needs to be stripped before packaging)
 /src/pydra/tasks/freesurfer/auto
