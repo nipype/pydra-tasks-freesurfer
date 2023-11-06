@@ -1,5 +1,5 @@
 Welcome to pydra-freesurfer's documentation!
-=========================================
+============================================
 
 .. toctree::
    :maxdepth: 2
