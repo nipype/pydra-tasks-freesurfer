@@ -141,14 +141,28 @@ jobs:
       matrix:
         python-version: ['3.8']  # '3.11'
     steps:
+    - name: Get Download cache Key
+      id: cache-key
+      run: echo "::set-output name=key::freesurfer-linux-ubuntu22_amd64-7.4.1"
+    - name: Cache FreeSurfer
+      uses: actions/cache@v2
+      with:
+        path: $HOME/downloads/freesurfer
+        key: ${{ steps.cache-key.outputs.key }}
+        restore-keys: |
+          freesurfer-linux-ubuntu22_amd64-7.4.1
+    - name: Download FreeSurfer
+      if: steps.cache-key.outputs.key != steps.cache-hit.outputs.key
+      run: |
+        mkdir -p $HOME/downloads/freesurfer
+        curl -s -o $HOME/downloads/freesurfer/freesurfer-linux-ubuntu22_amd64-7.4.1.tar.gz https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.4.1/freesurfer-linux-ubuntu22_amd64-7.4.1.tar.gz
+      shell: bash
     - name: Install Freesurfer
       env:
         FREESURFER_LICENCE: ${{ secrets.FREESURFER_LICENCE }}
       run: |
-        curl -s -o $HOME/freesurfer.tar.gz https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/7.4.1/freesurfer-linux-ubuntu22_amd64-7.4.1.tar.gz
-        df -h
-        pushd $HOME
-        tar -zxpf freesurfer.tar.gz
+        pushd $HOME/downloads/freesurfer
+        tar -zxpf freesurfer-linux-ubuntu22_amd64-7.4.1.tar.gz
         popd
         export FREESURFER_HOME=$HOME/freesurfer
         source $FREESURFER_HOME/SetUpFreeSurfer.sh
@@ -174,7 +188,7 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install task package
       run: |
-        pip install "./fileformats-medimage-freesurfer" "./src[test]"
+        pip install "./fileformats-medimage-freesurfer" "./fileformats-medimage-freesurfer-extras" "./src[test]"
         python -c "import pydra.tasks.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     - name: Test with pytest

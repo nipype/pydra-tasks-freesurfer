@@ -52,6 +52,7 @@ test = [
     "fileformats-extras",
     "fileformats-datascience-extras",
     "fileformats-medimage-extras",
+    "fileformats-medimage-freesurfer-extras",
 ]
 
 [tool.hatch.version]
