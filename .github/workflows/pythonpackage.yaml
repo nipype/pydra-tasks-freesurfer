@@ -141,6 +141,10 @@ jobs:
       matrix:
         python-version: ['3.8']  # '3.11'
     steps:
+    - name: Removed unnecessary tools to free space
+      run: |
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf "$AGENT_TOOLSDIRECTORY"      
     - name: Get Download cache Key
       id: cache-key
       run: echo "::set-output name=key::freesurfer-linux-ubuntu22_amd64-7.4.1"
