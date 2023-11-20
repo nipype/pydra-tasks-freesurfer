@@ -186,11 +186,6 @@ jobs:
   deploy-fileformats:
     needs: [devcheck, test]
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        pkg:
-          - ["src", "${{ secrets.PYPI_FILEFORMATS_API_TOKEN }}"]
-          - ["extras", "${{ secrets.PYPI_FILEFORMATS_EXTRAS_API_TOKEN }}"]
     steps:
     - uses: actions/checkout@v3
       with:
@@ -203,25 +198,57 @@ jobs:
     - name: Install build tools
       run: python -m pip install build twine
     - name: Build source and wheel distributions
-      run: python -m build ./fileformats/${{ matrix.pkg[0] }}
+      run: python -m build ./fileformats/src
     - name: Check distributions
-      run: twine check ./fileformats/${{ matrix.pkg[0] }}/dist/*
+      run: twine check ./fileformats/src/dist/*
     - name: Check for PyPI token on tag
       id: deployable
       if: (github.event_name == 'push' && startsWith(github.ref, 'refs/tags')) || github.event_name == 'repository_dispatch'
       env:
-        PYPI_API_TOKEN: "${{ matrix.pkg[1] }}"
+        PYPI_API_TOKEN: "${{ secrets.PYPI_FILEFORMATS_API_TOKEN }}"
       run: if [ -n "$PYPI_API_TOKEN" ]; then echo "DEPLOY=true" >> $GITHUB_OUTPUT; fi
     - name: Upload to PyPI
       if: steps.deployable.outputs.DEPLOY
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         user: __token__
-        password: ${{ matrix.pkg[1] }}
-        packages-dir: ./fileformats/${{ matrix.pkg[0] }}/dist 
+        password: ${{ secrets.PYPI_FILEFORMATS_API_TOKEN }}
+        packages-dir: ./fileformats/src/dist 
+
+  deploy-fileformats-extras:
+    needs: [deploy-fileformats]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 0 
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install build tools
+      run: python -m pip install build twine
+    - name: Build source and wheel distributions
+      run: python -m build ./fileformats/extras
+    - name: Check distributions
+      run: twine check ./fileformats/extras/dist/*
+    - name: Check for PyPI token on tag
+      id: deployable
+      if: (github.event_name == 'push' && startsWith(github.ref, 'refs/tags')) || github.event_name == 'repository_dispatch'
+      env:
+        PYPI_API_TOKEN: "${{ secrets.PYPI_FILEFORMATS_EXTRAS_API_TOKEN }}"
+      run: if [ -n "$PYPI_API_TOKEN" ]; then echo "DEPLOY=true" >> $GITHUB_OUTPUT; fi
+    - name: Upload to PyPI
+      if: steps.deployable.outputs.DEPLOY
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_FILEFORMATS_EXTRAS_API_TOKEN }}
+        packages-dir: ./fileformats/extras/dist 
 
   deploy:
-    needs: [deploy-fileformats]
+    needs: [deploy-fileformats-extras]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
