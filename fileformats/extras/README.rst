@@ -1,7 +1,7 @@
 FileFormats-medimage-freesurfer Extras
 ======================================
-.. image:: https://github.com/nipype/pydra-freesurfer/actions/workflows/pythonpackage.yaml/badge.svg
-    :target: https://github.com/nipype/pydra-freesurfer/actions/workflows/pythonpackage.yaml
+.. image:: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml/badge.svg
+    :target: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml
 
 
 This is a extras module for the `fileformats-medimage-freesurfer <https://github.com/nipype/pydra-freesurfer/>`__
