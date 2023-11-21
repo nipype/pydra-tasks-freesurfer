@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "fileformats-medimage-freesurfer-extras"
-description = "Classes for representing file formats used exclusively by the Freesurfer tool in Python classes for use in type hinting in data workflows"
+description = "Extensions to add functionality to tool-specific *fileformats* classes"
 readme = "README.rst"
 requires-python = ">=3.8"
 dependencies = [

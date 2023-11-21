@@ -47,9 +47,9 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_lta1: generic/file
+    in_lta1: medimage-freesurfer/lta
     # type=file|default=<undefined>: maps some src1 to dst1
-    out_file: generic/file
+    out_file: medimage-freesurfer/lta
     # type=file: the combined LTA maps: src1 to dst2 = LTA2*LTA1
     # type=file|default=<undefined>: the combined LTA maps: src1 to dst2 = LTA2*LTA1
     tal_source_file: generic/file
@@ -69,7 +69,7 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: generic/file
+    out_file: medimage-freesurfer/lta
     # type=file: the combined LTA maps: src1 to dst2 = LTA2*LTA1
     # type=file|default=<undefined>: the combined LTA maps: src1 to dst2 = LTA2*LTA1
   callables:

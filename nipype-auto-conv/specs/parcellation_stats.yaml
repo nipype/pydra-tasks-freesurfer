@@ -47,17 +47,17 @@ inputs:
   # passed to the field in the automatically generated unittests.
     wm: medimage/mgh-gz
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/wm.mgz
-    lh_white: generic/file
+    lh_white: medimage-freesurfer/white
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    rh_white: generic/file
+    rh_white: medimage-freesurfer/white
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    lh_pial: generic/file
+    lh_pial: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    rh_pial: generic/file
+    rh_pial: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    transform: generic/file
+    transform: medimage-freesurfer/xfm
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/transforms/talairach.xfm
-    thickness: generic/file
+    thickness: medimage-freesurfer/thickness
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/?h.thickness
     brainmask: medimage/mgh-gz
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/brainmask.mgz
@@ -86,10 +86,10 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_table: generic/file
+    out_table: medimage-freesurfer/stats
     # type=file: Table output to tablefile
     # type=file|default=<undefined>: Table output to tablefile
-    out_color: generic/file
+    out_color: medimage-freesurfer/ctab
     # type=file: Output annotation files's colortable to text file
     # type=file|default=<undefined>: Output annotation files's colortable to text file
   callables:

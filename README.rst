@@ -2,10 +2,10 @@
 Pydra task package for freesurfer
 ===============================
 
-.. image:: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml/badge.svg
-   :target: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml
-.. image:: https://codecov.io/gh/nipype/pydra-freesurfer/branch/main/graph/badge.svg?token=UIS0OGPST7
-   :target: https://codecov.io/gh/nipype/pydra-freesurfer
+.. image:: https://github.com/nipype/pydra-freesurfer/actions/workflows/pythonpackage.yaml/badge.svg
+   :target: https://github.com/nipype/pydra-freesurfer/actions/workflows/pythonpackage.yaml
+.. .. image:: https://codecov.io/gh/nipype/pydra-freesurfer/branch/main/graph/badge.svg?token=UIS0OGPST7
+..    :target: https://codecov.io/gh/nipype/pydra-freesurfer
 .. image:: https://img.shields.io/pypi/pyversions/pydra-freesurfer.svg
    :target: https://pypi.python.org/pypi/pydra-freesurfer/
    :alt: Supported Python versions

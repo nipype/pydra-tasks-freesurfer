@@ -59,7 +59,7 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: generic/file
+    out_file: medimage-freesurfer/m3z
     # type=file: The output file for CARegister
     # type=file|default=<undefined>: The output volume for CARegister
   callables:

@@ -4,11 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "fileformats-medimage-freesurfer"
-description = "Classes for representing different file formats solely used by the 'freesurfer' tool in Python classes for use in type hinting in data workflows"
+description = "Classes for representing different file formats in Python classes for use in type hinting in data workflows"
 readme = "README.rst"
 requires-python = ">=3.8"
 dependencies = [
-    "fileformats >= 0.4"
+    "fileformats >= 0.4",
+    "fileformats-medimage > = 0.2"
 ]
 license = {file = "LICENSE"}
 authors = [
@@ -50,6 +51,7 @@ test = [
     "pytest-env>=0.6.2",
     "pytest-cov>=2.12.1",
     "codecov",
+    "fileformats-medimage-medimage-extras",
 ]
 
 [project.urls]

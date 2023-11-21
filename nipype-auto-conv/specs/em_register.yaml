@@ -37,7 +37,7 @@ inputs:
     # type=file|default=<undefined>: in brain volume
     template: medimage/mgh-gz
     # type=file|default=<undefined>: template gca
-    out_file: generic/file
+    out_file: medimage-freesurfer/lta
     # type=file: output transform
     # type=file|default=<undefined>: output transform
     mask: generic/file
@@ -57,7 +57,7 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: generic/file
+    out_file: medimage-freesurfer/lta
     # type=file: output transform
     # type=file|default=<undefined>: output transform
   callables:

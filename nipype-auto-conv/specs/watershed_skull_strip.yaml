@@ -50,7 +50,7 @@ inputs:
     # type=file|default='brainmask.auto.mgz': output volume
     brain_atlas: generic/file
     # type=file|default=<undefined>: 
-    transform: generic/file
+    transform: medimage-freesurfer/lta
     # type=file|default=<undefined>: undocumented
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)

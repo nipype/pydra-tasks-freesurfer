@@ -63,7 +63,7 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    summary_file: generic/file
+    summary_file: medimage-freesurfer/stats
     # type=file: Segmentation summary statistics table
     # type=file|default=<undefined>: Segmentation stats summary table file
     avgwf_txt_file: text/text-file

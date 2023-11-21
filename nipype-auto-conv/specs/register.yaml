@@ -34,13 +34,13 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_surf: generic/file
+    in_surf: medimage-freesurfer/pial
     # type=file|default=<undefined>: Surface to register, often {hemi}.sphere
     target: medimage/mgh-gz
     # type=file|default=<undefined>: The data to register to. In normal recon-all usage, this is a template file for average surface.
-    in_sulc: generic/file
+    in_sulc: medimage-freesurfer/pial
     # type=file|default=<undefined>: Undocumented mandatory input file ${SUBJECTS_DIR}/surf/{hemisphere}.sulc 
-    in_smoothwm: generic/file
+    in_smoothwm: medimage-freesurfer/pial
     # type=file|default=<undefined>: Undocumented input file ${SUBJECTS_DIR}/surf/{hemisphere}.smoothwm 
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
@@ -55,7 +55,7 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: generic/file
+    out_file: medimage-freesurfer/reg
     # type=file: Output surface file to capture registration
     # type=file|default=<undefined>: Output surface file to capture registration
   callables:
