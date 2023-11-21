@@ -3,14 +3,16 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "fileformats-medimage-freesurfer"
-description = "Classes for representing different file formats solely used by the 'freesurfer' tool in Python classes for use in type hinting in data workflows"
-readme = "../README.rst"
+name = "fileformats-medimage-freesurfer-extras"
+description = "Extensions to add functionality to tool-specific *fileformats* classes"
+readme = "README.rst"
 requires-python = ">=3.8"
 dependencies = [
-    "fileformats >= 0.4"
+    "fileformats >= 0.7",
+    "fileformats-medimage-freesurfer",
+    "pydra >= 0.22.0"
 ]
-license = {file = "../LICENSE"}
+license = {file = "LICENSE"}
 authors = [
     {name = "Thomas G. Close", email = "tom.g.close@gmail.com"},
 ]
@@ -52,22 +54,25 @@ test = [
     "codecov",
 ]
 
+converters = [
+]
+
 [project.urls]
 repository = "https://github.com/nipype/pydra-freesurfer"
 
 [tool.hatch.version]
 source = "vcs"
-raw-options = { root = ".." }
+raw-options = { root = "../.." }
 
 [tool.hatch.build.hooks.vcs]
-version-file = "fileformats/medimage_freesurfer/_version.py"
+version-file = "fileformats/extras/medimage_freesurfer/_version.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["fileformats"]
 
 [tool.black]
 target-version = ['py38']
-exclude = "fileformats/medimage_freesurfer/_version.py"
+exclude = "fileformats/extras/medimage_freesurfer/_version.py"
 
 [tool.codespell]
 ignore-words = ".codespell-ignorewords"

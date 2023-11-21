@@ -28,7 +28,7 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    label_file: generic/file+list-of
+    label_file: medimage-freesurfer/label+list-of
     # type=inputmultiobject|default=[]: list of label files
     annot_file: generic/file
     # type=file|default=<undefined>: surface annotation file

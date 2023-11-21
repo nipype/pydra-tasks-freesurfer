@@ -51,7 +51,7 @@ inputs:
     # type=file|default=<undefined>: input volume - source data to pvc
     segmentation: medimage/mgh-gz
     # type=file|default=<undefined>: segfile : anatomical segmentation to define regions for GTM
-    reg_file: generic/file
+    reg_file: medimage-freesurfer/lta
     # type=file|default=<undefined>: LTA registration file that maps PET to anatomical
     mask_file: generic/file
     # type=file|default=<undefined>: ignore areas outside of the mask (in input vol space)

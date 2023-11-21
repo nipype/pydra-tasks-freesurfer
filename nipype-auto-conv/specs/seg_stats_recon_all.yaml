@@ -62,17 +62,17 @@ inputs:
     # type=file|default=<undefined>: Input segmentation volume
     transform: datascience/text-matrix
     # type=file|default=<undefined>: Input transform file
-    lh_orig_nofix: generic/file
+    lh_orig_nofix: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input lh.orig.nofix
-    rh_orig_nofix: generic/file
+    rh_orig_nofix: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input rh.orig.nofix
-    lh_white: generic/file
+    lh_white: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    rh_white: generic/file
+    rh_white: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    lh_pial: generic/file
+    lh_pial: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    rh_pial: generic/file
+    rh_pial: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
     aseg: generic/file
     # type=file|default=<undefined>: Mandatory implicit input in 5.3
@@ -105,7 +105,7 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    summary_file: generic/file
+    summary_file: medimage-freesurfer/stats
     # type=file: Segmentation summary statistics table
     # type=file|default=<undefined>: Segmentation stats summary table file
     avgwf_txt_file: text/text-file

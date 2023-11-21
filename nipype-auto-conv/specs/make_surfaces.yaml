@@ -41,7 +41,7 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_orig: generic/file
+    in_orig: medimage-freesurfer/pial
     # type=file|default=<undefined>: Implicit input file <hemisphere>.orig
     in_wm: medimage/mgh-gz
     # type=file|default=<undefined>: Implicit input file wm.mgz
@@ -53,7 +53,7 @@ inputs:
     # type=file|default=<undefined>: Implicit input label/<hemisphere>.aparc.annot
     orig_white: generic/file
     # type=file|default=<undefined>: Specify a white surface to start with
-    orig_pial: generic/file
+    orig_pial: medimage-freesurfer/pial
     # type=file|default=<undefined>: Specify a pial surface to start with
     in_aseg: generic/file
     # type=file|default=<undefined>: Input segmentation file

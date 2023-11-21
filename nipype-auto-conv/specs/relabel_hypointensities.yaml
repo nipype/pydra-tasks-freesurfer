@@ -33,9 +33,9 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    lh_white: generic/file
+    lh_white: medimage-freesurfer/pial
     # type=file|default=<undefined>: Implicit input file must be lh.white
-    rh_white: generic/file
+    rh_white: medimage-freesurfer/pial
     # type=file|default=<undefined>: Implicit input file must be rh.white
     aseg: medimage/mgh-gz
     # type=file|default=<undefined>: Input aseg file

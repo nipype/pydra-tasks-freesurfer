@@ -56,13 +56,13 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    surface: generic/file
+    surface: medimage-freesurfer/pial
     # type=file|default=<undefined>: Specify surface file for CurvatureStats
-    curvfile1: generic/file
+    curvfile1: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file for CurvatureStats
-    curvfile2: generic/file
+    curvfile2: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file for CurvatureStats
-    out_file: generic/file
+    out_file: medimage-freesurfer/stats
     # type=file: Output curvature stats file
     # type=file|default=<undefined>: Output curvature stats file
   metadata:
@@ -78,7 +78,7 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: generic/file
+    out_file: medimage-freesurfer/stats
     # type=file: Output curvature stats file
     # type=file|default=<undefined>: Output curvature stats file
   callables:

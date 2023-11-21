@@ -58,13 +58,13 @@ inputs:
     out_file: medimage/mgh-gz
     # type=file: Output aseg file
     # type=file|default=<undefined>: Full path of file to save the output segmentation in
-    lh_white: generic/file
+    lh_white: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    rh_white: generic/file
+    rh_white: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    lh_pial: generic/file
+    lh_pial: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    rh_pial: generic/file
+    rh_pial: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
     lh_ribbon: medimage/mgh-gz
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
@@ -72,9 +72,9 @@ inputs:
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
     ribbon: medimage/mgh-gz
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
-    lh_annotation: generic/file
+    lh_annotation: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
-    rh_annotation: generic/file
+    rh_annotation: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
     filled: generic/file
     # type=file|default=<undefined>: Implicit input filled file. Only required with FS v5.3.

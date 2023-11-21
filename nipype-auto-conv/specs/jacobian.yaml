@@ -31,9 +31,9 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_origsurf: generic/file
+    in_origsurf: medimage-freesurfer/pial
     # type=file|default=<undefined>: Original surface
-    in_mappedsurf: generic/file
+    in_mappedsurf: medimage-freesurfer/pial
     # type=file|default=<undefined>: Mapped surface
     out_file: generic/file
     # type=file: Output Jacobian of the surface mapping

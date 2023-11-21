@@ -39,7 +39,7 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_surf: generic/file
+    in_surf: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input surface file
     in_orig: generic/file
     # type=file|default=<undefined>: Original surface filename
@@ -56,7 +56,7 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: generic/file
+    out_file: medimage-freesurfer/out
     # type=file: Output label
     # type=file|default=<undefined>: Output filename
   callables:

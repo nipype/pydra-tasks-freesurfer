@@ -44,15 +44,15 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    canonsurf: generic/file
+    canonsurf: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input canonical surface file
     classifier: medimage/nifti1
     # type=file|default=<undefined>: Classifier array input file
-    smoothwm: generic/file
+    smoothwm: medimage-freesurfer/pial
     # type=file|default=<undefined>: implicit input {hemisphere}.smoothwm
-    curv: generic/file
+    curv: medimage-freesurfer/pial
     # type=file|default=<undefined>: implicit input {hemisphere}.curv
-    sulc: generic/file
+    sulc: medimage-freesurfer/pial
     # type=file|default=<undefined>: implicit input {hemisphere}.sulc
     out_file: generic/file
     # type=file: Output volume from MRIsCALabel

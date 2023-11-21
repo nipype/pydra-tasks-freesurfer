@@ -45,13 +45,13 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    sphere_reg: generic/file
+    sphere_reg: medimage-freesurfer/pial
     # type=file|default=<undefined>: Implicit input <hemisphere>.sphere.reg
-    white: generic/file
+    white: medimage-freesurfer/pial
     # type=file|default=<undefined>: Implicit input <hemisphere>.white
-    source_sphere_reg: generic/file
+    source_sphere_reg: medimage-freesurfer/pial
     # type=file|default=<undefined>: Implicit input <hemisphere>.sphere.reg
-    source_white: generic/file
+    source_white: medimage-freesurfer/pial
     # type=file|default=<undefined>: Implicit input <hemisphere>.white
     source_label: model/stl
     # type=file|default=<undefined>: Source label

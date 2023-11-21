@@ -4,7 +4,7 @@
 # For deployment, it will be necessary to create a PyPI API token and store it as a secret
 # https://docs.github.com/en/actions/reference/encrypted-secrets
 
-name: Python package
+name: CI/CD
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: converted-nipype
-        path: src/pydra/tasks/freesurfer/auto
+        path: pydra/tasks/freesurfer/auto
 
   devcheck:
     needs: [nipype-conv]
@@ -58,10 +58,10 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: converted-nipype
-        path: src/pydra/tasks/freesurfer/auto
+        path: pydra/tasks/freesurfer/auto
     - name: Strip auto package from gitignore so it is included in package
       run: |
-        sed -i '/\/src\/pydra\/tasks\/freesurfer\/auto/d' .gitignore
+        sed -i '/\/pydra\/tasks\/freesurfer\/auto/d' .gitignore
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
@@ -77,14 +77,13 @@ jobs:
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     - name: Install task package
       run: |
-        pip install "./src-fileformats[dev]" "./src-fileformats-extras[dev]"
-        pip install ${{ matrix.pip-flags }} "./src[dev]"
+        pip install "./fileformats/src[dev]" "fileformats/extras[dev]"
+        pip install ${{ matrix.pip-flags }} ".[dev]"
         python -c "import pydra.tasks.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import fileformats.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import fileformats.extras.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
-        
-
+  
   fileformats-test:
     runs-on: ubuntu-latest
     strategy:
@@ -104,42 +103,15 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install task package
       run: |
-        pip install "./src-fileformats[test]"
+        pip install "./fileformats/src[test]" "./fileformats/extras[test]"
         python -c "import fileformats.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
-    # - name: Test fileformats with pytest
-    #   run: |
-    #     pytest -sv --doctest-modules ./src-fileformats/fileformats/medimage_freesurfer \
-    #         --cov fileformats.medimage_freesurfer --cov-report xml
-
-  fileformats-extras-test:
-    needs: ["fileformats-test"]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.8', '3.11']
-    steps:
-    - uses: actions/checkout@v3
-    - name: Revert version to most recent tag on upstream update
-      if: github.event_name == 'repository_dispatch'
-      run: git checkout $(git tag -l | tail -n 1 | awk -F post '{print $1}')
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install build dependencies
+    - name: Test fileformats with pytest
       run: |
-        python -m pip install --upgrade pip
-    - name: Install task package
-      run: |
-        pip install "./src-fileformats" "./src-fileformats-extras[test]"
-        python -c "import fileformats.extras.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
-    # - name: Test fileformats extras with pytest
-    #   run: |
-    #     pytest -sv --doctest-modules ./src-fileformats-extras/fileformats/medimage_freesurfer \
-    #         --cov fileformats.extras.medimage_freesurfer --cov-report xml  
+        cd ./fileformats
+        pytest -sv --cov fileformats.medimage_freesurfer --cov fileformats.extras.medimage_freesurfer --cov-report xml .
 
   test:
-    needs: [nipype-conv, fileformats-test, fileformats-extras-test]
+    needs: [nipype-conv, fileformats-test]
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -185,7 +157,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: converted-nipype
-        path: src/pydra/tasks/freesurfer/auto
+        path: pydra/tasks/freesurfer/auto
     - name: Strip auto package from gitignore so it is included in package
       run: |
         sed -i '/\/src\/pydra\/tasks\/freesurfer\/auto/d' .gitignore
@@ -198,26 +170,86 @@ jobs:
         python -m pip install --upgrade pip
     - name: Install task package
       run: |
-        pip install "./src-fileformats" "./src-fileformats-extras" "./src[test]"
+        pip install "./fileformats/src" "./fileformats/extras" ".[test]"
         python -c "import pydra.tasks.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     - name: Test with pytest
       run: |
-        pytest -sv --doctest-modules ./src/pydra/tasks/freesurfer \
+        pytest -sv --doctest-modules ./pydra/tasks/freesurfer \
             --cov pydra.tasks.freesurfer --cov-report xml
     - uses: codecov/codecov-action@v3
       if: ${{ always() }}
       with:
-        files: .src/coverage.xml
-        # ,./src-fileformats/coverage.xml,./src-fileformats-extras/coverage.xml
+        files: coverage.xml,./fileformats/coverage.xml
         name: pydra-freesurfer
 
-  deploy:
+  deploy-fileformats:
     needs: [devcheck, test]
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        pkg-dir: [".", "./src-fileformats", "./src-fileformats-extras"]
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 0 
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install build tools
+      run: python -m pip install build twine
+    - name: Build source and wheel distributions
+      run: python -m build ./fileformats/src
+    - name: Check distributions
+      run: twine check ./fileformats/src/dist/*
+    - name: Check for PyPI token on tag
+      id: deployable
+      if: (github.event_name == 'push' && startsWith(github.ref, 'refs/tags')) || github.event_name == 'repository_dispatch'
+      env:
+        PYPI_API_TOKEN: "${{ secrets.PYPI_FILEFORMATS_API_TOKEN }}"
+      run: if [ -n "$PYPI_API_TOKEN" ]; then echo "DEPLOY=true" >> $GITHUB_OUTPUT; fi
+    - name: Upload to PyPI
+      if: steps.deployable.outputs.DEPLOY
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_FILEFORMATS_API_TOKEN }}
+        packages-dir: ./fileformats/src/dist 
+
+  deploy-fileformats-extras:
+    needs: [deploy-fileformats]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        fetch-depth: 0 
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install build tools
+      run: python -m pip install build twine
+    - name: Build source and wheel distributions
+      run: python -m build ./fileformats/extras
+    - name: Check distributions
+      run: twine check ./fileformats/extras/dist/*
+    - name: Check for PyPI token on tag
+      id: deployable
+      if: (github.event_name == 'push' && startsWith(github.ref, 'refs/tags')) || github.event_name == 'repository_dispatch'
+      env:
+        PYPI_API_TOKEN: "${{ secrets.PYPI_FILEFORMATS_EXTRAS_API_TOKEN }}"
+      run: if [ -n "$PYPI_API_TOKEN" ]; then echo "DEPLOY=true" >> $GITHUB_OUTPUT; fi
+    - name: Upload to PyPI
+      if: steps.deployable.outputs.DEPLOY
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_FILEFORMATS_EXTRAS_API_TOKEN }}
+        packages-dir: ./fileformats/extras/dist 
+
+  deploy:
+    needs: [deploy-fileformats-extras]
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       with:
@@ -227,14 +259,14 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: converted-nipype
-        path: src/pydra/tasks/freesurfer/auto
+        path: pydra/tasks/freesurfer/auto
     - name: Tag release with a post-release based on Nipype and Nipype2Pydra versions
       if: github.event_name == 'repository_dispatch'
       run: |
         TAG=$(git tag -l | tail -n 1 | awk -F post '{print $1}')
         POST=$(python -c "from pydra.tasks.freesurfer.auto._version import *; print(post_release)")
         git checkout $TAG
-        git add -f src/pydra/tasks/freesurfer/auto/_version.py
+        git add -f pydra/tasks/freesurfer/auto/_version.py
         git commit -am"added auto-generated version to make new tag for package version"
         git tag ${TAG}post${POST}    
     - name: Set up Python
@@ -245,19 +277,15 @@ jobs:
       run: python -m pip install build twine
     - name: Strip auto package from gitignore so it is included in package
       run: |
-        sed -i '/\/src\/pydra\/tasks\/freesurfer\/auto/d' .gitignore
+        sed -i '/\/pydra\/tasks\/freesurfer\/auto/d' .gitignore
     - name: Build source and wheel distributions
-      run: python -m build ${{ matrix.pkg-dir }}
+      run: python -m build .
     - name: Check distributions
       run: twine check dist/*
     - uses: actions/upload-artifact@v3
       with:
         name: distributions
         path: dist/
-    # Deploy on tags if PYPI_API_TOKEN is defined in the repository secrets.
-    # Secrets are not accessible in the if: condition [0], so set an output variable [1]
-    # [0] https://github.community/t/16928
-    # [1] https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-output-parameter
     - name: Check for PyPI token on tag
       id: deployable
       if: (github.event_name == 'push' && startsWith(github.ref, 'refs/tags')) || github.event_name == 'repository_dispatch'
@@ -266,7 +294,12 @@ jobs:
       run: if [ -n "$PYPI_API_TOKEN" ]; then echo "DEPLOY=true" >> $GITHUB_OUTPUT; fi
     - name: Upload to PyPI
       if: steps.deployable.outputs.DEPLOY
-      uses: pypa/gh-action-pypi-publish@v1
+      uses: pypa/gh-action-pypi-publish@release/v1
       with:
         user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        password: ${{ secrets.PYPI_API_TOKEN }}   
+
+# Deploy on tags if PYPI_API_TOKEN is defined in the repository secrets.
+# Secrets are not accessible in the if: condition [0], so set an output variable [1]
+# [0] https://github.community/t/16928
+# [1] https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-output-parameter        

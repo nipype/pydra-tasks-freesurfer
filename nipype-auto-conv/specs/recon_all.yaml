@@ -257,7 +257,7 @@ tests:
     # type=directory|default=<undefined>: path to subjects directory
     T1_files:
     # type=inputmultiobject|default=[]: name of T1 file to process
-    flags:
+    flags: '["-cw256", "-qcache"]'
     # type=inputmultiobject|default=[]: additional parameters
   imports:
   # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
@@ -277,7 +277,7 @@ tests:
 - inputs:
   # dict[str, str] - values to provide to inputs fields in the task initialisation
   # (if not specified, will try to choose a sensible value)
-    flags:
+    flags: '[]'
     # type=inputmultiobject|default=[]: additional parameters
     hemi: '"lh"'
     # type=enum|default='lh'|allowed['lh','rh']: hemisphere to process
@@ -365,7 +365,7 @@ doctests:
     # type=directory|default=<undefined>: path to subjects directory
     T1_files:
     # type=inputmultiobject|default=[]: name of T1 file to process
-    flags:
+    flags: '["-cw256", "-qcache"]'
     # type=inputmultiobject|default=[]: additional parameters
   imports:
   # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
@@ -378,7 +378,7 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    flags:
+    flags: '[]'
     # type=inputmultiobject|default=[]: additional parameters
     hemi: '"lh"'
     # type=enum|default='lh'|allowed['lh','rh']: hemisphere to process
