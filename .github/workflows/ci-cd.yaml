@@ -77,8 +77,8 @@ jobs:
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
     - name: Install task package
       run: |
-        pip install "./src-fileformats[dev]" "./src-fileformats-extras[dev]"
-        pip install ${{ matrix.pip-flags }} "./src[dev]"
+        pip install "./fileformats/src[dev]" "fileformats/extras[dev]"
+        pip install ${{ matrix.pip-flags }} ".[dev]"
         python -c "import pydra.tasks.freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import pydra as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
         python -c "import fileformats.medimage_freesurfer as m; print(f'{m.__name__} {m.__version__} @ {m.__file__}')"
