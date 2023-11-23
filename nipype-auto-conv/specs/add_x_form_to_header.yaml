@@ -50,9 +50,10 @@ inputs:
     # type=file|default=<undefined>: input volume
     transform: datascience/text-matrix
     # type=file|default=<undefined>: xfm file
-    out_file: generic/file
+    out_file: Path
     # type=file: output volume
     # type=file|default='output.mgz': output volume
+    # output_file_template ='output.mgz'
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -69,11 +70,13 @@ outputs:
     out_file: generic/file
     # type=file: output volume
     # type=file|default='output.mgz': output volume
+    # output_file_template ='output.mgz'
   callables:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
   templates:
   # dict[str, str] - `output_file_template` values to be provided to output fields
+    out_file: 'output.mgz'
   requirements:
   # dict[str, list[str]] - input fields that are required to be provided for the output field to be present
 tests:
