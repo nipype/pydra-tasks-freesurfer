@@ -139,5 +139,3 @@ dmypy.json
 
 /pydra/tasks/freesurfer/auto
 /pydra/tasks/freesurfer/_version.py
-/fileformats/src/fileformats/medimage_freesurfer/_version.py
-/fileformats/extras/fileformats/extras/medimage_freesurfer/_version.py

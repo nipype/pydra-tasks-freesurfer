@@ -31,7 +31,7 @@
 #     
 task_name: WatershedSkullStrip
 nipype_name: WatershedSkullStrip
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.preprocess
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

@@ -20,7 +20,7 @@
 #     
 task_name: MRIMarchingCubes
 nipype_name: MRIMarchingCubes
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

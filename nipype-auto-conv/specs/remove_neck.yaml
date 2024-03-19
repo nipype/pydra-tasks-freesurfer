@@ -21,7 +21,7 @@
 #     
 task_name: RemoveNeck
 nipype_name: RemoveNeck
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

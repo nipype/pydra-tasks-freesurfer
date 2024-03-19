@@ -18,7 +18,7 @@
 #     
 task_name: DICOMConvert
 nipype_name: DICOMConvert
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.preprocess
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

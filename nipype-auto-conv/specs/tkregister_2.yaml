@@ -37,7 +37,7 @@
 #     
 task_name: Tkregister2
 nipype_name: Tkregister2
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

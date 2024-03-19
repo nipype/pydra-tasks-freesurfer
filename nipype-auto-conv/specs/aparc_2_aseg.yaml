@@ -43,7 +43,7 @@
 #     
 task_name: Aparc2Aseg
 nipype_name: Aparc2Aseg
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -57,30 +57,30 @@ inputs:
   # passed to the field in the automatically generated unittests.
     out_file: medimage/mgh-gz
     # type=file: Output aseg file
-    # # type=file|default=<undefined>: Full path of file to save the output segmentation in
-    # lh_white: medimage-freesurfer/pial
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    # rh_white: medimage-freesurfer/pial
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    # lh_pial: medimage-freesurfer/pial
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    # rh_pial: medimage-freesurfer/pial
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    # lh_ribbon: medimage/mgh-gz
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
-    # rh_ribbon: medimage/mgh-gz
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
-    # ribbon: medimage/mgh-gz
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
-    # lh_annotation: medimage-freesurfer/pial
-    # # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
-    # rh_annotation: medimage-freesurfer/pial
-    # # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
-    # filled: generic/file
-    # # type=file|default=<undefined>: Implicit input filled file. Only required with FS v5.3.
-    # aseg: generic/file
-    # # type=file|default=<undefined>: Input aseg file
-    # ctxseg: generic/file
+    # type=file|default=<undefined>: Full path of file to save the output segmentation in
+    lh_white: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
+    rh_white: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
+    lh_pial: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
+    rh_pial: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
+    lh_ribbon: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
+    rh_ribbon: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
+    ribbon: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
+    lh_annotation: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
+    rh_annotation: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
+    filled: generic/file
+    # type=file|default=<undefined>: Implicit input filled file. Only required with FS v5.3.
+    aseg: generic/file
+    # type=file|default=<undefined>: Input aseg file
+    ctxseg: generic/file
     # type=file|default=<undefined>: 
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
@@ -114,47 +114,47 @@ tests:
     out_file:
     # type=file: Output aseg file
     # type=file|default=<undefined>: Full path of file to save the output segmentation in
-    # lh_white:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    # rh_white:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    # lh_pial:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    # rh_pial:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    # lh_ribbon:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
-    # rh_ribbon:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
-    # ribbon:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
-    # lh_annotation:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
-    # rh_annotation:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
-    # filled:
-    # # type=file|default=<undefined>: Implicit input filled file. Only required with FS v5.3.
-    # aseg:
-    # # type=file|default=<undefined>: Input aseg file
-    # volmask:
-    # # type=bool|default=False: Volume mask flag
-    # ctxseg:
-    # # type=file|default=<undefined>: 
-    # label_wm:
-    # # type=bool|default=False: For each voxel labeled as white matter in the aseg, re-assign its label to be that of the closest cortical point if its distance is less than dmaxctx.
-    # hypo_wm:
-    # # type=bool|default=False: Label hypointensities as WM
-    # rip_unknown:
-    # # type=bool|default=False: Do not label WM based on 'unknown' corical label
-    # a2009s:
-    # # type=bool|default=False: Using the a2009s atlas
-    # copy_inputs:
-    # # type=bool|default=False: If running as a node, set this to True.This will copy the input files to the node directory.
-    # subjects_dir:
-    # # type=directory|default=<undefined>: subjects directory
-    # args:
-    # # type=str|default='': Additional parameters to the command
-    # environ:
+    lh_white:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
+    rh_white:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
+    lh_pial:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
+    rh_pial:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
+    lh_ribbon:
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
+    rh_ribbon:
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
+    ribbon:
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
+    lh_annotation:
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
+    rh_annotation:
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
+    filled:
+    # type=file|default=<undefined>: Implicit input filled file. Only required with FS v5.3.
+    aseg:
+    # type=file|default=<undefined>: Input aseg file
+    volmask:
+    # type=bool|default=False: Volume mask flag
+    ctxseg:
+    # type=file|default=<undefined>: 
+    label_wm:
+    # type=bool|default=False: For each voxel labeled as white matter in the aseg, re-assign its label to be that of the closest cortical point if its distance is less than dmaxctx.
+    hypo_wm:
+    # type=bool|default=False: Label hypointensities as WM
+    rip_unknown:
+    # type=bool|default=False: Do not label WM based on 'unknown' corical label
+    a2009s:
+    # type=bool|default=False: Using the a2009s atlas
+    copy_inputs:
+    # type=bool|default=False: If running as a node, set this to True.This will copy the input files to the node directory.
+    subjects_dir:
+    # type=directory|default=<undefined>: subjects directory
+    args:
+    # type=str|default='': Additional parameters to the command
+    environ:
     # type=dict|default={}: Environment variables
   imports:
   # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
@@ -174,30 +174,30 @@ tests:
 - inputs:
   # dict[str, str] - values to provide to inputs fields in the task initialisation
   # (if not specified, will try to choose a sensible value)
-    # lh_white:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    # rh_white:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    # lh_pial:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    # rh_pial:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    # lh_ribbon:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
-    # rh_ribbon:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
-    # ribbon:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
-    # lh_annotation:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
-    # rh_annotation:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
+    lh_white:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
+    rh_white:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
+    lh_pial:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
+    rh_pial:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
+    lh_ribbon:
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
+    rh_ribbon:
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
+    ribbon:
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
+    lh_annotation:
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
+    rh_annotation:
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
     out_file:
     # type=file: Output aseg file
     # type=file|default=<undefined>: Full path of file to save the output segmentation in
-    # label_wm: 'True'
-    # # type=bool|default=False: For each voxel labeled as white matter in the aseg, re-assign its label to be that of the closest cortical point if its distance is less than dmaxctx.
-    # rip_unknown: 'True'
+    label_wm: 'True'
+    # type=bool|default=False: For each voxel labeled as white matter in the aseg, re-assign its label to be that of the closest cortical point if its distance is less than dmaxctx.
+    rip_unknown: 'True'
     # type=bool|default=False: Do not label WM based on 'unknown' corical label
   imports:
   # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
@@ -221,31 +221,31 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    # lh_white:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    # rh_white:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    # lh_pial:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    # rh_pial:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    # lh_ribbon:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
-    # rh_ribbon:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
-    # ribbon:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
-    # lh_annotation:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
-    # rh_annotation:
-    # # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
+    lh_white:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
+    rh_white:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
+    lh_pial:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
+    rh_pial:
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
+    lh_ribbon:
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
+    rh_ribbon:
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
+    ribbon:
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
+    lh_annotation:
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
+    rh_annotation:
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
     out_file:
     # type=file: Output aseg file
     # type=file|default=<undefined>: Full path of file to save the output segmentation in
-    # label_wm: 'True'
-    # # type=bool|default=False: For each voxel labeled as white matter in the aseg, re-assign its label to be that of the closest cortical point if its distance is less than dmaxctx.
-    # rip_unknown: 'True'
-    # # type=bool|default=False: Do not label WM based on 'unknown' corical label
+    label_wm: 'True'
+    # type=bool|default=False: For each voxel labeled as white matter in the aseg, re-assign its label to be that of the closest cortical point if its distance is less than dmaxctx.
+    rip_unknown: 'True'
+    # type=bool|default=False: Do not label WM based on 'unknown' corical label
   imports:
   # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys

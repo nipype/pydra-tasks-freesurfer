@@ -21,7 +21,7 @@
 #     
 task_name: MRISPreproc
 nipype_name: MRISPreproc
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.model
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

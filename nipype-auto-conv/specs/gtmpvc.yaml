@@ -35,7 +35,7 @@
 #     
 task_name: GTMPVC
 nipype_name: GTMPVC
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.petsurfer
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

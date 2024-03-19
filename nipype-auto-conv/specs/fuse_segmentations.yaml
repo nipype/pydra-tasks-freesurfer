@@ -22,7 +22,7 @@
 #     
 task_name: FuseSegmentations
 nipype_name: FuseSegmentations
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.longitudinal
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

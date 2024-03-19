@@ -25,7 +25,7 @@
 #     
 task_name: Contrast
 nipype_name: Contrast
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

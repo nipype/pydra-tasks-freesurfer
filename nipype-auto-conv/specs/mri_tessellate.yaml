@@ -20,7 +20,7 @@
 #     
 task_name: MRITessellate
 nipype_name: MRITessellate
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

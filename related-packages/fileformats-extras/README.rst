@@ -1,10 +1,10 @@
-FileFormats-medimage-freesurfer Extras
+FileFormats-freesurfer Extras
 ======================================
 .. image:: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml/badge.svg
     :target: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml
 
 
-This is a extras module for the `fileformats-medimage-freesurfer <https://github.com/nipype/pydra-freesurfer/>`__
+This is a extras module for the `fileformats-freesurfer <https://github.com/nipype/pydra-freesurfer/>`__
 fileformats extension package, which provides additional functionality to format classes (i.e. aside
 from basic identification and validation), such as conversion tools, metadata parsers, test data generators, etc...
 
@@ -14,7 +14,7 @@ Quick Installation
 
 This extension can be installed for Python 3 using *pip*::
 
-    $ pip3 install fileformats-medimage-freesurfer-extras
+    $ pip3 install fileformats-freesurfer-extras
 
 This will install the core package and any other dependencies
 

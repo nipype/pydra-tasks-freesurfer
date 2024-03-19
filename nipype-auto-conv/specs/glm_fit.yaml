@@ -18,7 +18,7 @@
 #     
 task_name: GLMFit
 nipype_name: GLMFit
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.model
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

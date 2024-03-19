@@ -1,4 +1,16 @@
-FileFormats Extension - medimage-freesurfer
+How to customise this template
+==============================
+
+#. Rename the `related-packages/fileformats/freesurfer` directory to the name of the fileformats subpackage (e.g. `medimage_fsl`)
+#. Search and replace "freesurfer" with the name of the fileformats subpackage the extras are to be added
+#. Replace name + email placeholders in `pyproject.toml` for developers and maintainers
+#. Add the extension file-format classes
+#. Ensure that all the extension file-format classes are imported into the extras package root, i.e. `fileformats/freesurfer`
+#. Delete these instructions
+
+...
+
+FileFormats Extension - freesurfer
 ====================================
 .. image:: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yml/badge.svg
     :target: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yml

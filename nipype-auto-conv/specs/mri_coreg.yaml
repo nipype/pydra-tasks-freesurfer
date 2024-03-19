@@ -41,7 +41,7 @@
 #     
 task_name: MRICoreg
 nipype_name: MRICoreg
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.registration
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface

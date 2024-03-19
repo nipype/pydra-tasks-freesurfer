@@ -14,7 +14,7 @@
 #     
 task_name: ApplyMask
 nipype_name: ApplyMask
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
