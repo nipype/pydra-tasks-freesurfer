@@ -131,13 +131,18 @@ dmypy.json
 # Pycharm
 .idea
 
+# Vim
+.*.sw[op]
+
 # VS Code
 .vscode
 
 # Mac garbarge
 .DS_store
 
+# Generated files
+/pydra/tasks/freesurfer/_version.py
+/related-packages/fileformats/fileformats/medimage_freesurfer/_version.py
+/related-packages/fileformats-extras/fileformats/extras/medimage_freesurfer/_version.py
 /pydra/tasks/freesurfer/auto
 /pydra/tasks/freesurfer/_version.py
-/fileformats/src/fileformats/medimage_freesurfer/_version.py
-/fileformats/extras/fileformats/extras/medimage_freesurfer/_version.py

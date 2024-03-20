@@ -28,7 +28,7 @@
 #     
 task_name: SegmentCC
 nipype_name: SegmentCC
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.preprocess
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -44,12 +44,17 @@ inputs:
     # type=file|default=<undefined>: Input aseg file to read from subjects directory
     in_norm: medimage/mgh-gz
     # type=file|default=<undefined>: Required undocumented input {subject}/mri/norm.mgz
-    out_file: generic/file
+    out_file: Path
     # type=file: Output segmentation uncluding corpus collosum
     # type=file|default=<undefined>: Filename to write aseg including CC
-    out_rotation: medimage-freesurfer/lta
+    out_rotation: Path
     # type=file: Output lta rotation file
     # type=file|default=<undefined>: Global filepath for writing rotation lta
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -101,7 +106,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -122,13 +127,13 @@ tests:
     # type=file|default=<undefined>: Input aseg file to read from subjects directory
     in_norm:
     # type=file|default=<undefined>: Required undocumented input {subject}/mri/norm.mgz
-    out_rotation:
+    out_rotation: '"cc.lta"'
     # type=file: Output lta rotation file
     # type=file|default=<undefined>: Global filepath for writing rotation lta
     subject_id: '"test"'
     # type=string|default='subject_id': Subject name
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -149,17 +154,17 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_file:
+    in_file: '"aseg.mgz"'
     # type=file|default=<undefined>: Input aseg file to read from subjects directory
-    in_norm:
+    in_norm: '"norm.mgz"'
     # type=file|default=<undefined>: Required undocumented input {subject}/mri/norm.mgz
-    out_rotation:
+    out_rotation: '"cc.lta"'
     # type=file: Output lta rotation file
     # type=file|default=<undefined>: Global filepath for writing rotation lta
     subject_id: '"test"'
     # type=string|default='subject_id': Subject name
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

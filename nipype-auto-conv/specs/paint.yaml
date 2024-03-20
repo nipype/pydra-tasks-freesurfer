@@ -25,7 +25,7 @@
 #     
 task_name: Paint
 nipype_name: Paint
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.registration
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -39,11 +39,16 @@ inputs:
   # passed to the field in the automatically generated unittests.
     in_surf: medimage-freesurfer/pial
     # type=file|default=<undefined>: Surface file with grid (vertices) onto which the template data is to be sampled or 'painted'
-    template: medimage/mgh-gz
-    # type=file|default=<undefined>: Template file
-    out_file: medimage-freesurfer/avg_curv
+    out_file: Path
     # type=file: File containing a surface-worth of per-vertex values, saved in 'curvature' format.
     # type=file|default=<undefined>: File containing a surface-worth of per-vertex values, saved in 'curvature' format.
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    template: medimage/mgh-gz
+    # type=file|default=<undefined>: Template file
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -57,7 +62,7 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: medimage-freesurfer/avg_curv
+    out_file: generic/file
     # type=file: File containing a surface-worth of per-vertex values, saved in 'curvature' format.
     # type=file|default=<undefined>: File containing a surface-worth of per-vertex values, saved in 'curvature' format.
   callables:
@@ -89,7 +94,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -112,11 +117,11 @@ tests:
     # type=file|default=<undefined>: Template file
     averages: '5'
     # type=int|default=0: Average curvature patterns
-    out_file:
+    out_file: '"lh.avg_curv"'
     # type=file: File containing a surface-worth of per-vertex values, saved in 'curvature' format.
     # type=file|default=<undefined>: File containing a surface-worth of per-vertex values, saved in 'curvature' format.
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -137,17 +142,17 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_surf:
+    in_surf: '"lh.pial"'
     # type=file|default=<undefined>: Surface file with grid (vertices) onto which the template data is to be sampled or 'painted'
-    template:
+    template: '"aseg.mgz"'
     # type=file|default=<undefined>: Template file
     averages: '5'
     # type=int|default=0: Average curvature patterns
-    out_file:
+    out_file: '"lh.avg_curv"'
     # type=file: File containing a surface-worth of per-vertex values, saved in 'curvature' format.
     # type=file|default=<undefined>: File containing a surface-worth of per-vertex values, saved in 'curvature' format.
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

@@ -20,7 +20,7 @@
 #     
 task_name: MRISPreprocReconAll
 nipype_name: MRISPreprocReconAll
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.model
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -32,20 +32,26 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
+    fsgd_file: generic/file
+    # type=file|default=<undefined>: specify subjects using fsgd file
+    lh_surfreg_target: generic/file
+    # type=file|default=<undefined>: Implicit target surface registration file
+    out_file: Path
+    # type=file: preprocessed output file
+    # type=file|default=<undefined>: output filename
+    rh_surfreg_target: generic/file
+    # type=file|default=<undefined>: Implicit target surface registration file
+    subject_file: generic/file
+    # type=file|default=<undefined>: file specifying subjects separated by white space
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
     surf_measure_file: generic/file
     # type=file|default=<undefined>: file necessary for surfmeas
     surfreg_files: generic/file+list-of
     # type=inputmultiobject|default=[]: lh and rh input surface registration files
-    lh_surfreg_target: generic/file
-    # type=file|default=<undefined>: Implicit target surface registration file
-    rh_surfreg_target: generic/file
-    # type=file|default=<undefined>: Implicit target surface registration file
-    fsgd_file: generic/file
-    # type=file|default=<undefined>: specify subjects using fsgd file
-    subject_file: generic/file
-    # type=file|default=<undefined>: file specifying subjects separated by white space
-    vol_measure_file: medimage/nifti1+list-of
-    # type=inputmultiobject|default=[]: list of volume measure and reg file tuples
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -130,7 +136,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -151,13 +157,13 @@ tests:
     # type=str|default='': target subject name
     hemi: '"lh"'
     # type=enum|default='lh'|allowed['lh','rh']: hemisphere for source and target
-    vol_measure_file:
+    vol_measure_file: '[("cont1.nii", "register.dat"),                                            ("cont1a.nii", "register.dat")]'
     # type=inputmultiobject|default=[]: list of volume measure and reg file tuples
     out_file: '"concatenated_file.mgz"'
     # type=file: preprocessed output file
     # type=file|default=<undefined>: output filename
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -182,13 +188,13 @@ doctests:
     # type=str|default='': target subject name
     hemi: '"lh"'
     # type=enum|default='lh'|allowed['lh','rh']: hemisphere for source and target
-    vol_measure_file:
+    vol_measure_file: '[("cont1.nii", "register.dat"),                                            ("cont1a.nii", "register.dat")]'
     # type=inputmultiobject|default=[]: list of volume measure and reg file tuples
     out_file: '"concatenated_file.mgz"'
     # type=file: preprocessed output file
     # type=file|default=<undefined>: output filename
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

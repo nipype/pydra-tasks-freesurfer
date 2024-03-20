@@ -34,7 +34,7 @@
 #     
 task_name: MNIBiasCorrection
 nipype_name: MNIBiasCorrection
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.preprocess
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -48,13 +48,18 @@ inputs:
   # passed to the field in the automatically generated unittests.
     in_file: medimage/mgh-gz
     # type=file|default=<undefined>: input volume. Input can be any format accepted by mri_convert.
-    out_file: generic/file
-    # type=file: output volume
-    # type=file|default=<undefined>: output volume. Output can be any format accepted by mri_convert. If the output format is COR, then the directory must exist.
     mask: generic/file
     # type=file|default=<undefined>: brainmask volume. Input can be any format accepted by mri_convert.
+    out_file: Path
+    # type=file: output volume
+    # type=file|default=<undefined>: output volume. Output can be any format accepted by mri_convert. If the output format is COR, then the directory must exist.
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
     transform: generic/file
     # type=file|default=<undefined>: tal.xfm. Use mri_make_uchar instead of conforming
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -110,7 +115,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -136,7 +141,7 @@ tests:
     distance: '50'
     # type=int|default=0: N3 -distance option
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -157,7 +162,7 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_file:
+    in_file: '"norm.mgz"'
     # type=file|default=<undefined>: input volume. Input can be any format accepted by mri_convert.
     iterations: '6'
     # type=int|default=4: Number of iterations to run nu_correct. Default is 4. This is the number of times that nu_correct is repeated (ie, using the output from the previous run as the input for the next). This is different than the -iterations option to nu_correct.
@@ -166,7 +171,7 @@ doctests:
     distance: '50'
     # type=int|default=0: N3 -distance option
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

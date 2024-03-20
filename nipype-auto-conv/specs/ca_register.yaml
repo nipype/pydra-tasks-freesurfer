@@ -24,7 +24,7 @@
 #     
 task_name: CARegister
 nipype_name: CARegister
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.preprocess
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -38,14 +38,22 @@ inputs:
   # passed to the field in the automatically generated unittests.
     in_file: medimage/mgh-gz
     # type=file|default=<undefined>: The input volume for CARegister
-    template: generic/file
-    # type=file|default=<undefined>: The template file in gca format
-    mask: generic/file
-    # type=file|default=<undefined>: Specifies volume to use as mask
-    transform: generic/file
-    # type=file|default=<undefined>: Specifies transform in lta format
     l_files: generic/file+list-of
     # type=inputmultiobject|default=[]: undocumented flag used in longitudinal processing
+    mask: generic/file
+    # type=file|default=<undefined>: Specifies volume to use as mask
+    out_file: Path
+    # type=file: The output file for CARegister
+    # type=file|default=<undefined>: The output volume for CARegister
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    template: generic/file
+    # type=file|default=<undefined>: The template file in gca format
+    transform: generic/file
+    # type=file|default=<undefined>: Specifies transform in lta format
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -108,7 +116,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -131,7 +139,7 @@ tests:
     # type=file: The output file for CARegister
     # type=file|default=<undefined>: The output volume for CARegister
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -152,13 +160,13 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_file:
+    in_file: '"norm.mgz"'
     # type=file|default=<undefined>: The input volume for CARegister
     out_file: '"talairach.m3z"'
     # type=file: The output file for CARegister
     # type=file|default=<undefined>: The output volume for CARegister
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

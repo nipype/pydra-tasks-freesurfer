@@ -24,7 +24,7 @@
 #     
 task_name: UnpackSDICOMDir
 nipype_name: UnpackSDICOMDir
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.preprocess
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -38,12 +38,21 @@ inputs:
   # passed to the field in the automatically generated unittests.
     config: generic/file
     # type=file|default=<undefined>: specify unpacking rules in file
-    seq_config: generic/file
-    # type=file|default=<undefined>: specify unpacking rules based on sequence
-    scan_only: generic/file
-    # type=file|default=<undefined>: only scan the directory and put result in file
     log_file: generic/file
     # type=file|default=<undefined>: explicitly set log file
+    output_dir: generic/directory
+    # type=directory|default=<undefined>: top directory into which the files will be unpacked
+    scan_only: generic/file
+    # type=file|default=<undefined>: only scan the directory and put result in file
+    seq_config: generic/file
+    # type=file|default=<undefined>: specify unpacking rules based on sequence
+    source_dir: generic/directory
+    # type=directory|default=<undefined>: directory with the DICOM files
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -97,7 +106,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -123,7 +132,7 @@ tests:
     dir_structure: '"generic"'
     # type=enum|default='fsfast'|allowed['fsfast','generic']: unpack to specified directory structures
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -153,7 +162,7 @@ doctests:
     dir_structure: '"generic"'
     # type=enum|default='fsfast'|allowed['fsfast','generic']: unpack to specified directory structures
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

@@ -26,7 +26,7 @@
 #     
 task_name: CALabel
 nipype_name: CALabel
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.preprocess
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -38,23 +38,28 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
+    aseg: generic/file
+    # type=file|default=<undefined>: Undocumented flag. Autorecon3 uses ../mri/aseg.presurf.mgz as input file
     in_file: medimage/mgh-gz
     # type=file|default=<undefined>: Input volume for CALabel
-    out_file: medimage/mgh-gz
-    # type=file: Output volume from CALabel
-    # type=file|default=<undefined>: Output file for CALabel
-    transform: datascience/text-matrix
-    # type=file|default=<undefined>: Input transform for CALabel
-    template: medimage/nifti1
-    # type=file|default=<undefined>: Input template for CALabel
     in_vol: generic/file
     # type=file|default=<undefined>: set input volume
     intensities: generic/file
     # type=file|default=<undefined>: input label intensities file(used in longitudinal processing)
     label: generic/file
     # type=file|default=<undefined>: Undocumented flag. Autorecon3 uses ../label/{hemisphere}.cortex.label as input file
-    aseg: generic/file
-    # type=file|default=<undefined>: Undocumented flag. Autorecon3 uses ../mri/aseg.presurf.mgz as input file
+    out_file: Path
+    # type=file: Output volume from CALabel
+    # type=file|default=<undefined>: Output file for CALabel
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    template: medimage/nifti1
+    # type=file|default=<undefined>: Input template for CALabel
+    transform: datascience/text-matrix
+    # type=file|default=<undefined>: Input transform for CALabel
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -116,7 +121,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -135,7 +140,7 @@ tests:
   # (if not specified, will try to choose a sensible value)
     in_file:
     # type=file|default=<undefined>: Input volume for CALabel
-    out_file:
+    out_file: '"out.mgz"'
     # type=file: Output volume from CALabel
     # type=file|default=<undefined>: Output file for CALabel
     transform:
@@ -143,7 +148,7 @@ tests:
     template:
     # type=file|default=<undefined>: Input template for CALabel
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -164,17 +169,17 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_file:
+    in_file: '"norm.mgz"'
     # type=file|default=<undefined>: Input volume for CALabel
-    out_file:
+    out_file: '"out.mgz"'
     # type=file: Output volume from CALabel
     # type=file|default=<undefined>: Output file for CALabel
-    transform:
+    transform: '"trans.mat"'
     # type=file|default=<undefined>: Input transform for CALabel
-    template:
+    template: '"Template_6.nii" # in practice use .gcs extension'
     # type=file|default=<undefined>: Input template for CALabel
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

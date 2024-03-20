@@ -44,7 +44,7 @@
 #     
 task_name: SegStatsReconAll
 nipype_name: SegStatsReconAll
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.model
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -56,42 +56,50 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    ribbon: medimage/mgh-gz
-    # type=file|default=<undefined>: Input file mri/ribbon.mgz
-    presurf_seg: medimage/mgh-gz
-    # type=file|default=<undefined>: Input segmentation volume
-    transform: datascience/text-matrix
-    # type=file|default=<undefined>: Input transform file
-    lh_orig_nofix: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input lh.orig.nofix
-    rh_orig_nofix: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input rh.orig.nofix
-    lh_white: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    rh_white: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    lh_pial: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    rh_pial: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
     aseg: generic/file
     # type=file|default=<undefined>: Mandatory implicit input in 5.3
-    segmentation_file: generic/file
-    # type=file|default=<undefined>: segmentation volume path
-    partial_volume_file: generic/file
-    # type=file|default=<undefined>: Compensate for partial voluming
-    in_file: generic/file
-    # type=file|default=<undefined>: Use the segmentation to report stats on this volume
+    brainmask_file: generic/file
+    # type=file|default=<undefined>: Load brain mask and compute the volume of the brain as the non-zero voxels in this volume
     color_table_file: generic/file
     # type=file|default=<undefined>: color table file with seg id names
     gca_color_table: generic/file
     # type=file|default=<undefined>: get color table from GCA (CMA)
-    mask_file: generic/file
-    # type=file|default=<undefined>: Mask volume (same size as seg
-    brainmask_file: generic/file
-    # type=file|default=<undefined>: Load brain mask and compute the volume of the brain as the non-zero voxels in this volume
+    in_file: generic/file
+    # type=file|default=<undefined>: Use the segmentation to report stats on this volume
     in_intensity: generic/file
     # type=file|default=<undefined>: Undocumented input norm.mgz file
+    lh_orig_nofix: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input lh.orig.nofix
+    lh_pial: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
+    lh_white: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
+    mask_file: generic/file
+    # type=file|default=<undefined>: Mask volume (same size as seg
+    partial_volume_file: generic/file
+    # type=file|default=<undefined>: Compensate for partial voluming
+    presurf_seg: medimage/mgh-gz
+    # type=file|default=<undefined>: Input segmentation volume
+    rh_orig_nofix: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input rh.orig.nofix
+    rh_pial: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
+    rh_white: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
+    ribbon: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file mri/ribbon.mgz
+    segmentation_file: generic/file
+    # type=file|default=<undefined>: segmentation volume path
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    summary_file: Path
+    # type=file: Segmentation summary statistics table
+    # type=file|default=<undefined>: Segmentation stats summary table file
+    transform: datascience/text-matrix
+    # type=file|default=<undefined>: Input transform file
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -105,18 +113,18 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    summary_file: medimage-freesurfer/stats
-    # type=file: Segmentation summary statistics table
-    # type=file|default=<undefined>: Segmentation stats summary table file
-    avgwf_txt_file: text/text-file
-    # type=file: Text file with functional statistics averaged over segs
-    # type=traitcompound|default=None: Save average waveform into file (bool or filename)
     avgwf_file: generic/file
     # type=file: Volume with functional statistics averaged over segs
     # type=traitcompound|default=None: Save as binary volume (bool or filename)
+    avgwf_txt_file: text/text-file
+    # type=file: Text file with functional statistics averaged over segs
+    # type=traitcompound|default=None: Save average waveform into file (bool or filename)
     sf_avg_file: generic/file
     # type=file: Text file with func statistics averaged over segs and framss
     # type=traitcompound|default=None: Save mean across space and time
+    summary_file: medimage-freesurfer/stats
+    # type=file: Segmentation summary statistics table
+    # type=file|default=<undefined>: Segmentation stats summary table file
   callables:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
@@ -246,7 +254,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -314,7 +322,7 @@ tests:
     exclude_id: '0'
     # type=int|default=0: Exclude seg id from report
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -345,23 +353,23 @@ doctests:
     # type=file|default=<undefined>: Segmentation stats summary table file
     subject_id: '"10335"'
     # type=string|default='subject_id': Subject id being processed
-    ribbon:
+    ribbon: '"wm.mgz"'
     # type=file|default=<undefined>: Input file mri/ribbon.mgz
-    transform:
+    transform: '"trans.mat"'
     # type=file|default=<undefined>: Input transform file
-    presurf_seg:
+    presurf_seg: '"wm.mgz"'
     # type=file|default=<undefined>: Input segmentation volume
-    lh_orig_nofix:
+    lh_orig_nofix: '"lh.pial"'
     # type=file|default=<undefined>: Input lh.orig.nofix
-    rh_orig_nofix:
+    rh_orig_nofix: '"lh.pial"'
     # type=file|default=<undefined>: Input rh.orig.nofix
-    lh_pial:
+    lh_pial: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    rh_pial:
+    rh_pial: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    lh_white:
+    lh_white: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    rh_white:
+    rh_white: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
     empty: 'True'
     # type=bool|default=False: Report on segmentations listed in the color table
@@ -386,7 +394,7 @@ doctests:
     exclude_id: '0'
     # type=int|default=0: Exclude seg id from report
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

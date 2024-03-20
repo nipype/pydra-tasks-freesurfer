@@ -43,7 +43,7 @@
 #     
 task_name: Aparc2Aseg
 nipype_name: Aparc2Aseg
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -55,33 +55,38 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: medimage/mgh-gz
-    # type=file: Output aseg file
-    # type=file|default=<undefined>: Full path of file to save the output segmentation in
-    lh_white: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    rh_white: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    lh_pial: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    rh_pial: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    lh_ribbon: medimage/mgh-gz
-    # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
-    rh_ribbon: medimage/mgh-gz
-    # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
-    ribbon: medimage/mgh-gz
-    # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
-    lh_annotation: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
-    rh_annotation: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
-    filled: generic/file
-    # type=file|default=<undefined>: Implicit input filled file. Only required with FS v5.3.
     aseg: generic/file
     # type=file|default=<undefined>: Input aseg file
     ctxseg: generic/file
     # type=file|default=<undefined>: 
+    filled: generic/file
+    # type=file|default=<undefined>: Implicit input filled file. Only required with FS v5.3.
+    lh_annotation: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
+    lh_pial: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
+    lh_ribbon: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
+    lh_white: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
+    out_file: Path
+    # type=file: Output aseg file
+    # type=file|default=<undefined>: Full path of file to save the output segmentation in
+    rh_annotation: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
+    rh_pial: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
+    rh_ribbon: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
+    rh_white: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
+    ribbon: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -157,7 +162,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -192,7 +197,7 @@ tests:
     # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
     rh_annotation:
     # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
-    out_file:
+    out_file: '"aparc+aseg.mgz"'
     # type=file: Output aseg file
     # type=file|default=<undefined>: Full path of file to save the output segmentation in
     label_wm: 'True'
@@ -200,7 +205,7 @@ tests:
     rip_unknown: 'True'
     # type=bool|default=False: Do not label WM based on 'unknown' corical label
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -221,25 +226,25 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    lh_white:
+    lh_white: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    rh_white:
+    rh_white: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    lh_pial:
+    lh_pial: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    rh_pial:
+    rh_pial: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    lh_ribbon:
+    lh_ribbon: '"label.mgz"'
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/lh.ribbon.mgz
-    rh_ribbon:
+    rh_ribbon: '"label.mgz"'
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/rh.ribbon.mgz
-    ribbon:
+    ribbon: '"label.mgz"'
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
-    lh_annotation:
+    lh_annotation: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/label/lh.aparc.annot
-    rh_annotation:
+    rh_annotation: '"lh.pial"'
     # type=file|default=<undefined>: Input file must be <subject_id>/label/rh.aparc.annot
-    out_file:
+    out_file: '"aparc+aseg.mgz"'
     # type=file: Output aseg file
     # type=file|default=<undefined>: Full path of file to save the output segmentation in
     label_wm: 'True'
@@ -247,7 +252,7 @@ doctests:
     rip_unknown: 'True'
     # type=bool|default=False: Do not label WM based on 'unknown' corical label
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

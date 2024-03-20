@@ -20,7 +20,7 @@
 #     
 task_name: MRIFill
 nipype_name: MRIFill
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -34,16 +34,21 @@ inputs:
   # passed to the field in the automatically generated unittests.
     in_file: medimage/mgh-gz
     # type=file|default=<undefined>: Input white matter file
-    out_file: medimage/mgh-gz
+    log_file: Path
+    # type=file: Output log file from MRIFill
+    # type=file|default=<undefined>: Output log file for MRIFill
+    out_file: Path
     # type=file: Output file from MRIFill
     # type=file|default=<undefined>: Output filled volume file name for MRIFill
     segmentation: generic/file
     # type=file|default=<undefined>: Input segmentation file for MRIFill
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
     transform: generic/file
     # type=file|default=<undefined>: Input transform file for MRIFill
-    log_file: generic/file
-    # type=file: Output log file from MRIFill
-    # type=file|default=<undefined>: Output log file for MRIFill
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -57,12 +62,12 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: medimage/mgh-gz
-    # type=file: Output file from MRIFill
-    # type=file|default=<undefined>: Output filled volume file name for MRIFill
     log_file: generic/file
     # type=file: Output log file from MRIFill
     # type=file|default=<undefined>: Output log file for MRIFill
+    out_file: medimage/mgh-gz
+    # type=file: Output file from MRIFill
+    # type=file|default=<undefined>: Output filled volume file name for MRIFill
   callables:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
@@ -93,7 +98,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -112,11 +117,11 @@ tests:
   # (if not specified, will try to choose a sensible value)
     in_file:
     # type=file|default=<undefined>: Input white matter file
-    out_file:
+    out_file: '"filled.mgz" # doctest: +SKIP'
     # type=file: Output file from MRIFill
     # type=file|default=<undefined>: Output filled volume file name for MRIFill
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -137,13 +142,13 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_file:
+    in_file: '"wm.mgz" # doctest: +SKIP'
     # type=file|default=<undefined>: Input white matter file
-    out_file:
+    out_file: '"filled.mgz" # doctest: +SKIP'
     # type=file: Output file from MRIFill
     # type=file|default=<undefined>: Output filled volume file name for MRIFill
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

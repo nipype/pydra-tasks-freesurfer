@@ -21,7 +21,7 @@
 #     
 task_name: EMRegister
 nipype_name: EMRegister
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.registration
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -35,15 +35,20 @@ inputs:
   # passed to the field in the automatically generated unittests.
     in_file: medimage/mgh-gz
     # type=file|default=<undefined>: in brain volume
-    template: medimage/mgh-gz
-    # type=file|default=<undefined>: template gca
-    out_file: medimage-freesurfer/lta
-    # type=file: output transform
-    # type=file|default=<undefined>: output transform
     mask: generic/file
     # type=file|default=<undefined>: use volume as a mask
+    out_file: Path
+    # type=file: output transform
+    # type=file|default=<undefined>: output transform
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    template: medimage/mgh-gz
+    # type=file|default=<undefined>: template gca
     transform: generic/file
     # type=file|default=<undefined>: Previously computed transform
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -95,7 +100,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -116,7 +121,7 @@ tests:
     # type=file|default=<undefined>: in brain volume
     template:
     # type=file|default=<undefined>: template gca
-    out_file:
+    out_file: '"norm_transform.lta"'
     # type=file: output transform
     # type=file|default=<undefined>: output transform
     skull: 'True'
@@ -124,7 +129,7 @@ tests:
     nbrspacing: '9'
     # type=int|default=0: align to atlas containing skull setting unknown_nbr_spacing = nbrspacing
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -145,11 +150,11 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_file:
+    in_file: '"norm.mgz"'
     # type=file|default=<undefined>: in brain volume
-    template:
+    template: '"aseg.mgz"'
     # type=file|default=<undefined>: template gca
-    out_file:
+    out_file: '"norm_transform.lta"'
     # type=file: output transform
     # type=file|default=<undefined>: output transform
     skull: 'True'
@@ -157,7 +162,7 @@ doctests:
     nbrspacing: '9'
     # type=int|default=0: align to atlas containing skull setting unknown_nbr_spacing = nbrspacing
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS
