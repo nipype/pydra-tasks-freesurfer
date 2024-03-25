@@ -134,7 +134,7 @@ jobs:
       id: cache-install
       uses: actions/cache@v4
       with:
-        path: ${{ env.FREESURFER_HOME }}
+        path: $HOME/downloads/freesurfer
         key: freesurfer-${{ env.FREESURFER_VERSION }}-${{ runner.os }}
 
     - name: Download FreeSurfer
@@ -145,7 +145,6 @@ jobs:
       shell: bash
 
     - name: Install Freesurfer
-      if: steps.cache-install.outputs.cache-hit != 'true'
       env:
         FREESURFER_LICENCE: ${{ secrets.FREESURFER_LICENCE }}
       run: |
