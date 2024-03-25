@@ -1,81 +1,35 @@
-[build-system]
-requires = ["hatchling", "hatch-vcs"]
-build-backend = "hatchling.build"
-
-[project]
+[tool.poetry]
 name = "pydra-freesurfer"
-description = "Pydra tasks package for freesurfer"
-readme = "README.rst"
-requires-python = ">=3.8"
-dependencies = [
-    "pydra >=0.22",
-    "fileformats >=0.8.3",
-    "fileformats-datascience >=0.1",
-    "fileformats-medimage >=0.4.1",
-    "fileformats-medimage-freesurfer",
-]
-license = { file = "LICENSE" }
-authors = [{ name = "Nipype developers", email = "neuroimaging@python.org" }]
-maintainers = [
-    { name = "Nipype developers", email = "neuroimaging@python.org" },
-]
-keywords = ["pydra"]
-classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
-    "Environment :: Console",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: Apache Software License",
-    "Operating System :: MacOS :: MacOS X",
-    "Operating System :: POSIX :: Linux",
-    "Programming Language :: Python :: 3",
-    "Topic :: Scientific/Engineering",
-]
-dynamic = ["version"]
+version = "0.0.1"
+description = "Pydra tasks for FreeSurfer"
+authors = ["Ghislain Vaillant <ghislain.vaillant@icm-institute.org>"]
+license = "Apache-2.0"
 
-[project.optional-dependencies]
-dev = ["black", "pre-commit"]
-doc = [
-    "packaging",
-    "sphinx >=2.1.2",
-    "sphinx_rtd_theme",
-    "sphinxcontrib-apidoc ~=0.3.0",
-    "sphinxcontrib-napoleon",
-    "sphinxcontrib-versioning",
-]
-test = [
-    "nipype2pydra",
-    "pytest >= 4.4.0",
-    "pytest-cov",
-    "pytest-env",
-    "pytest-xdist",
-    "pytest-rerunfailures",
-    "codecov",
-    "fileformats-extras",
-    "fileformats-datascience-extras",
-    "fileformats-medimage-extras",
-    "fileformats-medimage-freesurfer-extras",
-]
+[tool.poetry.dependencies]
+python = "^3.7"
+Sphinx = { version = "^4.5.0", optional = true }
+pydra = "^0.18"
 
-[tool.hatch.version]
-source = "vcs"
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+isort = "^5.10.1"
+pytest = "^7.1.2"
 
-[tool.hatch.build.hooks.vcs]
-version-file = "pydra/tasks/freesurfer/_version.py"
+[tool.poetry.extras]
+docs = ["Sphinx"]
 
-[tool.hatch.build.targets.wheel]
-packages = ["pydra"]
-include-only = ["pydra/tasks/freesurfer"]
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = ["--doctest-modules", "--doctest-continue-on-failure"]
+testpaths = ["pydra"]
 
 [tool.black]
-target-version = ["py38"]
-exclude = "_version.py"
+target-version = ["py37"]
 
-[tool.codespell]
-ignore-words = ".codespell-ignorewords"
-
-[tool.flake8]
-doctests = true
-per-file-ignores = ["__init__.py:F401,F403"]
-max-line-length = 88
-select = "C,E,F,W,B,B950"
-extend-ignore = ['E203', 'E501', 'E129', 'W503']
+[tool.isort]
+py_version = 37
+profile = "black"
