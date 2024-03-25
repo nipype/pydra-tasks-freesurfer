@@ -19,6 +19,7 @@ on:
 env:
   FREESURFER_VERSION: 7.4.1
   FREESURFER_HOME: /opt/freesurfer
+  DOWNLOADS_DIR: /downloads/freesurfer
 
 jobs:
 
@@ -134,21 +135,22 @@ jobs:
       id: cache-install
       uses: actions/cache@v4
       with:
-        path: $HOME/downloads/freesurfer
+        path: ${{ env.DOWNLOADS_DIR }}
         key: freesurfer-${{ env.FREESURFER_VERSION }}-${{ runner.os }}
 
     - name: Download FreeSurfer
       if: steps.cache-install.outputs.cache-hit != 'true'
       run: |
-        mkdir -p $HOME/downloads/freesurfer
-        curl -s -o $HOME/downloads/freesurfer/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/${{ env.FREESURFER_VERSION }}/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz
+        sudo mkdir -p $DOWNLOADS_DIR
+        sudo chown $USER $DOWNLOADS_DIR
+        curl -s -o $DOWNLOADS_DIR/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/${{ env.FREESURFER_VERSION }}/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz
       shell: bash
 
     - name: Install Freesurfer
       env:
         FREESURFER_LICENCE: ${{ secrets.FREESURFER_LICENCE }}
       run: |
-        pushd $HOME/downloads/freesurfer
+        pushd $DOWNLOADS_DIR/
         tar -zxpf freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz
         mv freesurfer/* ${{ env.FREESURFER_HOME }}
         popd
@@ -216,7 +218,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: '3.x'
 
     - name: Install build tools
       run: python -m pip install build twine
@@ -255,7 +257,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: '3.x'
 
     - name: Install build tools
       run: python -m pip install build twine
@@ -319,7 +321,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: '3.x'
 
     - name: Install build tools
       run: python -m pip install build twine
