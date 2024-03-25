@@ -68,7 +68,7 @@ include-only = ["pydra/tasks/freesurfer"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = ["--doctest-modules", "--doctest-continue-on-failure"]
+# addopts = ["--doctest-modules", "--doctest-continue-on-failure"]
 testpaths = ["pydra"]
 
 [tool.black]
