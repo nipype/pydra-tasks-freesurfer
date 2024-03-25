@@ -35,7 +35,7 @@
 #     
 task_name: ConcatenateLTA
 nipype_name: ConcatenateLTA
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.preprocess
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -49,13 +49,18 @@ inputs:
   # passed to the field in the automatically generated unittests.
     in_lta1: medimage-freesurfer/lta
     # type=file|default=<undefined>: maps some src1 to dst1
-    out_file: medimage-freesurfer/lta
+    out_file: Path
     # type=file: the combined LTA maps: src1 to dst2 = LTA2*LTA1
     # type=file|default=<undefined>: the combined LTA maps: src1 to dst2 = LTA2*LTA1
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
     tal_source_file: generic/file
     # type=file|default=<undefined>: if in_lta2 is talairach.xfm, specify source for talairach
     tal_template_file: generic/file
     # type=file|default=<undefined>: if in_lta2 is talairach.xfm, specify template for talairach
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -111,7 +116,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -133,7 +138,7 @@ tests:
     in_lta2: '"lta2.lta"'
     # type=traitcompound|default=None: maps dst1(src2) to dst2
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -154,11 +159,11 @@ tests:
     # type=traitcompound|default=None: maps dst1(src2) to dst2
     invert_1: 'True'
     # type=bool|default=False: invert in_lta1 before applying it
-    out_file:
+    out_file: '"inv1.lta"'
     # type=file: the combined LTA maps: src1 to dst2 = LTA2*LTA1
     # type=file|default=<undefined>: the combined LTA maps: src1 to dst2 = LTA2*LTA1
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -178,7 +183,7 @@ tests:
     out_type: '"RAS2RAS"'
     # type=enum|default='VOX2VOX'|allowed['RAS2RAS','VOX2VOX']: set final LTA type
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -199,12 +204,12 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_lta1:
+    in_lta1: '"lta1.lta"'
     # type=file|default=<undefined>: maps some src1 to dst1
     in_lta2: '"lta2.lta"'
     # type=traitcompound|default=None: maps dst1(src2) to dst2
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS
@@ -218,11 +223,11 @@ doctests:
     # type=traitcompound|default=None: maps dst1(src2) to dst2
     invert_1: 'True'
     # type=bool|default=False: invert in_lta1 before applying it
-    out_file:
+    out_file: '"inv1.lta"'
     # type=file: the combined LTA maps: src1 to dst2 = LTA2*LTA1
     # type=file|default=<undefined>: the combined LTA maps: src1 to dst2 = LTA2*LTA1
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS
@@ -235,7 +240,7 @@ doctests:
     out_type: '"RAS2RAS"'
     # type=enum|default='VOX2VOX'|allowed['RAS2RAS','VOX2VOX']: set final LTA type
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

@@ -8,7 +8,7 @@
 # 
 task_name: OneSampleTTest
 nipype_name: OneSampleTTest
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.model
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -20,29 +20,34 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_file: generic/file
-    # type=file|default=<undefined>: input 4D file
-    design: generic/file
-    # type=file|default=<undefined>: design matrix file
     contrast: generic/file+list-of
     # type=inputmultiobject|default=[]: contrast file
-    per_voxel_reg: generic/file+list-of
-    # type=inputmultiobject|default=[]: per-voxel regressors
-    weighted_ls: generic/file
-    # type=file|default=<undefined>: weighted least squares
-    fixed_fx_var: generic/file
-    # type=file|default=<undefined>: for fixed effects analysis
+    design: generic/file
+    # type=file|default=<undefined>: design matrix file
     fixed_fx_dof_file: generic/file
     # type=file|default=<undefined>: text file with dof for fixed effects analysis
-    weight_file: generic/file
-    # type=file|default=<undefined>: weight for each input at each voxel
-    mask_file: generic/file
-    # type=file: map of the mask used in the analysis
-    # type=file|default=<undefined>: binary mask
+    fixed_fx_var: generic/file
+    # type=file|default=<undefined>: for fixed effects analysis
+    in_file: generic/file
+    # type=file|default=<undefined>: input 4D file
     label_file: generic/file
     # type=file|default=<undefined>: use label as mask, surfaces only
+    mask_file: Path
+    # type=file: map of the mask used in the analysis
+    # type=file|default=<undefined>: binary mask
+    per_voxel_reg: generic/file+list-of
+    # type=inputmultiobject|default=[]: per-voxel regressors
     sim_done_file: generic/file
     # type=file|default=<undefined>: create file when simulation finished
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    weight_file: generic/file
+    # type=file|default=<undefined>: weight for each input at each voxel
+    weighted_ls: generic/file
+    # type=file|default=<undefined>: weighted least squares
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -58,33 +63,36 @@ outputs:
   # passed to the field in the automatically generated unittests.
     beta_file: generic/file
     # type=file: map of regression coefficients
+    bp_file: generic/file
+    # type=file: Binding potential estimates
+    dof_file: generic/file
+    # type=file: text file with effective degrees-of-freedom for the analysis
     error_file: generic/file
     # type=file: map of residual error
-    error_var_file: generic/file
-    # type=file: map of residual error variance
     error_stddev_file: generic/file
     # type=file: map of residual error standard deviation
+    error_var_file: generic/file
+    # type=file: map of residual error variance
     estimate_file: generic/file
     # type=file: map of the estimated Y values
+    frame_eigenvectors: generic/file
+    # type=file: matrix of frame eigenvectors from residual PCA
+    fwhm_file: generic/file
+    # type=file: text file with estimated smoothness
+    glm_dir: generic/directory
+    # type=directory: output directory
+    # type=str|default='': save outputs to dir
+    k2p_file: generic/file
+    # type=file: estimate of k2p parameter
     mask_file: generic/file
     # type=file: map of the mask used in the analysis
     # type=file|default=<undefined>: binary mask
-    fwhm_file: generic/file
-    # type=file: text file with estimated smoothness
-    dof_file: generic/file
-    # type=file: text file with effective degrees-of-freedom for the analysis
-    spatial_eigenvectors: generic/file
-    # type=file: map of spatial eigenvectors from residual PCA
-    frame_eigenvectors: generic/file
-    # type=file: matrix of frame eigenvectors from residual PCA
     singular_values: generic/file
     # type=file: matrix singular values from residual PCA
+    spatial_eigenvectors: generic/file
+    # type=file: map of spatial eigenvectors from residual PCA
     svd_stats_file: generic/file
     # type=file: text file summarizing the residual PCA
-    k2p_file: generic/file
-    # type=file: estimate of k2p parameter
-    bp_file: generic/file
-    # type=file: Binding potential estimates
   callables:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
@@ -226,7 +234,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically

@@ -1,10 +1,11 @@
-FileFormats Extension - medimage-freesurfer
-====================================
+FileFormats-medimage-freesurfer
+===============================
+
 .. image:: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yml/badge.svg
     :target: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yml
 
-This is the "freesurfer" extension module for the
-`fileformats <https://github.com/ArcanaFramework/fileformats-core>`__ package
+This is an extension module of the `fileformats <https://github.com/ArcanaFramework/fileformats>`__
+package for defining file formats that are specific to the CHANGME software toolkit.
 
 
 Quick Installation
@@ -12,9 +13,9 @@ Quick Installation
 
 This extension can be installed for Python 3 using *pip*::
 
-    $ pip3 install fileformats-freesurfer
+    $ pip3 install fileformats-medimage-freesurfer
 
-This will install the core package and any other dependencies
+This will install the format extensions and dependent base packages.
 
 License
 -------

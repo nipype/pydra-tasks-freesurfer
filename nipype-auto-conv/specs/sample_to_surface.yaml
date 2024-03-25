@@ -36,7 +36,7 @@
 #     
 task_name: SampleToSurface
 nipype_name: SampleToSurface
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -48,14 +48,22 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    source_file: medimage/nifti-gz
-    # type=file|default=<undefined>: volume to sample values from
+    mask_label: generic/file
+    # type=file|default=<undefined>: label file to mask output with
+    out_file: Path
+    # type=file: surface file
+    # type=file|default=<undefined>: surface file to write
     reference_file: generic/file
     # type=file|default=<undefined>: reference volume (default is orig.mgz)
     reg_file: datascience/dat-file
     # type=file|default=<undefined>: source-to-reference registration file
-    mask_label: generic/file
-    # type=file|default=<undefined>: label file to mask output with
+    source_file: medimage/nifti-gz
+    # type=file|default=<undefined>: volume to sample values from
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -69,12 +77,12 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_file: generic/file
-    # type=file: surface file
-    # type=file|default=<undefined>: surface file to write
     hits_file: generic/file
     # type=file: image with number of hits at each voxel
     # type=traitcompound|default=None: save image with number of hits at each voxel
+    out_file: generic/file
+    # type=file: surface file
+    # type=file|default=<undefined>: surface file to write
     vox_file: generic/file
     # type=file: text file with the number of voxels intersecting the surface
     # type=traitcompound|default=None: text file with the number of voxels intersecting the surface
@@ -172,7 +180,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -202,7 +210,7 @@ tests:
     hemi: '"lh"'
     # type=enum|default='lh'|allowed['lh','rh']: target hemisphere
   imports: &id001
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   - module: nipype.interfaces.freesurfer as fs
   expected_outputs:
@@ -224,9 +232,9 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    source_file:
+    source_file: '"cope1.nii.gz"'
     # type=file|default=<undefined>: volume to sample values from
-    reg_file:
+    reg_file: '"register.dat"'
     # type=file|default=<undefined>: source-to-reference registration file
     sampling_method: '"average"'
     # type=enum|default='point'|allowed['average','max','point']: how to sample -- at a point or at the max or average over a range
@@ -237,7 +245,7 @@ doctests:
     hemi: '"lh"'
     # type=enum|default='lh'|allowed['lh','rh']: target hemisphere
   imports: *id001
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

@@ -31,7 +31,7 @@
 #     
 task_name: WatershedSkullStrip
 nipype_name: WatershedSkullStrip
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.preprocess
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -43,15 +43,20 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_file: medimage/mgh-gz
-    # type=file|default=<undefined>: input volume
-    out_file: medimage/mgh-gz
-    # type=file: skull stripped brain volume
-    # type=file|default='brainmask.auto.mgz': output volume
     brain_atlas: generic/file
     # type=file|default=<undefined>: 
+    in_file: medimage/mgh-gz
+    # type=file|default=<undefined>: input volume
+    out_file: Path
+    # type=file: skull stripped brain volume
+    # type=file|default='brainmask.auto.mgz': output volume
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
     transform: medimage-freesurfer/lta
     # type=file|default=<undefined>: undocumented
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -97,7 +102,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -120,11 +125,11 @@ tests:
     # type=bool|default=False: specify T1 input volume (T1 grey value = 110)
     transform:
     # type=file|default=<undefined>: undocumented
-    out_file:
+    out_file: '"brainmask.auto.mgz"'
     # type=file: skull stripped brain volume
     # type=file|default='brainmask.auto.mgz': output volume
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -145,17 +150,17 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_file:
+    in_file: '"T1.mgz"'
     # type=file|default=<undefined>: input volume
     t1: 'True'
     # type=bool|default=False: specify T1 input volume (T1 grey value = 110)
-    transform:
+    transform: '"transforms/talairach_with_skull.lta"'
     # type=file|default=<undefined>: undocumented
-    out_file:
+    out_file: '"brainmask.auto.mgz"'
     # type=file: skull stripped brain volume
     # type=file|default='brainmask.auto.mgz': output volume
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

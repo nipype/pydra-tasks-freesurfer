@@ -29,7 +29,7 @@
 #     
 task_name: MakeSurfaces
 nipype_name: MakeSurfaces
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -41,24 +41,29 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_orig: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Implicit input file <hemisphere>.orig
-    in_wm: medimage/mgh-gz
-    # type=file|default=<undefined>: Implicit input file wm.mgz
-    in_filled: medimage/mgh-gz
-    # type=file|default=<undefined>: Implicit input file filled.mgz
-    in_white: generic/file
-    # type=file|default=<undefined>: Implicit input that is sometimes used
-    in_label: medimage/nifti1
-    # type=file|default=<undefined>: Implicit input label/<hemisphere>.aparc.annot
-    orig_white: generic/file
-    # type=file|default=<undefined>: Specify a white surface to start with
-    orig_pial: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Specify a pial surface to start with
-    in_aseg: generic/file
-    # type=file|default=<undefined>: Input segmentation file
     in_T1: medimage/mgh-gz
     # type=file|default=<undefined>: Input brain or T1 file
+    in_aseg: generic/file
+    # type=file|default=<undefined>: Input segmentation file
+    in_filled: medimage/mgh-gz
+    # type=file|default=<undefined>: Implicit input file filled.mgz
+    in_label: medimage/nifti1
+    # type=file|default=<undefined>: Implicit input label/<hemisphere>.aparc.annot
+    in_orig: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Implicit input file <hemisphere>.orig
+    in_white: generic/file
+    # type=file|default=<undefined>: Implicit input that is sometimes used
+    in_wm: medimage/mgh-gz
+    # type=file|default=<undefined>: Implicit input file wm.mgz
+    orig_pial: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Specify a pial surface to start with
+    orig_white: generic/file
+    # type=file|default=<undefined>: Specify a white surface to start with
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -72,18 +77,18 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_white: generic/file
-    # type=file: Output white matter hemisphere surface
-    out_curv: generic/file
-    # type=file: Output curv file for MakeSurfaces
     out_area: generic/file
     # type=file: Output area file for MakeSurfaces
     out_cortex: generic/file
     # type=file: Output cortex file for MakeSurfaces
+    out_curv: generic/file
+    # type=file: Output curv file for MakeSurfaces
     out_pial: generic/file
     # type=file: Output pial surface for MakeSurfaces
     out_thickness: generic/file
     # type=file: Output thickness file for MakeSurfaces
+    out_white: generic/file
+    # type=file: Output white matter hemisphere surface
   callables:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
@@ -142,7 +147,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -176,7 +181,7 @@ tests:
     orig_pial:
     # type=file|default=<undefined>: Specify a pial surface to start with
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -201,20 +206,20 @@ doctests:
     # type=enum|default='lh'|allowed['lh','rh']: Hemisphere being processed
     subject_id: '"10335"'
     # type=string|default='subject_id': Subject being processed
-    in_orig:
+    in_orig: '"lh.pial"'
     # type=file|default=<undefined>: Implicit input file <hemisphere>.orig
-    in_wm:
+    in_wm: '"wm.mgz"'
     # type=file|default=<undefined>: Implicit input file wm.mgz
-    in_filled:
+    in_filled: '"norm.mgz"'
     # type=file|default=<undefined>: Implicit input file filled.mgz
-    in_label:
+    in_label: '"aparc+aseg.nii"'
     # type=file|default=<undefined>: Implicit input label/<hemisphere>.aparc.annot
-    in_T1:
+    in_T1: '"T1.mgz"'
     # type=file|default=<undefined>: Input brain or T1 file
-    orig_pial:
+    orig_pial: '"lh.pial"'
     # type=file|default=<undefined>: Specify a pial surface to start with
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

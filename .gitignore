@@ -20,7 +20,6 @@ parts/
 sdist/
 var/
 wheels/
-pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -50,6 +49,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+cover/
 
 # Translations
 *.mo
@@ -72,6 +72,7 @@ instance/
 docs/_build/
 
 # PyBuilder
+.pybuilder/
 target/
 
 # Jupyter Notebook
@@ -81,17 +82,10 @@ target/
 profile_default/
 ipython_config.py
 
-# pyenv
-.python-version
+# Hatch
+.hatch/
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
 
 # Celery stuff
@@ -131,13 +125,37 @@ dmypy.json
 # Pycharm
 .idea
 
+# Vim
+.*.sw[op]
+
 # VS Code
 .vscode
 
 # Mac garbarge
 .DS_store
 
-/pydra/tasks/freesurfer/auto
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# Makefile stamp files
+*.stamp
+
+# JetBrains
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+
+.fleet/
+
+# macOS
+.DS_Store
+
+# Generated files
 /pydra/tasks/freesurfer/_version.py
-/fileformats/src/fileformats/medimage_freesurfer/_version.py
-/fileformats/extras/fileformats/extras/medimage_freesurfer/_version.py
+/related-packages/fileformats/fileformats/medimage_freesurfer/_version.py
+/related-packages/fileformats-extras/fileformats/extras/medimage_freesurfer/_version.py
+/pydra/tasks/freesurfer/auto

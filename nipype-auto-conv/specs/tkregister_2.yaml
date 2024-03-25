@@ -37,7 +37,7 @@
 #     
 task_name: Tkregister2
 nipype_name: Tkregister2
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -49,19 +49,24 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    target_image: medimage/nifti1
-    # type=file|default=<undefined>: target volume
-    moving_image: medimage/nifti1,medimage/mgh-gz
-    # type=file|default=<undefined>: moving volume
     fsl_in_matrix: datascience/text-matrix
     # type=file|default=<undefined>: fsl-style registration input matrix
-    xfm: generic/file
-    # type=file|default=<undefined>: use a matrix in MNI coordinates as initial registration
     lta_in: generic/file
     # type=file|default=<undefined>: use a matrix in MNI coordinates as initial registration
-    reg_file: datascience/dat-file
+    moving_image: medimage/nifti1,medimage/mgh-gz
+    # type=file|default=<undefined>: moving volume
+    reg_file: Path
     # type=file: freesurfer-style registration file
     # type=file|default='register.dat': freesurfer-style registration file
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    target_image: medimage/nifti1
+    # type=file|default=<undefined>: target volume
+    xfm: generic/file
+    # type=file|default=<undefined>: use a matrix in MNI coordinates as initial registration
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -75,13 +80,13 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    reg_file: datascience/dat-file
-    # type=file: freesurfer-style registration file
-    # type=file|default='register.dat': freesurfer-style registration file
     fsl_file: generic/file
     # type=file: FSL-style registration file
     lta_file: generic/file
     # type=file: LTA-style registration file
+    reg_file: datascience/dat-file
+    # type=file: freesurfer-style registration file
+    # type=file|default='register.dat': freesurfer-style registration file
   callables:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
@@ -133,7 +138,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -156,11 +161,11 @@ tests:
     # type=file|default=<undefined>: target volume
     reg_header: 'True'
     # type=bool|default=False: compute regstration from headers
-    reg_file:
+    reg_file: '"T1_to_native.dat"'
     # type=file: freesurfer-style registration file
     # type=file|default='register.dat': freesurfer-style registration file
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -182,7 +187,7 @@ tests:
     fsl_in_matrix:
     # type=file|default=<undefined>: fsl-style registration input matrix
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -203,17 +208,17 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    moving_image:
+    moving_image: '"T1.mgz"'
     # type=file|default=<undefined>: moving volume
-    target_image:
+    target_image: '"structural.nii"'
     # type=file|default=<undefined>: target volume
     reg_header: 'True'
     # type=bool|default=False: compute regstration from headers
-    reg_file:
+    reg_file: '"T1_to_native.dat"'
     # type=file: freesurfer-style registration file
     # type=file|default='register.dat': freesurfer-style registration file
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS
@@ -223,12 +228,12 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    moving_image:
+    moving_image: '"epi.nii"'
     # type=file|default=<undefined>: moving volume
-    fsl_in_matrix:
+    fsl_in_matrix: '"flirt.mat"'
     # type=file|default=<undefined>: fsl-style registration input matrix
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

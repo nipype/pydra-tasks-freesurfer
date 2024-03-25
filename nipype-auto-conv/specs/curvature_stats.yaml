@@ -44,7 +44,7 @@
 #     
 task_name: CurvatureStats
 nipype_name: CurvatureStats
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -56,15 +56,20 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    surface: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Specify surface file for CurvatureStats
     curvfile1: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file for CurvatureStats
     curvfile2: medimage-freesurfer/pial
     # type=file|default=<undefined>: Input file for CurvatureStats
-    out_file: medimage-freesurfer/stats
+    out_file: Path
     # type=file: Output curvature stats file
     # type=file|default=<undefined>: Output curvature stats file
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    surface: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Specify surface file for CurvatureStats
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -120,7 +125,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -145,7 +150,7 @@ tests:
     # type=file|default=<undefined>: Input file for CurvatureStats
     surface:
     # type=file|default=<undefined>: Specify surface file for CurvatureStats
-    out_file:
+    out_file: '"lh.curv.stats"'
     # type=file: Output curvature stats file
     # type=file|default=<undefined>: Output curvature stats file
     values: 'True'
@@ -155,7 +160,7 @@ tests:
     write: 'True'
     # type=bool|default=False: Write curvature files
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -178,13 +183,13 @@ doctests:
   # '.mock()' method of the corresponding class is used instead.
     hemisphere: '"lh"'
     # type=enum|default='lh'|allowed['lh','rh']: Hemisphere being processed
-    curvfile1:
+    curvfile1: '"lh.pial"'
     # type=file|default=<undefined>: Input file for CurvatureStats
-    curvfile2:
+    curvfile2: '"lh.pial"'
     # type=file|default=<undefined>: Input file for CurvatureStats
-    surface:
+    surface: '"lh.pial"'
     # type=file|default=<undefined>: Specify surface file for CurvatureStats
-    out_file:
+    out_file: '"lh.curv.stats"'
     # type=file: Output curvature stats file
     # type=file|default=<undefined>: Output curvature stats file
     values: 'True'
@@ -194,7 +199,7 @@ doctests:
     write: 'True'
     # type=bool|default=False: Write curvature files
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

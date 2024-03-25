@@ -26,7 +26,7 @@
 #     
 task_name: FixTopology
 nipype_name: FixTopology
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -38,16 +38,21 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_orig: medimage-freesurfer/orig
-    # type=file|default=<undefined>: Undocumented input file <hemisphere>.orig
-    in_inflated: medimage-freesurfer/inflated
-    # type=file|default=<undefined>: Undocumented input file <hemisphere>.inflated
     in_brain: generic/file
     # type=file|default=<undefined>: Implicit input brain.mgz
+    in_inflated: medimage-freesurfer/inflated
+    # type=file|default=<undefined>: Undocumented input file <hemisphere>.inflated
+    in_orig: medimage-freesurfer/orig
+    # type=file|default=<undefined>: Undocumented input file <hemisphere>.orig
     in_wm: generic/file
     # type=file|default=<undefined>: Implicit input wm.mgz
     sphere: medimage-freesurfer/nofix
     # type=file|default=<undefined>: Sphere input file
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -103,7 +108,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -135,7 +140,7 @@ tests:
     ga: 'True'
     # type=bool|default=False: No documentation. Direct questions to analysis-bugs@nmr.mgh.harvard.edu
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -156,11 +161,11 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_orig:
+    in_orig: '"lh.orig" # doctest: +SKIP'
     # type=file|default=<undefined>: Undocumented input file <hemisphere>.orig
-    in_inflated:
+    in_inflated: '"lh.inflated" # doctest: +SKIP'
     # type=file|default=<undefined>: Undocumented input file <hemisphere>.inflated
-    sphere:
+    sphere: '"lh.qsphere.nofix" # doctest: +SKIP'
     # type=file|default=<undefined>: Sphere input file
     hemisphere: '"lh"'
     # type=string|default='': Hemisphere being processed
@@ -171,7 +176,7 @@ doctests:
     ga: 'True'
     # type=bool|default=False: No documentation. Direct questions to analysis-bugs@nmr.mgh.harvard.edu
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

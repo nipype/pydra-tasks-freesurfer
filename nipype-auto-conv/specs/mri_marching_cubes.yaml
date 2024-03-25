@@ -20,7 +20,7 @@
 #     
 task_name: MRIMarchingCubes
 nipype_name: MRIMarchingCubes
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -34,6 +34,15 @@ inputs:
   # passed to the field in the automatically generated unittests.
     in_file: generic/file
     # type=file|default=<undefined>: Input volume to tessellate voxels from.
+    out_file: Path
+    # type=file|default=<undefined>: output filename or True to generate one
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
+    out_file: out_file_default
+    # type=file|default=<undefined>: output filename or True to generate one
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -54,8 +63,6 @@ outputs:
   # to set to the `callable` attribute of output fields
   templates:
   # dict[str, str] - `output_file_template` values to be provided to output fields
-    out_file: out_file
-    # type=file|default=<undefined>: output filename or True to generate one
   requirements:
   # dict[str, list[str]] - input fields that are required to be provided for the output field to be present
 tests:
@@ -77,7 +84,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically

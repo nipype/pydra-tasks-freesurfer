@@ -33,7 +33,7 @@
 #     
 task_name: ParcellationStats
 nipype_name: ParcellationStats
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -45,34 +45,45 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    wm: medimage/mgh-gz
-    # type=file|default=<undefined>: Input file must be <subject_id>/mri/wm.mgz
-    lh_white: medimage-freesurfer/white
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    rh_white: medimage-freesurfer/white
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    lh_pial: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    rh_pial: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    transform: medimage-freesurfer/xfm
-    # type=file|default=<undefined>: Input file must be <subject_id>/mri/transforms/talairach.xfm
-    thickness: medimage-freesurfer/thickness
-    # type=file|default=<undefined>: Input file must be <subject_id>/surf/?h.thickness
-    brainmask: medimage/mgh-gz
-    # type=file|default=<undefined>: Input file must be <subject_id>/mri/brainmask.mgz
     aseg: medimage/mgh-gz
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/aseg.presurf.mgz
-    ribbon: medimage/mgh-gz
-    # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
+    brainmask: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/brainmask.mgz
     cortex_label: generic/file
     # type=file|default=<undefined>: implicit input file {hemi}.cortex.label
-    in_cortex: generic/file
-    # type=file|default=<undefined>: Input cortex label
     in_annotation: generic/file
     # type=file|default=<undefined>: compute properties for each label in the annotation file separately
+    in_cortex: generic/file
+    # type=file|default=<undefined>: Input cortex label
     in_label: generic/file
     # type=file|default=<undefined>: limit calculations to specified label
+    lh_pial: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
+    lh_white: medimage-freesurfer/white
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
+    out_color: Path
+    # type=file: Output annotation files's colortable to text file
+    # type=file|default=<undefined>: Output annotation files's colortable to text file
+    out_table: Path
+    # type=file: Table output to tablefile
+    # type=file|default=<undefined>: Table output to tablefile
+    rh_pial: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
+    rh_white: medimage-freesurfer/white
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
+    ribbon: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    thickness: medimage-freesurfer/thickness
+    # type=file|default=<undefined>: Input file must be <subject_id>/surf/?h.thickness
+    transform: medimage-freesurfer/xfm
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/transforms/talairach.xfm
+    wm: medimage/mgh-gz
+    # type=file|default=<undefined>: Input file must be <subject_id>/mri/wm.mgz
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -86,23 +97,23 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    out_table: medimage-freesurfer/stats
-    # type=file: Table output to tablefile
-    # type=file|default=<undefined>: Table output to tablefile
     out_color: medimage-freesurfer/ctab
     # type=file: Output annotation files's colortable to text file
     # type=file|default=<undefined>: Output annotation files's colortable to text file
+    out_table: medimage-freesurfer/stats
+    # type=file: Table output to tablefile
+    # type=file|default=<undefined>: Table output to tablefile
   callables:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
   templates:
   # dict[str, str] - `output_file_template` values to be provided to output fields
-    out_table: '"lh.test.stats"'
-    # type=file: Table output to tablefile
-    # type=file|default=<undefined>: Table output to tablefile
     out_color: '"test.ctab"'
     # type=file: Output annotation files's colortable to text file
     # type=file|default=<undefined>: Output annotation files's colortable to text file
+    out_table: '"lh.test.stats"'
+    # type=file: Table output to tablefile
+    # type=file|default=<undefined>: Table output to tablefile
   requirements:
   # dict[str, list[str]] - input fields that are required to be provided for the output field to be present
 tests:
@@ -164,7 +175,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -214,7 +225,7 @@ tests:
     # type=file: Output annotation files's colortable to text file
     # type=file|default=<undefined>: Output annotation files's colortable to text file
   imports: &id001
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   - module: os
   expected_outputs:
@@ -240,25 +251,25 @@ doctests:
     # type=string|default='subject_id': Subject being processed
     hemisphere: '"lh"'
     # type=enum|default='lh'|allowed['lh','rh']: Hemisphere being processed
-    wm:
+    wm: '"./../mri/wm.mgz" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/wm.mgz
-    transform:
+    transform: '"./../mri/transforms/talairach.xfm" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/transforms/talairach.xfm
-    brainmask:
+    brainmask: '"./../mri/brainmask.mgz" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/brainmask.mgz
-    aseg:
+    aseg: '"./../mri/aseg.presurf.mgz" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/aseg.presurf.mgz
-    ribbon:
+    ribbon: '"./../mri/ribbon.mgz" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/mri/ribbon.mgz
-    lh_pial:
+    lh_pial: '"lh.pial" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.pial
-    rh_pial:
+    rh_pial: '"lh.pial" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.pial
-    lh_white:
+    lh_white: '"lh.white" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/lh.white
-    rh_white:
+    rh_white: '"rh.white" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/rh.white
-    thickness:
+    thickness: '"lh.thickness" # doctest: +SKIP'
     # type=file|default=<undefined>: Input file must be <subject_id>/surf/?h.thickness
     surface: '"white"'
     # type=string|default='': Input surface (e.g. 'white')
@@ -269,7 +280,7 @@ doctests:
     # type=file: Output annotation files's colortable to text file
     # type=file|default=<undefined>: Output annotation files's colortable to text file
   imports: *id001
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

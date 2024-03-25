@@ -22,7 +22,7 @@
 #     
 task_name: Register
 nipype_name: Register
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.registration
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -34,14 +34,22 @@ inputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
-    in_surf: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Surface to register, often {hemi}.sphere
-    target: medimage/mgh-gz
-    # type=file|default=<undefined>: The data to register to. In normal recon-all usage, this is a template file for average surface.
-    in_sulc: medimage-freesurfer/pial
-    # type=file|default=<undefined>: Undocumented mandatory input file ${SUBJECTS_DIR}/surf/{hemisphere}.sulc 
     in_smoothwm: medimage-freesurfer/pial
     # type=file|default=<undefined>: Undocumented input file ${SUBJECTS_DIR}/surf/{hemisphere}.smoothwm 
+    in_sulc: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Undocumented mandatory input file ${SUBJECTS_DIR}/surf/{hemisphere}.sulc 
+    in_surf: medimage-freesurfer/pial
+    # type=file|default=<undefined>: Surface to register, often {hemi}.sphere
+    out_file: Path
+    # type=file: Output surface file to capture registration
+    # type=file|default=<undefined>: Output surface file to capture registration
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+    target: medimage/mgh-gz
+    # type=file|default=<undefined>: The data to register to. In normal recon-all usage, this is a template file for average surface.
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -92,7 +100,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -123,7 +131,7 @@ tests:
     curv: 'True'
     # type=bool|default=False: Use smoothwm curvature for final alignment
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -144,13 +152,13 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_surf:
+    in_surf: '"lh.pial"'
     # type=file|default=<undefined>: Surface to register, often {hemi}.sphere
-    in_smoothwm:
+    in_smoothwm: '"lh.pial"'
     # type=file|default=<undefined>: Undocumented input file ${SUBJECTS_DIR}/surf/{hemisphere}.smoothwm 
-    in_sulc:
+    in_sulc: '"lh.pial"'
     # type=file|default=<undefined>: Undocumented mandatory input file ${SUBJECTS_DIR}/surf/{hemisphere}.sulc 
-    target:
+    target: '"aseg.mgz"'
     # type=file|default=<undefined>: The data to register to. In normal recon-all usage, this is a template file for average surface.
     out_file: '"lh.pial.reg"'
     # type=file: Output surface file to capture registration
@@ -158,7 +166,7 @@ doctests:
     curv: 'True'
     # type=bool|default=False: Use smoothwm curvature for final alignment
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

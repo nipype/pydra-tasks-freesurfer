@@ -32,7 +32,7 @@
 #     
 task_name: RegisterAVItoTalairach
 nipype_name: RegisterAVItoTalairach
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.registration
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -46,13 +46,18 @@ inputs:
   # passed to the field in the automatically generated unittests.
     in_file: medimage/mgh-gz
     # type=file|default=<undefined>: The input file
+    out_file: Path
+    # type=file: The output file for RegisterAVItoTalairach
+    # type=file|default='talairach.auto.xfm': The transform output
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
     target: medimage/mgh-gz
     # type=file|default=<undefined>: The target file
     vox2vox: text/text-file
     # type=file|default=<undefined>: The vox2vox file
-    out_file: generic/file
-    # type=file: The output file for RegisterAVItoTalairach
-    # type=file|default='talairach.auto.xfm': The transform output
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -66,11 +71,11 @@ outputs:
   # from the nipype interface, but you may want to be more specific, particularly
   # for file types, where specifying the format also specifies the file that will be
   # passed to the field in the automatically generated unittests.
+    log_file: generic/file
+    # type=file: The output log
     out_file: generic/file
     # type=file: The output file for RegisterAVItoTalairach
     # type=file|default='talairach.auto.xfm': The transform output
-    log_file: generic/file
-    # type=file: The output log
   callables:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
@@ -98,7 +103,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -122,7 +127,7 @@ tests:
     vox2vox:
     # type=file|default=<undefined>: The vox2vox file
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -143,14 +148,14 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_file:
+    in_file: '"structural.mgz"                         # doctest: +SKIP'
     # type=file|default=<undefined>: The input file
-    target:
+    target: '"mni305.cor.mgz"                          # doctest: +SKIP'
     # type=file|default=<undefined>: The target file
-    vox2vox:
+    vox2vox: '"talsrcimg_to_structural_t4_vox2vox.txt" # doctest: +SKIP'
     # type=file|default=<undefined>: The vox2vox file
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS

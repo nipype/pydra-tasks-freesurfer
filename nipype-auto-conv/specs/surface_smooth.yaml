@@ -33,7 +33,7 @@
 #     
 task_name: SurfaceSmooth
 nipype_name: SurfaceSmooth
-nipype_module: nipype.interfaces.freesurfer
+nipype_module: nipype.interfaces.freesurfer.utils
 inputs:
   omit:
   # list[str] - fields to omit from the Pydra interface
@@ -47,6 +47,14 @@ inputs:
   # passed to the field in the automatically generated unittests.
     in_file: medimage/mgh-gz
     # type=file|default=<undefined>: source surface file
+    out_file: Path
+    # type=file: smoothed surface file
+    # type=file|default=<undefined>: surface file to write
+    subjects_dir: generic/directory
+    # type=directory|default=<undefined>: subjects directory
+  callable_defaults:
+  # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
+  # to set as the `default` method of input fields
   metadata:
   # dict[str, dict[str, any]] - additional metadata to set on any of the input fields (e.g. out_file: position: 1)
 outputs:
@@ -101,7 +109,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -127,7 +135,7 @@ tests:
     fwhm: '5'
     # type=float|default=0.0: effective FWHM of the smoothing process
   imports: &id001
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   - module: nipype.interfaces.freesurfer as fs
   expected_outputs:
@@ -149,7 +157,7 @@ doctests:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
   # If the field is of file-format type and the value is None, then the
   # '.mock()' method of the corresponding class is used instead.
-    in_file:
+    in_file: '"lh.cope1.mgz"'
     # type=file|default=<undefined>: source surface file
     subject_id: '"subj_1"'
     # type=string|default='': subject id of surface file
@@ -158,7 +166,7 @@ doctests:
     fwhm: '5'
     # type=float|default=0.0: effective FWHM of the smoothing process
   imports: *id001
-  # list[nipype2pydra.task.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS
