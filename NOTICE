@@ -1,6 +1,10 @@
-Pydra-freesurfer
+Pydra-Freesurfer
 Copyright 2024 Pydra Development Team
 
-The bases for the task interfaces defined in this package were semi-automatically converted
-from Nipype interfaces (https://github.com/nipy/nipype) using the Nipype2Pydra tool
-(https://github.com/nipype/nipype2pydra).
+Portions of this software were developed by the ARAMIS Lab for the Clinica project.
+Initial code for the GTMSeg, ReconAll and TkRegister2 tasks were copied from
+<https://github.com/aramis-lab/clinica-pydra-freesurfer>.
+
+The basis for the remaining task interfaces defined in this package were semi-automatically
+converted from Nipype interfaces (https://github.com/nipy/nipype) using the Nipype2Pydra
+tool (https://github.com/nipype/nipype2pydra).
