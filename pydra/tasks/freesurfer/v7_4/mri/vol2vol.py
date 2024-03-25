@@ -88,21 +88,30 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer import specs
+from pydra.tasks.freesurfer.v7_4 import specs
 
 
 @define(kw_only=True)
 class Vol2VolSpec(ShellSpec):
     """Specifications for mri_vol2vol."""
 
-    moving_volume: str = field(metadata={"help_string": "moving volume", "argstr": "--mov"})
+    moving_volume: str = field(
+        metadata={"help_string": "moving volume", "argstr": "--mov"}
+    )
 
-    target_volume: str = field(metadata={"help_string": "target volume", "argstr": "--targ"})
+    target_volume: str = field(
+        metadata={"help_string": "target volume", "argstr": "--targ"}
+    )
 
-    output_volume: str = field(metadata={"help_string": "output volume", "argstr": "--o"})
+    output_volume: str = field(
+        metadata={"help_string": "output volume", "argstr": "--o"}
+    )
 
     registration_file: str = field(
-        metadata={"help_string": "registration file in FreeSurfer format", "argstr": "--reg"}
+        metadata={
+            "help_string": "registration file in FreeSurfer format",
+            "argstr": "--reg",
+        }
     )
 
     use_registered_volume_as_target: bool = field(
@@ -113,12 +122,19 @@ class Vol2VolSpec(ShellSpec):
         }
     )
 
-    fsl_registration_file: str = field(metadata={"help_string": "registration file in FSL format", "argstr": "--fsl"})
+    fsl_registration_file: str = field(
+        metadata={"help_string": "registration file in FSL format", "argstr": "--fsl"}
+    )
 
-    xfm_registration_file: str = field(metadata={"help_string": "registration file in XFM format", "argstr": "--xfm"})
+    xfm_registration_file: str = field(
+        metadata={"help_string": "registration file in XFM format", "argstr": "--xfm"}
+    )
 
     resample_to_talairach: bool = field(
-        metadata={"help_string": "resample moving volume to Talairach", "argstr": "--tal"}
+        metadata={
+            "help_string": "resample moving volume to Talairach",
+            "argstr": "--tal",
+        }
     )
 
     talairach_resolution: int = field(
@@ -130,10 +146,15 @@ class Vol2VolSpec(ShellSpec):
         }
     )
 
-    invert_transform: bool = field(metadata={"help_string": "invert transform", "argstr": "--inv"})
+    invert_transform: bool = field(
+        metadata={"help_string": "invert transform", "argstr": "--inv"}
+    )
 
     no_resampling: bool = field(
-        metadata={"help_string": "change the vox2ras matrix instead of resampling", "argstr": "--no-resample"}
+        metadata={
+            "help_string": "change the vox2ras matrix instead of resampling",
+            "argstr": "--no-resample",
+        }
     )
 
     interpolation: str = field(

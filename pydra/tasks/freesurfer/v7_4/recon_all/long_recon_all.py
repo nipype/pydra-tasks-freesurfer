@@ -11,7 +11,7 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellOutSpec, ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer.recon_all import specs
+from pydra.tasks.freesurfer.v7_4.recon_all import specs
 
 
 @define(slots=False, kw_only=True)
@@ -27,7 +27,9 @@ class LongReconAllSpec(ShellSpec):
         }
     )
 
-    longitudinal_template_id: str = field(metadata={"help_string": "longitudinal template identifier", "argstr": None})
+    longitudinal_template_id: str = field(
+        metadata={"help_string": "longitudinal template identifier", "argstr": None}
+    )
 
 
 @define(slots=False, kw_only=True)
@@ -49,6 +51,10 @@ class LongReconAll(ShellCommandTask):
 
     executable = "recon-all"
 
-    input_spec = SpecInfo(name="Input", bases=(LongReconAllSpec, specs.ReconAllBaseSpec))
+    input_spec = SpecInfo(
+        name="Input", bases=(LongReconAllSpec, specs.ReconAllBaseSpec)
+    )
 
-    output_spec = SpecInfo(name="Output", bases=(LongReconAllOutSpec, specs.ReconAllBaseOutSpec))
+    output_spec = SpecInfo(
+        name="Output", bases=(LongReconAllOutSpec, specs.ReconAllBaseOutSpec)
+    )

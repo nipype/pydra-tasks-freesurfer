@@ -6,7 +6,7 @@ from typing import List
 from attrs import define, field
 
 from pydra.engine.specs import ShellSpec
-from pydra.tasks.freesurfer.specs import SubjectsDirOutSpec
+from pydra.tasks.freesurfer.v7_4.specs import SubjectsDirOutSpec
 
 # FIXME: Change to ty.Tuple[float, float, float] once Pydra supports it, if ever.
 SeedPoint = List[float]
@@ -40,7 +40,9 @@ class ReconAllBaseSpec(ShellSpec):
         },
     )
 
-    custom_brain_mask: PathLike = field(metadata={"help_string": "custom brain mask", "argstr": "-xmask"})
+    custom_brain_mask: PathLike = field(
+        metadata={"help_string": "custom brain mask", "argstr": "-xmask"}
+    )
 
     hemisphere: str = field(
         metadata={
@@ -51,7 +53,9 @@ class ReconAllBaseSpec(ShellSpec):
         }
     )
 
-    pons_seed_point: SeedPoint = field(metadata={"help_string": "seed point for pons", "argstr": "-pons-crs"})
+    pons_seed_point: SeedPoint = field(
+        metadata={"help_string": "seed point for pons", "argstr": "-pons-crs"}
+    )
 
     corpus_callosum_seed_point: SeedPoint = field(
         metadata={"help_string": "seed point for corpus callosum", "argstr": "-cc-crs"}
@@ -66,17 +70,28 @@ class ReconAllBaseSpec(ShellSpec):
     )
 
     custom_talairach_atlas: PathLike = field(
-        metadata={"help_string": "use a custom talairach atlas", "argstr": "-custom-tal-atlas"}
+        metadata={
+            "help_string": "use a custom talairach atlas",
+            "argstr": "-custom-tal-atlas",
+        }
     )
 
-    deface: bool = field(metadata={"help_string": "deface subject", "argstr": "-deface"})
+    deface: bool = field(
+        metadata={"help_string": "deface subject", "argstr": "-deface"}
+    )
 
     no_subcortical_segmentation: bool = field(
-        metadata={"help_string": "skip subcortical segmentation steps", "argstr": "-nosubcortseg"}
+        metadata={
+            "help_string": "skip subcortical segmentation steps",
+            "argstr": "-nosubcortseg",
+        }
     )
 
     conform_width_to_256: bool = field(
-        metadata={"help_string": "conform image dimensions to 256 when running mri_convert", "argstr": "-cw256"}
+        metadata={
+            "help_string": "conform image dimensions to 256 when running mri_convert",
+            "argstr": "-cw256",
+        }
     )
 
     cache_files_for_qdec: bool = field(
@@ -87,13 +102,22 @@ class ReconAllBaseSpec(ShellSpec):
     )
 
     parallel: bool = field(
-        metadata={"help_string": "process both hemispheres in parallel", "argstr": "-parallel", "xor": ["hemisphere"]}
+        metadata={
+            "help_string": "process both hemispheres in parallel",
+            "argstr": "-parallel",
+            "xor": ["hemisphere"],
+        }
     )
 
-    num_threads: int = field(metadata={"help_string": "set number of threads to use", "argstr": "-threads"})
+    num_threads: int = field(
+        metadata={"help_string": "set number of threads to use", "argstr": "-threads"}
+    )
 
     subjects_dir: PathLike = field(
-        metadata={"help_string": "subjects directory processed by FreeSurfer", "argstr": "-sd"}
+        metadata={
+            "help_string": "subjects directory processed by FreeSurfer",
+            "argstr": "-sd",
+        }
     )
 
 

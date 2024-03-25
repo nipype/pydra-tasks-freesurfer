@@ -30,7 +30,7 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer import specs
+from pydra.tasks.freesurfer.v7_4 import specs
 
 
 @define(slots=False, kw_only=True)
@@ -85,17 +85,36 @@ class CALabelSpec(ShellSpec):
         }
     )
 
-    subjects_dir: str = field(metadata={"help_string": "subjects directory", "argstr": "-sdir"})
+    subjects_dir: str = field(
+        metadata={"help_string": "subjects directory", "argstr": "-sdir"}
+    )
 
-    aseg_volume: PathLike = field(metadata={"help_string": "use aseg volume to correct midline", "argstr": "-aseg"})
+    aseg_volume: PathLike = field(
+        metadata={
+            "help_string": "use aseg volume to correct midline",
+            "argstr": "-aseg",
+        }
+    )
 
-    original_surface: str = field(default="smoothwm", metadata={"help_string": "original surface", "argstr": "-orig"})
+    original_surface: str = field(
+        default="smoothwm",
+        metadata={"help_string": "original surface", "argstr": "-orig"},
+    )
 
-    no_covariance: bool = field(metadata={"help_string": "set covariance matrices to identity", "argstr": "-novar"})
+    no_covariance: bool = field(
+        metadata={
+            "help_string": "set covariance matrices to identity",
+            "argstr": "-novar",
+        }
+    )
 
-    parcellation_table: PathLike = field(metadata={"help_string": "parcellation table", "argstr": "-t"})
+    parcellation_table: PathLike = field(
+        metadata={"help_string": "parcellation table", "argstr": "-t"}
+    )
 
-    cortex_label_file: PathLike = field(metadata={"help_string": "cortex label file", "argstr": "-l"})
+    cortex_label_file: PathLike = field(
+        metadata={"help_string": "cortex label file", "argstr": "-l"}
+    )
 
 
 class CALabel(ShellCommandTask):

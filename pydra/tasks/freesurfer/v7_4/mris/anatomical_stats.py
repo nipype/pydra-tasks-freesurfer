@@ -24,7 +24,7 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer import specs
+from pydra.tasks.freesurfer.v7_4 import specs
 
 
 @define(slots=False, kw_only=True)
@@ -32,7 +32,12 @@ class AnatomicalStatsSpec(ShellSpec):
     """Specifications for mris_anatomical_stats."""
 
     subject_id: str = field(
-        metadata={"help_string": "subject identifier", "mandatory": True, "argstr": "", "position": -3}
+        metadata={
+            "help_string": "subject identifier",
+            "mandatory": True,
+            "argstr": "",
+            "position": -3,
+        }
     )
 
     hemisphere: str = field(
@@ -45,14 +50,23 @@ class AnatomicalStatsSpec(ShellSpec):
         }
     )
 
-    surface_name: str = field(default="white", metadata={"help_string": "surface name", "argstr": "", "position": -1})
+    surface_name: str = field(
+        default="white",
+        metadata={"help_string": "surface name", "argstr": "", "position": -1},
+    )
 
     label_file: PathLike = field(
-        metadata={"help_string": "restrict computation to each label in this file", "argstr": "-l"}
+        metadata={
+            "help_string": "restrict computation to each label in this file",
+            "argstr": "-l",
+        }
     )
 
     annotation_file: PathLike = field(
-        metadata={"help_string": "compute statistics for each annotation in this file", "argstr": "-a"}
+        metadata={
+            "help_string": "compute statistics for each annotation in this file",
+            "argstr": "-a",
+        }
     )
 
     output_stats_file: str = field(
@@ -80,14 +94,24 @@ class AnatomicalStatsSpec(ShellSpec):
     )
 
     no_global_stats: bool = field(
-        metadata={"help_string": "do not write global stats", "argstr": "-noglobal", "requires": {"output_stats_file"}}
+        metadata={
+            "help_string": "do not write global stats",
+            "argstr": "-noglobal",
+            "requires": {"output_stats_file"},
+        }
     )
 
     no_header: bool = field(
-        metadata={"help_string": "do not write a header", "argstr": "-noheader", "requires": {"output_log_file"}}
+        metadata={
+            "help_string": "do not write a header",
+            "argstr": "-noheader",
+            "requires": {"output_log_file"},
+        }
     )
 
-    subjects_dir: str = field(metadata={"help_string": "subjects directory", "argstr": "-sdir"})
+    subjects_dir: str = field(
+        metadata={"help_string": "subjects directory", "argstr": "-sdir"}
+    )
 
 
 class AnatomicalStats(ShellCommandTask):

@@ -3,7 +3,7 @@ This is a basic doctest demonstrating that the package and pydra can both be suc
 imported.
 
 >>> import pydra.engine
->>> import pydra.tasks.freesurfer
+>>> import pydra.tasks.freesurfer.v7_4
 """
 
 from warnings import warn
@@ -25,7 +25,7 @@ if "nipype" not in __version__:
         warn(
             "Nipype interfaces haven't been automatically converted from their specs in "
             f"`nipype-auto-conv`. Please run `{str(pkg_path / 'nipype-auto-conv' / 'generate')}` "
-            "to generated the converted Nipype interfaces in pydra.tasks.freesurfer.auto"
+            "to generated the converted Nipype interfaces in pydra.tasks.freesurfer.v7_4.auto"
         )
     else:
         n_ver = nipype_version.replace(".", "_")

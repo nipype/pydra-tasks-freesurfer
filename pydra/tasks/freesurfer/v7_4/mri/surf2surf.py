@@ -98,7 +98,7 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer import specs
+from pydra.tasks.freesurfer.v7_4 import specs
 
 
 @define(kw_only=True)
@@ -256,6 +256,8 @@ class Surf2SurfSpec(ShellSpec):
 class Surf2Surf(ShellCommandTask):
     """Task definition for mri_surf2surf."""
 
-    input_spec = SpecInfo(name="Input", bases=(Surf2SurfSpec, specs.HemisphereSpec, specs.SubjectsDirSpec))
+    input_spec = SpecInfo(
+        name="Input", bases=(Surf2SurfSpec, specs.HemisphereSpec, specs.SubjectsDirSpec)
+    )
 
     executable = "mri_surf2surf"

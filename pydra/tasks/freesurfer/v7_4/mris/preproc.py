@@ -89,7 +89,7 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer import specs
+from pydra.tasks.freesurfer.v7_4 import specs
 
 
 @define(kw_only=True)
@@ -103,7 +103,11 @@ class PreprocSpec(ShellSpec):
     )
 
     target_subject_id: str = field(
-        metadata={"help_string": "subject identifier to use as common space", "mandatory": True, "argstr": "--target"}
+        metadata={
+            "help_string": "subject identifier to use as common space",
+            "mandatory": True,
+            "argstr": "--target",
+        }
     )
 
     hemisphere: str = field(
@@ -115,7 +119,9 @@ class PreprocSpec(ShellSpec):
         }
     )
 
-    measure: str = field(metadata={"help_string": "use measure as input", "argstr": "--meas"})
+    measure: str = field(
+        metadata={"help_string": "use measure as input", "argstr": "--meas"}
+    )
 
     source_subject_ids: Sequence[str] = field(
         metadata={
@@ -150,12 +156,22 @@ class PreprocSpec(ShellSpec):
         }
     )
 
-    target_smoothing: float = field(metadata={"help_string": "smooth target surface by X mm", "argstr": "--fwhm"})
+    target_smoothing: float = field(
+        metadata={"help_string": "smooth target surface by X mm", "argstr": "--fwhm"}
+    )
 
-    source_smoothing: float = field(metadata={"help_string": "smooth source surface by X mm", "argstr": "--fwhm-src"})
+    source_smoothing: float = field(
+        metadata={
+            "help_string": "smooth source surface by X mm",
+            "argstr": "--fwhm-src",
+        }
+    )
 
     compute_paired_differences: bool = field(
-        metadata={"help_string": "compute paired differences", "argstr": "--paired-diff"}
+        metadata={
+            "help_string": "compute paired differences",
+            "argstr": "--paired-diff",
+        }
     )
 
 

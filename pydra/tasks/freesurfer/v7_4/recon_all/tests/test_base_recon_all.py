@@ -1,4 +1,4 @@
-from pydra.tasks.freesurfer.recon_all.base_recon_all import BaseReconAll
+from pydra.tasks.freesurfer.v7_4.recon_all.base_recon_all import BaseReconAll
 
 
 def test_executable():

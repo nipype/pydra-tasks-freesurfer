@@ -93,29 +93,51 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer import specs
+from pydra.tasks.freesurfer.v7_4 import specs
 
 
 @define(kw_only=True)
 class Label2VolSpec(ShellSpec):
     """Specifications for mri_label2vol."""
 
-    _xor = frozenset(["label_file", "label_files", "annotation_file", "segmentation_file"])
+    _xor = frozenset(
+        ["label_file", "label_files", "annotation_file", "segmentation_file"]
+    )
 
     label_file: PathLike = field(
-        metadata={"help_string": "label file", "mandatory": True, "argstr": "--label", "xor": _xor}
+        metadata={
+            "help_string": "label file",
+            "mandatory": True,
+            "argstr": "--label",
+            "xor": _xor,
+        }
     )
 
     label_files: Sequence[PathLike] = field(
-        metadata={"help_string": "label files", "mandatory": True, "argstr": "--label ...", "xor": _xor}
+        metadata={
+            "help_string": "label files",
+            "mandatory": True,
+            "argstr": "--label ...",
+            "xor": _xor,
+        }
     )
 
     annotation_file: PathLike = field(
-        metadata={"help_string": "annotation file", "mandatory": True, "argstr": "--annot", "xor": _xor}
+        metadata={
+            "help_string": "annotation file",
+            "mandatory": True,
+            "argstr": "--annot",
+            "xor": _xor,
+        }
     )
 
     segmentation_file: PathLike = field(
-        metadata={"help_string": "segmentation file", "mandatory": True, "argstr": "--seg", "xor": _xor}
+        metadata={
+            "help_string": "segmentation file",
+            "mandatory": True,
+            "argstr": "--seg",
+            "xor": _xor,
+        }
     )
 
     template_volume: PathLike = field(
@@ -150,7 +172,10 @@ class Label2VolSpec(ShellSpec):
     )
 
     subject_id: str = field(
-        metadata={"help_string": "subject identifier to load the surface from", "argstr": "--subject"}
+        metadata={
+            "help_string": "subject identifier to load the surface from",
+            "argstr": "--subject",
+        }
     )
 
     no_registration: bool = field(
@@ -161,7 +186,9 @@ class Label2VolSpec(ShellSpec):
         }
     )
 
-    output_volume: str = field(metadata={"help_string": "output volume", "argstr": "--o"})
+    output_volume: str = field(
+        metadata={"help_string": "output volume", "argstr": "--o"}
+    )
 
 
 class Label2Vol(ShellCommandTask):
@@ -169,6 +196,8 @@ class Label2Vol(ShellCommandTask):
 
     executable = "mri_label2vol"
 
-    input_spec = SpecInfo(name="Input", bases=(Label2VolSpec, specs.HemisphereSpec, specs.SubjectsDirSpec))
+    input_spec = SpecInfo(
+        name="Input", bases=(Label2VolSpec, specs.HemisphereSpec, specs.SubjectsDirSpec)
+    )
 
     output_spec = SpecInfo(name="Output", bases=(specs.SubjectsDirOutSpec,))

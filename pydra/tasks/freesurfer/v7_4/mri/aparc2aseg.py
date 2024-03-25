@@ -21,17 +21,24 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer import specs
+from pydra.tasks.freesurfer.v7_4 import specs
 
 
 @define(slots=False, kw_only=True)
 class Aparc2AsegSpec(ShellSpec):
     """Specifications for mri_aparc2aseg."""
 
-    subject_id: str = field(metadata={"help_string": "subject identifier", "mandatory": True, "argstr": "--s"})
+    subject_id: str = field(
+        metadata={
+            "help_string": "subject identifier",
+            "mandatory": True,
+            "argstr": "--s",
+        }
+    )
 
     output_image: str = field(
-        default="mri/aparc+aseg.mgz", metadata={"help_string": "output segmented volume", "argstr": "--o"}
+        default="mri/aparc+aseg.mgz",
+        metadata={"help_string": "output segmented volume", "argstr": "--o"},
     )
 
     cortex_mask: str = field(
@@ -68,14 +75,20 @@ class Aparc2AsegSpec(ShellSpec):
     )
 
     num_threads: int = field(
-        metadata={"help_string": "run in parallel with this number of threads", "argstr": "--nthreads"}
+        metadata={
+            "help_string": "run in parallel with this number of threads",
+            "argstr": "--nthreads",
+        }
     )
 
 
 class Aparc2Aseg(ShellCommandTask):
     """Task definition for mri_aparc2aseg."""
 
-    input_spec = SpecInfo(name="Input", bases=(Aparc2AsegSpec, specs.HemisphereSpec, specs.SubjectsDirSpec))
+    input_spec = SpecInfo(
+        name="Input",
+        bases=(Aparc2AsegSpec, specs.HemisphereSpec, specs.SubjectsDirSpec),
+    )
 
     output_spec = SpecInfo(name="Output", bases=(specs.SubjectsDirOutSpec,))
 

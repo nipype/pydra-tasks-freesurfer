@@ -26,7 +26,7 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer import specs
+from pydra.tasks.freesurfer.v7_4 import specs
 
 
 @define(slots=False, kw_only=True)
@@ -44,15 +44,30 @@ class CATrainSpec(ShellSpec):
     )
 
     canonical_surface: PathLike = field(
-        metadata={"help_string": "canonical surface", "mandatory": True, "argstr": "", "position": -4}
+        metadata={
+            "help_string": "canonical surface",
+            "mandatory": True,
+            "argstr": "",
+            "position": -4,
+        }
     )
 
     annotation_file: PathLike = field(
-        metadata={"help_string": "annotation file", "mandatory": True, "argstr": "", "position": -3}
+        metadata={
+            "help_string": "annotation file",
+            "mandatory": True,
+            "argstr": "",
+            "position": -3,
+        }
     )
 
     subject_ids: Sequence[str] = field(
-        metadata={"help_string": "subject identifiers", "mandatory": True, "argstr": "...", "position": -2}
+        metadata={
+            "help_string": "subject identifiers",
+            "mandatory": True,
+            "argstr": "...",
+            "position": -2,
+        }
     )
 
     output_surface_atlas: str = field(
@@ -64,14 +79,18 @@ class CATrainSpec(ShellSpec):
         }
     )
 
-    subjects_dir: str = field(metadata={"help_string": "subjects directory", "argstr": "-sdir"})
+    subjects_dir: str = field(
+        metadata={"help_string": "subjects directory", "argstr": "-sdir"}
+    )
 
     original_surface: str = field(
         default="smoothwm",
         metadata={"help_string": "original surface", "argstr": "-orig"},
     )
 
-    parcellation_table: str = field(metadata={"help_string": "parcellation table", "argstr": "-t"})
+    parcellation_table: str = field(
+        metadata={"help_string": "parcellation table", "argstr": "-t"}
+    )
 
     num_subjects: int = field(
         metadata={

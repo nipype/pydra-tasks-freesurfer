@@ -13,7 +13,7 @@ from attrs import define, field
 
 from pydra.engine.specs import ShellOutSpec, ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer.recon_all import specs
+from pydra.tasks.freesurfer.v7_4.recon_all import specs
 
 
 @define(slots=False, kw_only=True)
@@ -21,7 +21,11 @@ class BaseReconAllSpec(ShellSpec):
     """Specifications for the base template workflow of recon-all."""
 
     base_template_id: str = field(
-        metadata={"help_string": "base template identifier", "mandatory": True, "argstr": "-base"}
+        metadata={
+            "help_string": "base template identifier",
+            "mandatory": True,
+            "argstr": "-base",
+        }
     )
 
     base_timepoint_ids: Sequence[str] = field(
@@ -46,6 +50,10 @@ class BaseReconAll(ShellCommandTask):
 
     executable = "recon-all"
 
-    input_spec = SpecInfo(name="Input", bases=(BaseReconAllSpec, specs.ReconAllBaseSpec))
+    input_spec = SpecInfo(
+        name="Input", bases=(BaseReconAllSpec, specs.ReconAllBaseSpec)
+    )
 
-    output_spec = SpecInfo(name="Output", bases=(BaseReconAllOutSpec, specs.ReconAllBaseOutSpec))
+    output_spec = SpecInfo(
+        name="Output", bases=(BaseReconAllOutSpec, specs.ReconAllBaseOutSpec)
+    )

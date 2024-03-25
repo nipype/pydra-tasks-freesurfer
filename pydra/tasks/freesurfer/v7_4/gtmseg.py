@@ -37,18 +37,27 @@ from attrs import NOTHING, define, field
 
 from pydra.engine.specs import ShellSpec, SpecInfo
 from pydra.engine.task import ShellCommandTask
-from pydra.tasks.freesurfer import specs
+from pydra.tasks.freesurfer.v7_4 import specs
 
 
 @define(kw_only=True)
 class GTMSegSpec(ShellSpec):
     """Specifications for gtmseg."""
 
-    subject_id: str = field(metadata={"help_string": "subject identifier", "mandatory": True, "argstr": "--s"})
+    subject_id: str = field(
+        metadata={
+            "help_string": "subject identifier",
+            "mandatory": True,
+            "argstr": "--s",
+        }
+    )
 
     output_volume: str = field(
         default="gtmseg.mgz",
-        metadata={"help_string": "output volume relative to the subject's mri directory", "argstr": "--o"},
+        metadata={
+            "help_string": "output volume relative to the subject's mri directory",
+            "argstr": "--o",
+        },
     )
 
     generate_segmentation: bool = field(
@@ -56,7 +65,9 @@ class GTMSegSpec(ShellSpec):
             "help_string": "generate or use subject's head segmentation",
             "mandatory": True,
             "formatter": lambda generate_segmentation: (
-                "" if generate_segmentation is NOTHING else "--xcerseg" if generate_segmentation else "--no-xcerseg"
+                ""
+                if generate_segmentation is NOTHING
+                else "--xcerseg" if generate_segmentation else "--no-xcerseg"
             ),
             "xor": {"head_segmentation"},
         }
@@ -87,9 +98,13 @@ class GTMSegSpec(ShellSpec):
         }
     )
 
-    colortable: str = field(metadata={"help_string": "use custom colortable", "argstr": "--ctab"})
+    colortable: str = field(
+        metadata={"help_string": "use custom colortable", "argstr": "--ctab"}
+    )
 
-    upsampling_factor: int = field(metadata={"help_string": "upsampling factor (defaults to 2)", "argstr": "--usf"})
+    upsampling_factor: int = field(
+        metadata={"help_string": "upsampling factor (defaults to 2)", "argstr": "--usf"}
+    )
 
     output_upsampling_factor: int = field(
         metadata={
@@ -99,15 +114,24 @@ class GTMSegSpec(ShellSpec):
     )
 
     keep_hypointensities: bool = field(
-        metadata={"help_string": "do not relabel hypointensities as white matter", "argstr": "--keep-hypo"}
+        metadata={
+            "help_string": "do not relabel hypointensities as white matter",
+            "argstr": "--keep-hypo",
+        }
     )
 
     keep_corpus_callosum: bool = field(
-        metadata={"help_string": "do not relabel corpus callosum as white matter", "argstr": "--keep-cc"}
+        metadata={
+            "help_string": "do not relabel corpus callosum as white matter",
+            "argstr": "--keep-cc",
+        }
     )
 
     subsegment_white_matter: bool = field(
-        metadata={"help_string": "subsegment white matter into lobes", "argstr": "--subsegwm"}
+        metadata={
+            "help_string": "subsegment white matter into lobes",
+            "argstr": "--subsegwm",
+        }
     )
 
 
