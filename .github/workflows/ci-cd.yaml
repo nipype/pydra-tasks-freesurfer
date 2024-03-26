@@ -410,7 +410,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: python -m pip install .[doc]
+        run: python -m pip install related-packages/fileformats .[doc]
 
       - name: Build docs
         run: |
