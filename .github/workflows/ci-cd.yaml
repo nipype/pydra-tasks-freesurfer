@@ -21,6 +21,11 @@ env:
   FREESURFER_HOME: /opt/freesurfer
   DOWNLOADS_DIR: /downloads/freesurfer
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write  
+
 jobs:
 
   nipype-conv:
