@@ -3,8 +3,8 @@
 [![PyPI - Version][pypi-version]][pypi-project]
 [![PyPI - Python Version][pypi-pyversions]][pypi-project]
 [![PyPI - Downloads][pypi-downloads]][pypi-project]
-![][status-docs]
-![][status-cicd]
+[![Status-docs][status-docs-badge]][status-docs-link]
+[![Status-CICD][status-cicd-badge]][status-cicd-link]
 
 ----
 
@@ -136,10 +136,10 @@ ready for use, where v* corresponds to the version of Freesurfer that you have t
 it against e.g.
 
 ```console
-   from pydra.tasks.freesurfer.auto import <the-task-you-have-validated>
+from pydra.tasks.freesurfer.auto import <the-task-you-have-validated>
 ```
 
-and copy the test file `pydra/tasks/freesurfer/auto/tests/test_<validated-task>.py
+and copy the test file `pydra/tasks/freesurfer/auto/tests/test_<validated-task>.py`
 into `pydra/tasks/freesurfer/v*/tests`.
 
 
@@ -189,6 +189,10 @@ This project is distributed under the terms of the [Apache License, Version 2.0]
 
 [pypi-version]: https://img.shields.io/pypi/v/pydra-freesurfer.svg
 
-[status-docs]: https://github.com/nipype/pydra-freesurfer/actions/workflows/docs.yaml/badge.svg
+[status-docs-badge]: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat
 
-[status-cicd]: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml/badge.svg
+[status-cicd-badge]: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml/badge.svg
+
+[status-docs-link]: https://nipype.github.io/pydra-freesurfer/
+
+[status-cicd-link]: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml
