@@ -398,7 +398,7 @@ jobs:
         prerelease: false
 
   docs:
-    needs: deploy
+    # needs: deploy
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -408,6 +408,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+
+      - name: Download tasks converted from Nipype 
+        uses: actions/download-artifact@v4
+        with:
+          name: converted-nipype
+          path: pydra/tasks/freesurfer/auto
 
       - name: Install dependencies
         run: python -m pip install related-packages/fileformats .[doc]
@@ -421,7 +427,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs/build'
+          path: 'docs/build/html'
 
       - name: Setup GitHub Pages
         if: github.event_name == 'release' || github.event_name == 'repository_dispatch'
