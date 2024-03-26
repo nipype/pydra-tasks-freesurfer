@@ -133,19 +133,20 @@ jobs:
         sudo mkdir -p $FREESURFER_HOME
         sudo chown $USER $FREESURFER_HOME
 
-    - name: Cache Freesurfer Install
-      id: cache-install
-      uses: actions/cache@v4
-      with:
-        path: ${{ env.DOWNLOADS_DIR }}
-        key: freesurfer-${{ env.FREESURFER_VERSION }}-${{ runner.os }}
+    # - name: Cache Freesurfer Download
+    #   id: cache-install
+    #   uses: actions/cache@v4
+    #   with:
+    #     path: ${{ env.DOWNLOADS_DIR }}
+    #     key: freesurfer-${{ env.FREESURFER_VERSION }}-${{ runner.os }}
 
     - name: Download FreeSurfer
-      if: steps.cache-install.outputs.cache-hit != 'true'
+      # if: steps.cache-install.outputs.cache-hit != 'true'
       run: |
         sudo mkdir -p $DOWNLOADS_DIR
         sudo chown $USER $DOWNLOADS_DIR
-        curl -s -o $DOWNLOADS_DIR/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/${{ env.FREESURFER_VERSION }}/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz
+        curl -s -o $DOWNLOADS_DIR/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz \
+          https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/${{ env.FREESURFER_VERSION }}/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz
       shell: bash
 
     - name: Install Freesurfer
@@ -397,6 +398,7 @@ jobs:
         prerelease: false
 
   docs:
+    # needs: deploy
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -411,7 +413,10 @@ jobs:
         run: python -m pip install .[doc]
 
       - name: Build docs
-        run: make -C docs html
+        run: |
+          pushd docs
+          make html
+          popd
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
