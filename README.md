@@ -136,10 +136,10 @@ ready for use, where v* corresponds to the version of Freesurfer that you have t
 it against e.g.
 
 ```console
-   from pydra.tasks.freesurfer.auto import <the-task-you-have-validated>
+from pydra.tasks.freesurfer.auto import <the-task-you-have-validated>
 ```
 
-and copy the test file `pydra/tasks/freesurfer/auto/tests/test_<validated-task>.py
+and copy the test file `pydra/tasks/freesurfer/auto/tests/test_<validated-task>.py`
 into `pydra/tasks/freesurfer/v*/tests`.
 
 
