@@ -38,9 +38,11 @@ doc = [
     "packaging",
     "sphinx >=2.1.2",
     "sphinx_rtd_theme",
+    "sphinx_pyproject",
     "sphinxcontrib-apidoc ~=0.3.0",
     "sphinxcontrib-napoleon",
     "sphinxcontrib-versioning",
+    "pydata-sphinx-theme >=0.13",
 ]
 test = [
     "nipype2pydra",
