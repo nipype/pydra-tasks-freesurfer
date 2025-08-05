@@ -120,7 +120,7 @@ jobs:
 
 
   deploy-fileformats:
-    needs: [devcheck, test]
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
 
