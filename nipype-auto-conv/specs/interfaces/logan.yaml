@@ -1,23 +1,22 @@
 # This file is used to manually specify the semi-automatic conversion of
-# 'nipype.interfaces.freesurfer.petsurfer.MRTM' from Nipype to Pydra.
+# 'nipype.interfaces.freesurfer.petsurfer.Logan' from Nipype to Pydra.
 #
 # Please fill-in/edit the fields below where appropriate
 #
 # Docs
 # ----
-# Perform MRTM1 kinetic modeling.
+# Perform Logan kinetic modeling.
+# Examples
+# --------
+# >>> logan = Logan()
+# >>> logan.inputs.in_file = 'tac.nii'
+# >>> logan.inputs.logan = ('ref_tac.dat', 'timing.dat', 2600)
+# >>> logan.inputs.glm_dir = 'logan'
+# >>> logan.cmdline
+# 'mri_glmfit --glmdir logan --y tac.nii --logan ref_tac.dat timing.dat 2600'
 # 
-#     Examples
-#     --------
-#     >>> mrtm = MRTM()
-#     >>> mrtm.inputs.in_file = 'tac.nii'
-#     >>> mrtm.inputs.mrtm1 = ('ref_tac.dat', 'timing.dat')
-#     >>> mrtm.inputs.glm_dir = 'mrtm'
-#     >>> mrtm.cmdline
-#     'mri_glmfit --glmdir mrtm --y tac.nii --mrtm1 ref_tac.dat timing.dat'
-#     
-task_name: MRTM
-nipype_name: MRTM
+task_name: Logan
+nipype_name: Logan
 nipype_module: nipype.interfaces.freesurfer.petsurfer
 inputs:
   omit:
@@ -42,9 +41,6 @@ inputs:
     # type=file|default=<undefined>: input 4D file
     label_file: generic/file
     # type=file|default=<undefined>: use label as mask, surfaces only
-    mask_file: Path
-    # type=file: map of the mask used in the analysis
-    # type=file|default=<undefined>: binary mask
     per_voxel_reg: generic/file+list-of
     # type=inputmultiobject|default=[]: per-voxel regressors
     sim_done_file: generic/file
@@ -107,8 +103,8 @@ outputs:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
   templates:
-  # dict[str, str] - `output_file_template` values to be provided to output fields
-    glm_dir: '"mrtm"'
+  # dict[str, str] - `path_template` values to be provided to output fields
+    glm_dir: '"logan"'
     # type=directory: output directory
     # type=str|default='': save outputs to dir
   requirements:
@@ -117,8 +113,8 @@ tests:
 - inputs:
   # dict[str, str] - values to provide to inputs fields in the task initialisation
   # (if not specified, will try to choose a sensible value)
-    mrtm1:
-    # type=tuple|default=(<undefined>, <undefined>): RefTac TimeSec : perform MRTM1 kinetic modeling
+    logan:
+    # type=tuple|default=(<undefined>, <undefined>, 0.0): RefTac TimeSec tstar   : perform Logan kinetic modeling
     glm_dir:
     # type=directory: output directory
     # type=str|default='': save outputs to dir
@@ -213,10 +209,14 @@ tests:
     # type=int|default=0: test GLM by resynthsis
     profile:
     # type=int|default=0: niters : test speed
+    mrtm1:
+    # type=tuple|default=(<undefined>, <undefined>): RefTac TimeSec : perform MRTM1 kinetic modeling
     mrtm2:
     # type=tuple|default=(<undefined>, <undefined>, 0.0): RefTac TimeSec k2prime : perform MRTM2 kinetic modeling
-    logan:
-    # type=tuple|default=(<undefined>, <undefined>, 0.0): RefTac TimeSec tstar   : perform Logan kinetic modeling
+    bp_clip_neg:
+    # type=bool|default=False: set negative BP voxels to zero
+    bp_clip_max:
+    # type=float|default=0.0: set BP voxels above max to max
     force_perm:
     # type=bool|default=False: force perumtation test, even when design matrix is not orthog
     diag:
@@ -244,7 +244,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.statements.imports.explicitimport] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -263,13 +263,11 @@ tests:
   # (if not specified, will try to choose a sensible value)
     in_file:
     # type=file|default=<undefined>: input 4D file
-    mrtm1: ("ref_tac.dat", "timing.dat")
-    # type=tuple|default=(<undefined>, <undefined>): RefTac TimeSec : perform MRTM1 kinetic modeling
-    glm_dir: '"mrtm"'
+    glm_dir: '"logan"'
     # type=directory: output directory
     # type=str|default='': save outputs to dir
   imports:
-  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.statements.imports.explicitimport] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -284,7 +282,7 @@ tests:
   # bool - whether the unittest is expected to fail or not. Set to false
   # when you are satisfied with the edits you have made to this file
 doctests:
-- cmdline: mri_glmfit --glmdir mrtm --y tac.nii --mrtm1 ref_tac.dat timing.dat
+- cmdline:
   # str - the expected cmdline output
   inputs:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
@@ -292,13 +290,11 @@ doctests:
   # '.mock()' method of the corresponding class is used instead.
     in_file: '"tac.nii"'
     # type=file|default=<undefined>: input 4D file
-    mrtm1: ("ref_tac.dat", "timing.dat")
-    # type=tuple|default=(<undefined>, <undefined>): RefTac TimeSec : perform MRTM1 kinetic modeling
-    glm_dir: '"mrtm"'
+    glm_dir: '"logan"'
     # type=directory: output directory
     # type=str|default='': save outputs to dir
   imports:
-  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.statements.imports.explicitimport] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS
