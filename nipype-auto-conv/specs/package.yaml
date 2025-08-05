@@ -1,7 +1,7 @@
 # name of the package to generate, e.g. pydra.tasks.mriqc
 name: pydra.tasks.freesurfer
 # name of the nipype package to generate from (e.g. mriqc)
-nipype_name: freesurfer
+nipype_name: nipype.interfaces.freesurfer
 # Whether the package is an interface-only package (i.e. only contains interfaces and not workflows)
 interface_only: null
 # The name of the global struct/dict that contains workflow inputs that are to be converted to inputs of the function along with the type of the struct, either "dict" or "class"
