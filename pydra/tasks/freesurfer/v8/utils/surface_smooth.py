@@ -4,7 +4,7 @@ from fileformats.medimage import MghGz
 import logging
 from pydra.tasks.freesurfer.v8.nipype_ports.utils.filemanip import fname_presuffix
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -35,7 +35,7 @@ class SurfaceSmooth(shell.Task["SurfaceSmooth.Outputs"]):
 
     >>> from fileformats.generic import Directory
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.surface_smooth import SurfaceSmooth
 
     >>> task = SurfaceSmooth()

@@ -5,7 +5,7 @@ from fileformats.medimage_freesurfer import Lta
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -87,7 +87,7 @@ class RobustTemplate(shell.Task["RobustTemplate.Outputs"]):
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import Nifti1
     >>> from fileformats.medimage_freesurfer import Lta
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.longitudinal.robust_template import RobustTemplate
 
     >>> task = RobustTemplate()

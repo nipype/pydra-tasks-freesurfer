@@ -2,7 +2,7 @@ import attrs
 from fileformats.generic import Directory
 import logging
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -31,7 +31,7 @@ class MakeAverageSubject(shell.Task["MakeAverageSubject.Outputs"]):
     -------
 
     >>> from fileformats.generic import Directory
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.make_average_subject import MakeAverageSubject
 
     >>> task = MakeAverageSubject()

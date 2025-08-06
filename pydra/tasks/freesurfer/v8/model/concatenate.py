@@ -4,7 +4,7 @@ from fileformats.medimage import Nifti1
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -30,7 +30,7 @@ class Concatenate(shell.Task["Concatenate.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import Nifti1
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.model.concatenate import Concatenate
 
     >>> task = Concatenate()

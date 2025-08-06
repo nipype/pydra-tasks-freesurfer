@@ -8,7 +8,7 @@ from pydra.tasks.freesurfer.v8.nipype_ports.utils.filemanip import (
 )
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -189,7 +189,7 @@ class SampleToSurface(shell.Task["SampleToSurface.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import NiftiGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.sample_to_surface import SampleToSurface
 
     >>> task = SampleToSurface()

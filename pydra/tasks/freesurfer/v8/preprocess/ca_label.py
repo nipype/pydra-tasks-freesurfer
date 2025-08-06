@@ -5,7 +5,7 @@ from fileformats.medimage import MghGz
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -37,7 +37,7 @@ class CALabel(shell.Task["CALabel.Outputs"]):
     >>> from fileformats.datascience import TextMatrix
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.preprocess.ca_label import CALabel
 
     >>> task = CALabel()

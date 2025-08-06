@@ -3,7 +3,7 @@ from fileformats.generic import Directory, File
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 from pydra.utils.typing import MultiInputObj
 import typing as ty
@@ -65,7 +65,7 @@ class MRISPreprocReconAll(shell.Task["MRISPreprocReconAll.Outputs"]):
     -------
 
     >>> from fileformats.generic import Directory, File
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.model.mris_preproc_recon_all import MRISPreprocReconAll
     >>> from pydra.utils.typing import MultiInputObj
 

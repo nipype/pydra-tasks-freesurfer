@@ -2,7 +2,7 @@ from fileformats.generic import Directory, File
 from fileformats.medimage import MghGz
 import logging
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -17,7 +17,7 @@ class EMRegister(shell.Task["EMRegister.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.registration.em_register import EMRegister
 
     >>> task = EMRegister()

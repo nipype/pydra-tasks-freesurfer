@@ -2,7 +2,7 @@ from fileformats.generic import Directory, File
 from fileformats.medimage_freesurfer import Pial
 import logging
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -18,7 +18,7 @@ class MRIsCALabel(shell.Task["MRIsCALabel.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage_freesurfer import Pial
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.preprocess.mr_is_ca_label import MRIsCALabel
 
     >>> task = MRIsCALabel()

@@ -6,7 +6,7 @@ import logging
 import os
 import os.path
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -44,7 +44,7 @@ class RegisterAVItoTalairach(shell.Task["RegisterAVItoTalairach.Outputs"]):
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz
     >>> from fileformats.text import TextFile
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.registration.register_av_ito_talairach import RegisterAVItoTalairach
 
     >>> task = RegisterAVItoTalairach()

@@ -4,7 +4,7 @@ from fileformats.medimage_freesurfer import Pial
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -68,7 +68,7 @@ class SphericalAverage(shell.Task["SphericalAverage.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage_freesurfer import Pial
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.model.spherical_average import SphericalAverage
 
     >>> task = SphericalAverage()

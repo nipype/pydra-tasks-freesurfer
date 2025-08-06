@@ -5,7 +5,7 @@ import logging
 import os
 import os.path
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -46,7 +46,7 @@ class Register(shell.Task["Register.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage_freesurfer import Pial
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.registration.register import Register
 
     >>> task = Register()

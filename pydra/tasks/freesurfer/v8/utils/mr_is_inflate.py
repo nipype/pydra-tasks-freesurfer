@@ -4,7 +4,7 @@ from fileformats.medimage_freesurfer import Pial
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -37,7 +37,7 @@ class MRIsInflate(shell.Task["MRIsInflate.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage_freesurfer import Pial
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.mr_is_inflate import MRIsInflate
 
     >>> task = MRIsInflate()

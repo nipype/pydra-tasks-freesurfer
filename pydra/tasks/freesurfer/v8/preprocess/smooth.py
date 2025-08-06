@@ -5,7 +5,7 @@ from fileformats.medimage_freesurfer import Dat
 import logging
 from pydra.tasks.freesurfer.v8.nipype_ports.utils.filemanip import fname_presuffix
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -34,7 +34,7 @@ class Smooth(shell.Task["Smooth.Outputs"]):
     >>> from fileformats.generic import Directory
     >>> from fileformats.medimage import Nifti1
     >>> from fileformats.medimage_freesurfer import Dat
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.preprocess.smooth import Smooth
 
     >>> task = Smooth()

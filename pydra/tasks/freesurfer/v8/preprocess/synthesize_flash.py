@@ -4,7 +4,7 @@ from fileformats.medimage import MghGz
 import logging
 from pydra.tasks.freesurfer.v8.nipype_ports.utils.filemanip import fname_presuffix
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -31,7 +31,7 @@ class SynthesizeFLASH(shell.Task["SynthesizeFLASH.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.preprocess.synthesize_flash import SynthesizeFLASH
 
     >>> task = SynthesizeFLASH()

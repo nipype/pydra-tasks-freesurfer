@@ -4,7 +4,7 @@ import logging
 from pydra.tasks.freesurfer.v8.nipype_ports.utils.filemanip import split_filename
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -85,7 +85,7 @@ class MRIsConvert(shell.Task["MRIsConvert.Outputs"]):
     -------
 
     >>> from fileformats.generic import Directory, File
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.mr_is_convert import MRIsConvert
 
     """

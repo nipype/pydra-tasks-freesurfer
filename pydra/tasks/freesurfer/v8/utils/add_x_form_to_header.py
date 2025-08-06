@@ -4,7 +4,7 @@ from fileformats.medimage import MghGz
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -48,7 +48,7 @@ class AddXFormToHeader(shell.Task["AddXFormToHeader.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.add_x_form_to_header import AddXFormToHeader
 
     >>> task = AddXFormToHeader()

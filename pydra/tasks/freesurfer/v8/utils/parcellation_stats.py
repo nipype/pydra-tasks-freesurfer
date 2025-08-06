@@ -5,7 +5,7 @@ from fileformats.medimage_freesurfer import Pial, White
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -52,7 +52,7 @@ class ParcellationStats(shell.Task["ParcellationStats.Outputs"]):
     >>> from fileformats.medimage import MghGz
     >>> from fileformats.medimage_freesurfer import Pial, White
     >>> import os
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.parcellation_stats import ParcellationStats
 
     >>> task = ParcellationStats()

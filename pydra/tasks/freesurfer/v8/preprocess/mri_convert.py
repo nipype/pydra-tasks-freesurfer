@@ -5,7 +5,7 @@ import logging
 from pydra.tasks.freesurfer.v8.nipype_ports.utils.filemanip import fname_presuffix
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -46,7 +46,7 @@ class MRIConvert(shell.Task["MRIConvert.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import Nifti1
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.preprocess.mri_convert import MRIConvert
 
     >>> task = MRIConvert()

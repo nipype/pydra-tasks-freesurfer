@@ -3,7 +3,7 @@ from fileformats.generic import Directory, File
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 from pydra.utils.typing import MultiInputObj
 import typing as ty
@@ -38,7 +38,7 @@ class MRISPreproc(shell.Task["MRISPreproc.Outputs"]):
     -------
 
     >>> from fileformats.generic import Directory, File
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.model.mris_preproc import MRISPreproc
     >>> from pydra.utils.typing import MultiInputObj
 

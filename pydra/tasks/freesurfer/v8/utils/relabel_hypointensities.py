@@ -2,7 +2,7 @@ from fileformats.generic import Directory, File
 from fileformats.medimage_freesurfer import Pial
 import logging
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -17,7 +17,7 @@ class RelabelHypointensities(shell.Task["RelabelHypointensities.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage_freesurfer import Pial
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.relabel_hypointensities import RelabelHypointensities
 
     >>> task = RelabelHypointensities()

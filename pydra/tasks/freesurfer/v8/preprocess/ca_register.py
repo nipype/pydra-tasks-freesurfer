@@ -2,7 +2,7 @@ from fileformats.generic import Directory, File
 from fileformats.medimage import MghGz
 import logging
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -32,7 +32,7 @@ class CARegister(shell.Task["CARegister.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.preprocess.ca_register import CARegister
 
     >>> task = CARegister()

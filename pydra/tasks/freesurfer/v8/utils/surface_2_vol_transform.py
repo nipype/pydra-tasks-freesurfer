@@ -2,7 +2,7 @@ from fileformats.generic import File
 from fileformats.medimage import MghGz
 import logging
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -17,7 +17,7 @@ class Surface2VolTransform(shell.Task["Surface2VolTransform.Outputs"]):
 
     >>> from fileformats.generic import File
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.surface_2_vol_transform import Surface2VolTransform
 
     >>> task = Surface2VolTransform()

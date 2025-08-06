@@ -3,7 +3,7 @@ from fileformats.generic import Directory, File
 from fileformats.medimage_freesurfer import Pial
 import logging
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -33,7 +33,7 @@ class Paint(shell.Task["Paint.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage_freesurfer import Pial
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.registration.paint import Paint
 
     >>> task = Paint()

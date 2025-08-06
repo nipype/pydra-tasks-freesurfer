@@ -4,7 +4,7 @@ from fileformats.medimage import MghGz
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 from pydra.utils.typing import MultiInputObj
 import typing as ty
@@ -47,7 +47,7 @@ class FuseSegmentations(shell.Task["FuseSegmentations.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.longitudinal.fuse_segmentations import FuseSegmentations
     >>> from pydra.utils.typing import MultiInputObj
 

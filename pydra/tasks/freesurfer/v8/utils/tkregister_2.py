@@ -6,7 +6,7 @@ import logging
 from pydra.tasks.freesurfer.v8.nipype_ports.utils.filemanip import fname_presuffix
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -97,7 +97,7 @@ class Tkregister2(shell.Task["Tkregister2.Outputs"]):
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz, Nifti1
     >>> from fileformats.medimage_freesurfer import Dat
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.tkregister_2 import Tkregister2
 
     >>> task = Tkregister2()

@@ -1,7 +1,7 @@
 from fileformats.medimage_freesurfer import Pial
 import logging
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -15,7 +15,7 @@ class ExtractMainComponent(shell.Task["ExtractMainComponent.Outputs"]):
     -------
 
     >>> from fileformats.medimage_freesurfer import Pial
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.extract_main_component import ExtractMainComponent
 
     >>> task = ExtractMainComponent()

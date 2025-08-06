@@ -4,7 +4,7 @@ from fileformats.medimage import MghGz
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -34,7 +34,7 @@ class Apas2Aseg(shell.Task["Apas2Aseg.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.utils.apas_2_aseg import Apas2Aseg
 
     >>> task = Apas2Aseg()

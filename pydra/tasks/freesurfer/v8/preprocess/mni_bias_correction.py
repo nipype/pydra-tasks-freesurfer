@@ -2,7 +2,7 @@ from fileformats.generic import Directory, File
 from fileformats.medimage import MghGz
 import logging
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 
 
@@ -17,7 +17,7 @@ class MNIBiasCorrection(shell.Task["MNIBiasCorrection.Outputs"]):
 
     >>> from fileformats.generic import Directory, File
     >>> from fileformats.medimage import MghGz
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.preprocess.mni_bias_correction import MNIBiasCorrection
 
     >>> task = MNIBiasCorrection()

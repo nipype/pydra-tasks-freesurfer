@@ -3,7 +3,7 @@ from fileformats.generic import Directory, File
 import logging
 import os
 from pathlib import Path
-from pathlib._local import Path
+from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -38,7 +38,7 @@ class GTMSeg(shell.Task["GTMSeg.Outputs"]):
     -------
 
     >>> from fileformats.generic import Directory, File
-    >>> from pathlib._local import Path
+    >>> from pathlib import Path
     >>> from pydra.tasks.freesurfer.v8.petsurfer.gtm_seg import GTMSeg
 
     >>> task = GTMSeg()
