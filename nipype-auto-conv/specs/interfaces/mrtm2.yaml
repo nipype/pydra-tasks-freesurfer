@@ -6,15 +6,15 @@
 # Docs
 # ----
 # Perform MRTM2 kinetic modeling.
-#     Examples
-#     --------
-#     >>> mrtm2 = MRTM2()
-#     >>> mrtm2.inputs.in_file = 'tac.nii'
-#     >>> mrtm2.inputs.mrtm2 = ('ref_tac.dat', 'timing.dat', 0.07872)
-#     >>> mrtm2.inputs.glm_dir = 'mrtm2'
-#     >>> mrtm2.cmdline
-#     'mri_glmfit --glmdir mrtm2 --y tac.nii --mrtm2 ref_tac.dat timing.dat 0.078720'
-#     
+# Examples
+# --------
+# >>> mrtm2 = MRTM2()
+# >>> mrtm2.inputs.in_file = 'tac.nii'
+# >>> mrtm2.inputs.mrtm2 = ('ref_tac.dat', 'timing.dat', 0.07872)
+# >>> mrtm2.inputs.glm_dir = 'mrtm2'
+# >>> mrtm2.cmdline
+# 'mri_glmfit --glmdir mrtm2 --y tac.nii --mrtm2 ref_tac.dat timing.dat 0.078720'
+# 
 task_name: MRTM2
 nipype_name: MRTM2
 nipype_module: nipype.interfaces.freesurfer.petsurfer
@@ -41,9 +41,6 @@ inputs:
     # type=file|default=<undefined>: input 4D file
     label_file: generic/file
     # type=file|default=<undefined>: use label as mask, surfaces only
-    mask_file: Path
-    # type=file: map of the mask used in the analysis
-    # type=file|default=<undefined>: binary mask
     per_voxel_reg: generic/file+list-of
     # type=inputmultiobject|default=[]: per-voxel regressors
     sim_done_file: generic/file
@@ -106,7 +103,7 @@ outputs:
   # dict[str, str] - names of methods/callable classes defined in the adjacent `*_callables.py`
   # to set to the `callable` attribute of output fields
   templates:
-  # dict[str, str] - `output_file_template` values to be provided to output fields
+  # dict[str, str] - `path_template` values to be provided to output fields
     glm_dir: '"mrtm2"'
     # type=directory: output directory
     # type=str|default='': save outputs to dir
@@ -216,6 +213,10 @@ tests:
     # type=tuple|default=(<undefined>, <undefined>): RefTac TimeSec : perform MRTM1 kinetic modeling
     logan:
     # type=tuple|default=(<undefined>, <undefined>, 0.0): RefTac TimeSec tstar   : perform Logan kinetic modeling
+    bp_clip_neg:
+    # type=bool|default=False: set negative BP voxels to zero
+    bp_clip_max:
+    # type=float|default=0.0: set BP voxels above max to max
     force_perm:
     # type=bool|default=False: force perumtation test, even when design matrix is not orthog
     diag:
@@ -243,7 +244,7 @@ tests:
     environ:
     # type=dict|default={}: Environment variables
   imports:
-  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.statements.imports.explicitimport] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -262,13 +263,11 @@ tests:
   # (if not specified, will try to choose a sensible value)
     in_file:
     # type=file|default=<undefined>: input 4D file
-    mrtm2: ("ref_tac.dat", "timing.dat", 0.07872)
-    # type=tuple|default=(<undefined>, <undefined>, 0.0): RefTac TimeSec k2prime : perform MRTM2 kinetic modeling
     glm_dir: '"mrtm2"'
     # type=directory: output directory
     # type=str|default='': save outputs to dir
   imports:
-  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.statements.imports.explicitimport] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   expected_outputs:
   # dict[str, str] - expected values for selected outputs, noting that tests will typically
@@ -283,7 +282,7 @@ tests:
   # bool - whether the unittest is expected to fail or not. Set to false
   # when you are satisfied with the edits you have made to this file
 doctests:
-- cmdline: mri_glmfit --glmdir mrtm2 --y tac.nii --mrtm2 ref_tac.dat timing.dat 0.078720
+- cmdline:
   # str - the expected cmdline output
   inputs:
   # dict[str, str] - name-value pairs for inputs to be provided to the doctest.
@@ -291,13 +290,11 @@ doctests:
   # '.mock()' method of the corresponding class is used instead.
     in_file: '"tac.nii"'
     # type=file|default=<undefined>: input 4D file
-    mrtm2: ("ref_tac.dat", "timing.dat", 0.07872)
-    # type=tuple|default=(<undefined>, <undefined>, 0.0): RefTac TimeSec k2prime : perform MRTM2 kinetic modeling
     glm_dir: '"mrtm2"'
     # type=directory: output directory
     # type=str|default='': save outputs to dir
   imports:
-  # list[nipype2pydra.task.base.importstatement] - list import statements required by the test, with each list item
+  # list[nipype2pydra.statements.imports.explicitimport] - list import statements required by the test, with each list item
   # consisting of 'module', 'name', and optionally 'alias' keys
   directive:
   # str - any doctest directive to place on the cmdline call, e.g. # doctest: +ELLIPSIS
