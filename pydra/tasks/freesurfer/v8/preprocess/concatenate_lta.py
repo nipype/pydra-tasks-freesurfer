@@ -84,13 +84,13 @@ class ConcatenateLTA(shell.Task["ConcatenateLTA.Outputs"]):
     out_type: ty.Any = shell.arg(
         help="set final LTA type", formatter="out_type_formatter"
     )
-    tal_source_file: File = shell.arg(
+    tal_source_file: File | None = shell.arg(
         help="if in_lta2 is talairach.xfm, specify source for talairach",
         argstr="-tal {tal_source_file}",
         position=-5,
         requires=["tal_template_file"],
     )
-    tal_template_file: File = shell.arg(
+    tal_template_file: File | None = shell.arg(
         help="if in_lta2 is talairach.xfm, specify template for talairach",
         argstr="{tal_template_file}",
         position=-4,

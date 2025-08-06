@@ -235,10 +235,10 @@ def glm_dir_default(inputs):
         ["nii", "nii_gz"],
         ["design", "fsgd", "one_sample"],
         ["weight_inv", "weighted_ls", "weight_file", "weight_sqrt"],
-        ["prune_thresh", "noprune"],
+        ["prune_thresh", "no_prune"],
         ["weight_file", "weighted_ls"],
         ["fixed_fx_dof_file", "fixed_fx_dof"],
-        ["no_prune", "prunethresh"],
+        ["no_prune", "prune_thresh"],
         ["cortex", "label_file"],
     ]
 )

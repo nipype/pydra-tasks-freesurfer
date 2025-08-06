@@ -242,7 +242,7 @@ class MRIConvert(shell.Task["MRIConvert.Outputs"]):
     template_type: ty.Any = shell.arg(
         help="template file type", argstr="--template_type {template_type}"
     )
-    split: bool = shell.arg(
+    split_: bool = shell.arg(
         help="split output frames into separate output files.", argstr="--split"
     )
     frame: int = shell.arg(

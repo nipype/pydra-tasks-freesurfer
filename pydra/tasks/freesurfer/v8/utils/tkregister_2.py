@@ -131,7 +131,7 @@ class Tkregister2(shell.Task["Tkregister2.Outputs"]):
         help="target volume", argstr="--targ {target_image}"
     )
     fstarg: bool = shell.arg(help="use subject's T1 as reference", argstr="--fstarg")
-    moving_image: Nifti1 | MghGz = shell.arg(
+    moving_image: Nifti1 | MghGz | None = shell.arg(
         help="moving volume", argstr="--mov {moving_image}"
     )
     fsl_in_matrix: File = shell.arg(

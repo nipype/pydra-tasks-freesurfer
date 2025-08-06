@@ -174,7 +174,7 @@ class MakeSurfaces(shell.Task["MakeSurfaces.Outputs"]):
     orig_white: File = shell.arg(
         help="Specify a white surface to start with", argstr="-orig_white {orig_white}"
     )
-    orig_pial: File = shell.arg(
+    orig_pial: File | None = shell.arg(
         help="Specify a pial surface to start with",
         argstr="-orig_pial {orig_pial}",
         requires=["in_label"],

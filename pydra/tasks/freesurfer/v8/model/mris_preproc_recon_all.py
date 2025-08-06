@@ -93,10 +93,10 @@ class MRISPreprocReconAll(shell.Task["MRISPreprocReconAll.Outputs"]):
         requires=["lh_surfreg_target", "rh_surfreg_target"],
         formatter="surfreg_files_formatter",
     )
-    lh_surfreg_target: File = shell.arg(
+    lh_surfreg_target: File | None = shell.arg(
         help="Implicit target surface registration file", requires=["surfreg_files"]
     )
-    rh_surfreg_target: File = shell.arg(
+    rh_surfreg_target: File | None = shell.arg(
         help="Implicit target surface registration file", requires=["surfreg_files"]
     )
     subject_id: ty.Any | None = shell.arg(
