@@ -28,6 +28,9 @@ permissions:
 
 env: # Define environment variables
   # Force tox and pytest to use color
+  FREESURFER_VERSION: 8.1.0
+  FREESURFER_HOME: /opt/freesurfer
+  DOWNLOADS_DIR: /tmp/downloads
   FORCE_COLOR: true
 jobs:
 
