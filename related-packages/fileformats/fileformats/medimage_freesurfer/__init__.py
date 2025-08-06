@@ -1,6 +1,7 @@
 from ._version import __version__  # noqa: F401
 from fileformats.generic import File
 
+
 class Inflated(File):
     ext = ".inflated"
     binary = True
@@ -77,5 +78,10 @@ class White(File):
 
 
 class Label(File):
+    ext = ".label"
+    binary = True
+
+
+class Dat(File):
     ext = ".label"
     binary = True
