@@ -27,11 +27,10 @@ permissions:
   id-token: write  
 
 env: # Define environment variables
-  # Force tox and pytest to use color
-  FREESURFER_VERSION: 8.1.0
-  FREESURFER_HOME: /opt/freesurfer
-  DOWNLOADS_DIR: /tmp/downloads
+  SCIGET_NAME: freesurfer
+  SCIGET_VERSION: 7.4.1
   FORCE_COLOR: true
+
 jobs:
 
   build:
@@ -69,39 +68,28 @@ jobs:
       if: github.event_name == 'repository_dispatch'
       run: git checkout $(git tag -l | grep 'v.*' | tail -n 1 | awk -F post '{print $1}')
 
-    - name: Create installation directory
+    - name: Install Apptainer and Lmod
       run: |
-        sudo mkdir -p $FREESURFER_HOME
-        sudo chown $USER $FREESURFER_HOME
+        sudo add-apt-repository -y ppa:apptainer/ppa
+        sudo apt-get update
+        sudo apt-get install -y lmod apptainer
 
-    # - name: Cache Freesurfer Download
-    #   id: cache-install
-    #   uses: actions/cache@v4
-    #   with:
-    #     path: ${{ env.DOWNLOADS_DIR }}
-    #     key: freesurfer-${{ env.FREESURFER_VERSION }}-${{ runner.os }}
-
-    - name: Download FreeSurfer
-      # if: steps.cache-install.outputs.cache-hit != 'true'
+    - name: Install Neurocommand
       run: |
-        sudo mkdir -p $DOWNLOADS_DIR
-        sudo chown $USER $DOWNLOADS_DIR
-        curl -s -o $DOWNLOADS_DIR/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz \
-          https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/${{ env.FREESURFER_VERSION }}/freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz
-      shell: bash
+        git clone https://github.com/NeuroDesk/neurocommand.git
+        pushd neurocommand
+        pip3 install -r neurodesk/requirements.txt --user
+        bash build.sh --cli
+        echo "APPTAINER_BINDPATH=`pwd -P`" >> $GITHUB_ENV
 
-    - name: Install Freesurfer
-      env:
-        FREESURFER_LICENCE: ${{ secrets.FREESURFER_LICENCE }}
-      run: |
-        pushd $DOWNLOADS_DIR/
-        tar -zxpf freesurfer-linux-ubuntu22_amd64-${{ env.FREESURFER_VERSION }}.tar.gz
-        mv freesurfer/* ${{ env.FREESURFER_HOME }}
+        source /etc/profile.d/lmod.sh
+        ./containers.sh "${{ env.SCIGET_NAME }}" | grep -E "^\s*\|\s*${{ env.SCIGET_NAME }}\s*\|\s*${{ env.SCIGET_VERSION }}\s*\|" | awk -F '|' '{gsub(/ /,"",$4); print $4}'
+        SCIGET_BUILDVERSION=$(./containers.sh "${{ env.SCIGET_NAME }}" | grep -E "^\s*\|\s*${{ env.SCIGET_NAME }}\s*\|\s*${{ env.SCIGET_VERSION }}\s*\|" | awk -F '|' '{gsub(/ /,"",$4); print $4}')
+
+        ./local/fetch_containers.sh ${{ env.SCIGET_NAME }} ${{ env.SCIGET_VERSION }} $SCIGET_BUILDVERSION
+        echo "SCIGET_BUILDVERSION=$SCIGET_BUILDVERSION" >> $GITHUB_ENV
         popd
-        source ${{ env.FREESURFER_HOME }}/SetUpFreeSurfer.sh
-        echo $FREESURFER_LICENCE > ${{ env.FREESURFER_HOME }}/license.txt
-        echo "PATH=${{ env.FREESURFER_HOME }}/bin:$PATH" >> $GITHUB_ENV     
- 
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
