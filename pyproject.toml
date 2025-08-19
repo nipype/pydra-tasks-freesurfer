@@ -53,7 +53,7 @@ test = [
     "fileformats-extras",
     "fileformats-datascience-extras",
     "fileformats-medimage-extras",
-    "fileformats-medimage-freesurfer-extras",
+    "./related-packages/fileformats-extras",
 ]
 
 
