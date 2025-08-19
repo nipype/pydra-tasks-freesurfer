@@ -53,7 +53,7 @@ test = [
     "fileformats-extras",
     "fileformats-datascience-extras",
     "fileformats-medimage-extras",
-    "./related-packages/fileformats-extras",
+    "fileformats-medimage-freesurfer-extras",
 ]
 
 
@@ -120,3 +120,9 @@ ignore = ["FBT001", "FA"]
 
 [tool.ruff.lint.extend-per-file-ignores]
 "docs/conf.py" = ["INP001", "A001"]
+
+[tool.tox.envs.default]
+deps = [
+  "-e ./related-packages/fileformats",
+  "-e ./related-packages/fileformats-extras",
+]
