@@ -161,7 +161,7 @@ jobs:
 
     - name: Check for PyPI token on tag
       id: deployable
-      if: github.event_name == 'release' || github.event_name == 'repository_dispatch'
+      if: github.event_name == 'release'
       env:
         PYPI_API_TOKEN: "${{ secrets.PYPI_FILEFORMATS_API_TOKEN }}"
       run: if [ -n "$PYPI_API_TOKEN" ]; then echo "DEPLOY=true" >> $GITHUB_OUTPUT; fi
@@ -200,7 +200,7 @@ jobs:
 
     - name: Check for PyPI token on tag
       id: deployable
-      if: github.event_name == 'release' || github.event_name == 'repository_dispatch'
+      if: github.event_name == 'release'
       env:
         PYPI_API_TOKEN: "${{ secrets.PYPI_FILEFORMATS_EXTRAS_API_TOKEN }}"
       run: if [ -n "$PYPI_API_TOKEN" ]; then echo "DEPLOY=true" >> $GITHUB_OUTPUT; fi
@@ -216,7 +216,6 @@ jobs:
   deploy:
     needs: [build, test, deploy-fileformats, deploy-fileformats-extras]
     runs-on: ubuntu-latest
-    if: github.event_name == 'release'
     permissions:
       attestations: write
       id-token: write
@@ -227,7 +226,9 @@ jobs:
         name: Packages
         path: dist
     - name: Upload to PyPI
+      if: github.event_name == 'release'
       uses: pypa/gh-action-pypi-publish@release/v1
+      
 
 # Deploy on tags if PYPI_API_TOKEN is defined in the repository secrets.
 # Secrets are not accessible in the if: condition [0], so set an output variable [1]
