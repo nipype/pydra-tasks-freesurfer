@@ -1,4 +1,4 @@
-# pydra-freesurfer
+# pydra-tasks-freesurfer
 
 [![PyPI - Version][pypi-version]][pypi-project]
 [![PyPI - Python Version][pypi-pyversions]][pypi-project]
@@ -40,7 +40,7 @@ to facilitate their integration into more advanced processing workflows.
 ## Installation
 
 ```console
-pip install pydra-freesurfer
+pip install pydra-tasks-freesurfer
 ```
 
 A separate installation of FreeSurfer is required to use this package.
@@ -181,18 +181,18 @@ This project is distributed under the terms of the [Apache License, Version 2.0]
 
 [pydra]: https://nipype.github.io/pydra
 
-[pypi-downloads]: https://static.pepy.tech/badge/pydra-freesurfer
+[pypi-downloads]: https://static.pepy.tech/badge/pydra-tasks-freesurfer
 
-[pypi-project]: https://pypi.org/project/pydra-freesurfer
+[pypi-project]: https://pypi.org/project/pydra-tasks-freesurfer
 
-[pypi-pyversions]: https://img.shields.io/pypi/pyversions/pydra-freesurfer.svg
+[pypi-pyversions]: https://img.shields.io/pypi/pyversions/pydra-tasks-freesurfer.svg
 
-[pypi-version]: https://img.shields.io/pypi/v/pydra-freesurfer.svg
+[pypi-version]: https://img.shields.io/pypi/v/pydra-tasks-freesurfer.svg
 
 [status-docs-badge]: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat
 
-[status-cicd-badge]: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml/badge.svg
+[status-cicd-badge]: https://github.com/nipype/pydra-tasks-freesurfer/actions/workflows/ci-cd.yaml/badge.svg
 
-[status-docs-link]: https://nipype.github.io/pydra-freesurfer/
+[status-docs-link]: https://nipype.github.io/pydra-tasks-freesurfer/
 
-[status-cicd-link]: https://github.com/nipype/pydra-freesurfer/actions/workflows/ci-cd.yaml
+[status-cicd-link]: https://github.com/nipype/pydra-tasks-freesurfer/actions/workflows/ci-cd.yaml
