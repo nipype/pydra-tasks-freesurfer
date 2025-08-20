@@ -13,6 +13,7 @@ dependencies = [
   "fileformats >=0.15.4",
   "fileformats-datascience >=0.3.2",
   "fileformats-medimage >=0.10.5",
+  "fileformats-medimage_freesurfer",
 ]
 license = { file = "LICENSE" }
 authors = [{ name = "Nipype developers", email = "neuroimaging@python.org" }]
@@ -119,3 +120,6 @@ ignore = ["FBT001", "FA"]
 
 [tool.ruff.lint.extend-per-file-ignores]
 "docs/conf.py" = ["INP001", "A001"]
+
+[tool.pyright]
+reportAssignmentType = false
