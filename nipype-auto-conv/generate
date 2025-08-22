@@ -25,7 +25,7 @@ echo "Running nipype2pydra conversion..."
 nipype2pydra convert $conv_dir/specs $conv_dir/..
 
 echo "Committing converted tasks to ${CURRENT_BRANCH}-auto-conv..."
-git add pydra/tasks/ants
+git add pydra/tasks/freesurfer
 git commit -m "Auto-converted Nipype tasks to Pydra tasks" || echo true
 
 echo "Rebasing '$CURRENT_BRANCH' to apply changes..."
