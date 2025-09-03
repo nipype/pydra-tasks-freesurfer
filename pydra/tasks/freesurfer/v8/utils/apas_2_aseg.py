@@ -38,8 +38,8 @@ class Apas2Aseg(shell.Task["Apas2Aseg.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.apas_2_aseg import Apas2Aseg
 
     >>> task = Apas2Aseg()
-    >>> task.inputs.in_file = MghGz.mock("aseg.mgz")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("aseg.mgz")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

@@ -16,13 +16,13 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
 
     outputs = {}
     outputs["surface"] = _gen_outfilename(
-        label_value=inputs["label_value"],
         in_file=inputs["in_file"],
+        label_value=inputs["label_value"],
         out_file=inputs["out_file"],
         inputs=inputs["inputs"],
-        stdout=inputs["stdout"],
-        stderr=inputs["stderr"],
         output_dir=inputs["output_dir"],
+        stderr=inputs["stderr"],
+        stdout=inputs["stdout"],
     )
     return outputs
 
@@ -37,8 +37,8 @@ def surface_callable(output_dir, inputs, stdout, stderr):
 def _gen_filename(name, inputs):
     if name == "out_file":
         return _gen_outfilename(
-            label_value=inputs["label_value"],
             in_file=inputs["in_file"],
+            label_value=inputs["label_value"],
             out_file=inputs["out_file"],
         )
     else:
@@ -90,13 +90,13 @@ class MRIMarchingCubes(shell.Task["MRIMarchingCubes.Outputs"]):
 
 
 def _gen_outfilename(
-    label_value=None,
     in_file=None,
+    label_value=None,
     out_file=None,
     inputs=None,
-    stdout=None,
-    stderr=None,
     output_dir=None,
+    stderr=None,
+    stdout=None,
 ):
     if out_file is not attrs.NOTHING:
         return os.path.abspath(out_file)

@@ -39,9 +39,9 @@ class ParseDICOMDir(shell.Task["ParseDICOMDir.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.parse_dicom_dir import ParseDICOMDir
 
     >>> task = ParseDICOMDir()
-    >>> task.inputs.dicom_dir = Directory.mock(".")
-    >>> task.inputs.summarize = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.dicom_dir = Directory.mock(".")
+    >>> task.summarize = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_parse_sdcmdir --d . --o dicominfo.txt --sortbyrun --summarize'
 

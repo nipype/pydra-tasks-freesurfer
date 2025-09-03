@@ -21,8 +21,8 @@ class RemoveIntersection(shell.Task["RemoveIntersection.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.remove_intersection import RemoveIntersection
 
     >>> task = RemoveIntersection()
-    >>> task.inputs.in_file = Pial.mock("lh.pial")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = Pial.mock("lh.pial")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

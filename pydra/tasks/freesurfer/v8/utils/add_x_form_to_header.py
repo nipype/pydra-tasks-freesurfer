@@ -52,18 +52,18 @@ class AddXFormToHeader(shell.Task["AddXFormToHeader.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.add_x_form_to_header import AddXFormToHeader
 
     >>> task = AddXFormToHeader()
-    >>> task.inputs.in_file = MghGz.mock("norm.mgz")
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("norm.mgz")
+    >>> task.transform = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
 
     >>> task = AddXFormToHeader()
-    >>> task.inputs.in_file = MghGz.mock()
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.copy_name = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock()
+    >>> task.transform = File.mock()
+    >>> task.copy_name = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_add_xform_to_header -c trans.mat norm.mgz output.mgz'
 

@@ -32,18 +32,18 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
     outputs = {}
     outputs["converted"] = os.path.abspath(
         _gen_outfilename(
-            out_file=inputs["out_file"],
-            parcstats_file=inputs["parcstats_file"],
-            scalarcurv_file=inputs["scalarcurv_file"],
-            out_datatype=inputs["out_datatype"],
             annot_file=inputs["annot_file"],
             functional_file=inputs["functional_file"],
             in_file=inputs["in_file"],
             label_file=inputs["label_file"],
+            out_datatype=inputs["out_datatype"],
+            out_file=inputs["out_file"],
+            parcstats_file=inputs["parcstats_file"],
+            scalarcurv_file=inputs["scalarcurv_file"],
             inputs=inputs["inputs"],
-            stdout=inputs["stdout"],
-            stderr=inputs["stderr"],
             output_dir=inputs["output_dir"],
+            stderr=inputs["stderr"],
+            stdout=inputs["stdout"],
         )
     )
     return outputs
@@ -60,14 +60,14 @@ def _gen_filename(name, inputs):
     if name == "out_file":
         return os.path.abspath(
             _gen_outfilename(
-                out_file=inputs["out_file"],
-                parcstats_file=inputs["parcstats_file"],
-                scalarcurv_file=inputs["scalarcurv_file"],
-                out_datatype=inputs["out_datatype"],
                 annot_file=inputs["annot_file"],
                 functional_file=inputs["functional_file"],
                 in_file=inputs["in_file"],
                 label_file=inputs["label_file"],
+                out_datatype=inputs["out_datatype"],
+                out_file=inputs["out_file"],
+                parcstats_file=inputs["parcstats_file"],
+                scalarcurv_file=inputs["scalarcurv_file"],
             )
         )
     else:
@@ -165,18 +165,18 @@ class MRIsConvert(shell.Task["MRIsConvert.Outputs"]):
 
 
 def _gen_outfilename(
-    out_file=None,
-    parcstats_file=None,
-    scalarcurv_file=None,
-    out_datatype=None,
     annot_file=None,
     functional_file=None,
     in_file=None,
     label_file=None,
+    out_datatype=None,
+    out_file=None,
+    parcstats_file=None,
+    scalarcurv_file=None,
     inputs=None,
-    stdout=None,
-    stderr=None,
     output_dir=None,
+    stderr=None,
+    stdout=None,
 ):
     if out_file is not attrs.NOTHING:
         return out_file

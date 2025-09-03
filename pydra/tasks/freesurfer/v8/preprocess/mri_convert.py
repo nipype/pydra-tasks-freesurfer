@@ -27,9 +27,9 @@ def _format_arg(name, value, inputs, argstr):
 def _gen_filename(name, inputs):
     if name == "out_file":
         return _get_outfilename(
-            out_type=inputs["out_type"],
             in_file=inputs["in_file"],
             out_file=inputs["out_file"],
+            out_type=inputs["out_type"],
         )
     return None
 
@@ -50,17 +50,17 @@ class MRIConvert(shell.Task["MRIConvert.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.mri_convert import MRIConvert
 
     >>> task = MRIConvert()
-    >>> task.inputs.autoalign_matrix = File.mock()
-    >>> task.inputs.apply_transform = File.mock()
-    >>> task.inputs.apply_inv_transform = File.mock()
-    >>> task.inputs.out_type = "mgz"
-    >>> task.inputs.in_file = Nifti1.mock("structural.nii")
-    >>> task.inputs.reslice_like = File.mock()
-    >>> task.inputs.in_like = File.mock()
-    >>> task.inputs.color_file = File.mock()
-    >>> task.inputs.status_file = File.mock()
-    >>> task.inputs.sdcm_list = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.autoalign_matrix = File.mock()
+    >>> task.apply_transform = File.mock()
+    >>> task.apply_inv_transform = File.mock()
+    >>> task.out_type = "mgz"
+    >>> task.in_file = Nifti1.mock("structural.nii")
+    >>> task.reslice_like = File.mock()
+    >>> task.in_like = File.mock()
+    >>> task.color_file = File.mock()
+    >>> task.status_file = File.mock()
+    >>> task.sdcm_list = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_convert --out_type mgz --input_volume structural.nii --output_volume outfile.mgz'
 
@@ -242,7 +242,7 @@ class MRIConvert(shell.Task["MRIConvert.Outputs"]):
     template_type: ty.Any = shell.arg(
         help="template file type", argstr="--template_type {template_type}"
     )
-    split_: bool = shell.arg(
+    split: bool = shell.arg(
         help="split output frames into separate output files.", argstr="--split"
     )
     frame: int = shell.arg(
@@ -295,7 +295,7 @@ class MRIConvert(shell.Task["MRIConvert.Outputs"]):
         )
 
 
-def _get_outfilename(out_type=None, in_file=None, out_file=None):
+def _get_outfilename(in_file=None, out_file=None, out_type=None):
     self_dict = {}
     outfile = out_file
     if outfile is attrs.NOTHING:

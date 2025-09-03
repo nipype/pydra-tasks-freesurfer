@@ -29,8 +29,8 @@ def _format_arg(name, value, inputs, argstr):
             fname = _list_outputs(
                 annot=inputs["annot"],
                 segmentation_file=inputs["segmentation_file"],
-                surf_label=inputs["surf_label"],
                 summary_file=inputs["summary_file"],
+                surf_label=inputs["surf_label"],
             )[name]
         else:
             fname = value
@@ -114,8 +114,8 @@ def _gen_filename(name, inputs):
         return _list_outputs(
             annot=inputs["annot"],
             segmentation_file=inputs["segmentation_file"],
-            surf_label=inputs["surf_label"],
             summary_file=inputs["summary_file"],
+            surf_label=inputs["surf_label"],
         )[name]
     return None
 
@@ -126,8 +126,8 @@ def summary_file_default(inputs):
 
 @shell.define(
     xor=[
-        ["segmentation_file", "surf_label", "annot"],
-        ["default_color_table", "color_table_file", "gca_color_table"],
+        ["annot", "segmentation_file", "surf_label"],
+        ["color_table_file", "default_color_table", "gca_color_table"],
     ]
 )
 class SegStatsReconAll(shell.Task["SegStatsReconAll.Outputs"]):
@@ -142,32 +142,32 @@ class SegStatsReconAll(shell.Task["SegStatsReconAll.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.model.seg_stats_recon_all import SegStatsReconAll
 
     >>> task = SegStatsReconAll()
-    >>> task.inputs.ribbon = MghGz.mock("wm.mgz")
-    >>> task.inputs.presurf_seg = MghGz.mock("wm.mgz")
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.lh_orig_nofix = File.mock()
-    >>> task.inputs.rh_orig_nofix = Pial.mock("lh.pial")
-    >>> task.inputs.lh_white = File.mock()
-    >>> task.inputs.rh_white = Pial.mock("lh.pial")
-    >>> task.inputs.lh_pial = File.mock()
-    >>> task.inputs.rh_pial = Pial.mock("lh.pial")
-    >>> task.inputs.aseg = File.mock()
-    >>> task.inputs.segmentation_file = File.mock()
-    >>> task.inputs.annot = ("PWS04", "lh", "aparc")
-    >>> task.inputs.summary_file = "summary.stats"
-    >>> task.inputs.partial_volume_file = File.mock()
-    >>> task.inputs.in_file = File.mock()
-    >>> task.inputs.color_table_file = File.mock()
-    >>> task.inputs.gca_color_table = File.mock()
-    >>> task.inputs.cortex_vol_from_surf = True
-    >>> task.inputs.mask_file = File.mock()
-    >>> task.inputs.brain_vol = "brain-vol-from-seg"
-    >>> task.inputs.brainmask_file = File.mock()
-    >>> task.inputs.etiv = True
-    >>> task.inputs.supratent = True
-    >>> task.inputs.euler = True
-    >>> task.inputs.in_intensity = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.ribbon = MghGz.mock("wm.mgz")
+    >>> task.presurf_seg = MghGz.mock("wm.mgz")
+    >>> task.transform = File.mock()
+    >>> task.lh_orig_nofix = File.mock()
+    >>> task.rh_orig_nofix = Pial.mock("lh.pial")
+    >>> task.lh_white = File.mock()
+    >>> task.rh_white = Pial.mock("lh.pial")
+    >>> task.lh_pial = File.mock()
+    >>> task.rh_pial = Pial.mock("lh.pial")
+    >>> task.aseg = File.mock()
+    >>> task.segmentation_file = File.mock()
+    >>> task.annot = ("PWS04", "lh", "aparc")
+    >>> task.summary_file = "summary.stats"
+    >>> task.partial_volume_file = File.mock()
+    >>> task.in_file = File.mock()
+    >>> task.color_table_file = File.mock()
+    >>> task.gca_color_table = File.mock()
+    >>> task.cortex_vol_from_surf = True
+    >>> task.mask_file = File.mock()
+    >>> task.brain_vol = "brain-vol-from-seg"
+    >>> task.brainmask_file = File.mock()
+    >>> task.etiv = True
+    >>> task.supratent = True
+    >>> task.euler = True
+    >>> task.in_intensity = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

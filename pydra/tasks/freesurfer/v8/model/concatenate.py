@@ -34,10 +34,10 @@ class Concatenate(shell.Task["Concatenate.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.model.concatenate import Concatenate
 
     >>> task = Concatenate()
-    >>> task.inputs.in_files = [Nifti1.mock("cont1.nii"), Nifti1.mock("cont2.nii")]
-    >>> task.inputs.multiply_matrix_file = File.mock()
-    >>> task.inputs.mask_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_files = [Nifti1.mock("cont1.nii"), Nifti1.mock("cont2.nii")]
+    >>> task.multiply_matrix_file = File.mock()
+    >>> task.mask_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_concat --o bar.nii --i cont1.nii --i cont2.nii'
 
@@ -75,7 +75,7 @@ class Concatenate(shell.Task["Concatenate.Outputs"]):
         help="Multiply input by an ascii matrix in file",
         argstr="--mtx {multiply_matrix_file}",
     )
-    combine_: bool = shell.arg(
+    combine: bool = shell.arg(
         help="Combine non-zero values into single frame volume", argstr="--combine"
     )
     keep_dtype: bool = shell.arg(

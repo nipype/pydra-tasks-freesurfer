@@ -48,10 +48,10 @@ class RegisterAVItoTalairach(shell.Task["RegisterAVItoTalairach.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.registration.register_av_ito_talairach import RegisterAVItoTalairach
 
     >>> task = RegisterAVItoTalairach()
-    >>> task.inputs.in_file = MghGz.mock("structural.mgz"                         # doctest: +SKIP)
-    >>> task.inputs.target = File.mock()
-    >>> task.inputs.vox2vox = TextFile.mock("talsrcimg_to_structural_t4_vox2vox.txt" # doctest: +SKIP)
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("structural.mgz"                         # doctest: +SKIP)
+    >>> task.target = File.mock()
+    >>> task.vox2vox = TextFile.mock("talsrcimg_to_structural_t4_vox2vox.txt" # doctest: +SKIP)
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'avi2talxfm structural.mgz mni305.cor.mgz talsrcimg_to_structural_t4_vox2vox.txt talairach.auto.xfm'
 

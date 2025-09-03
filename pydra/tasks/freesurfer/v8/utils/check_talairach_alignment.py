@@ -24,7 +24,7 @@ def out_file_callable(output_dir, inputs, stdout, stderr):
     return outputs.get("out_file")
 
 
-@shell.define(xor=[["subject", "in_file"]])
+@shell.define(xor=[["in_file", "subject"]])
 class CheckTalairachAlignment(shell.Task["CheckTalairachAlignment.Outputs"]):
     """
     Examples
@@ -35,8 +35,8 @@ class CheckTalairachAlignment(shell.Task["CheckTalairachAlignment.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.check_talairach_alignment import CheckTalairachAlignment
 
     >>> task = CheckTalairachAlignment()
-    >>> task.inputs.in_file = TextMatrix.mock("trans.mat")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = TextMatrix.mock("trans.mat")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'talairach_afd -T 0.005 -xfm trans.mat'
 

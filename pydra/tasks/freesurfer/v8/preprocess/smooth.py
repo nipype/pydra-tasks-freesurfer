@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 def _gen_filename(name, inputs):
     if name == "smoothed_file":
         return _list_outputs(
-            smoothed_file=inputs["smoothed_file"], in_file=inputs["in_file"]
+            in_file=inputs["in_file"], smoothed_file=inputs["smoothed_file"]
         )[name]
     return None
 
@@ -25,7 +25,7 @@ def smoothed_file_default(inputs):
     return _gen_filename("smoothed_file", inputs=inputs)
 
 
-@shell.define(xor=[["surface_fwhm", "num_iters"], ["proj_frac", "proj_frac_avg"]])
+@shell.define(xor=[["num_iters", "surface_fwhm"], ["proj_frac", "proj_frac_avg"]])
 class Smooth(shell.Task["Smooth.Outputs"]):
     """
     Examples
@@ -38,12 +38,12 @@ class Smooth(shell.Task["Smooth.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.smooth import Smooth
 
     >>> task = Smooth()
-    >>> task.inputs.in_file = Nifti1.mock("functional.nii")
-    >>> task.inputs.reg_file = Dat.mock("register.dat")
-    >>> task.inputs.smoothed_file = "foo_out.nii"
-    >>> task.inputs.surface_fwhm = 10
-    >>> task.inputs.vol_fwhm = 6
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = Nifti1.mock("functional.nii")
+    >>> task.reg_file = Dat.mock("register.dat")
+    >>> task.smoothed_file = "foo_out.nii"
+    >>> task.surface_fwhm = 10
+    >>> task.vol_fwhm = 6
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mris_volsmooth --i functional.nii --reg register.dat --o foo_out.nii --fwhm 10.000000 --vol-fwhm 6.000000'
 
@@ -108,7 +108,7 @@ def _gen_fname(basename, fname=None, cwd=None, suffix="_fs", use_ext=True):
     return fname
 
 
-def _list_outputs(smoothed_file=None, in_file=None):
+def _list_outputs(in_file=None, smoothed_file=None):
     outputs = {}
     outfile = smoothed_file
     if outfile is attrs.NOTHING:

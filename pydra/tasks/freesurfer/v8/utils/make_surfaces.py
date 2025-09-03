@@ -123,7 +123,7 @@ def out_thickness_callable(output_dir, inputs, stdout, stderr):
     return outputs.get("out_thickness")
 
 
-@shell.define(xor=[["noaparc", "in_label"]])
+@shell.define(xor=[["in_label", "noaparc"]])
 class MakeSurfaces(shell.Task["MakeSurfaces.Outputs"]):
     """
     Examples
@@ -135,17 +135,17 @@ class MakeSurfaces(shell.Task["MakeSurfaces.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.make_surfaces import MakeSurfaces
 
     >>> task = MakeSurfaces()
-    >>> task.inputs.hemisphere = "lh"
-    >>> task.inputs.in_orig = Pial.mock("lh.pial")
-    >>> task.inputs.in_wm = File.mock()
-    >>> task.inputs.in_filled = MghGz.mock("norm.mgz")
-    >>> task.inputs.in_white = File.mock()
-    >>> task.inputs.in_label = File.mock()
-    >>> task.inputs.orig_white = File.mock()
-    >>> task.inputs.orig_pial = File.mock()
-    >>> task.inputs.in_aseg = File.mock()
-    >>> task.inputs.in_T1 = MghGz.mock("T1.mgz")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.hemisphere = "lh"
+    >>> task.in_orig = Pial.mock("lh.pial")
+    >>> task.in_wm = File.mock()
+    >>> task.in_filled = MghGz.mock("norm.mgz")
+    >>> task.in_white = File.mock()
+    >>> task.in_label = File.mock()
+    >>> task.orig_white = File.mock()
+    >>> task.orig_pial = File.mock()
+    >>> task.in_aseg = File.mock()
+    >>> task.in_T1 = MghGz.mock("T1.mgz")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -174,7 +174,7 @@ class MakeSurfaces(shell.Task["MakeSurfaces.Outputs"]):
     orig_white: File = shell.arg(
         help="Specify a white surface to start with", argstr="-orig_white {orig_white}"
     )
-    orig_pial: File | None = shell.arg(
+    orig_pial: File = shell.arg(
         help="Specify a pial surface to start with",
         argstr="-orig_pial {orig_pial}",
         requires=["in_label"],

@@ -74,7 +74,7 @@ def out_itk_callable(output_dir, inputs, stdout, stderr):
     return outputs.get("out_itk")
 
 
-@shell.define(xor=[["in_reg", "in_itk", "in_mni", "in_fsl", "in_niftyreg", "in_lta"]])
+@shell.define(xor=[["in_fsl", "in_itk", "in_lta", "in_mni", "in_niftyreg", "in_reg"]])
 class LTAConvert(shell.Task["LTAConvert.Outputs"]):
     """
     Examples

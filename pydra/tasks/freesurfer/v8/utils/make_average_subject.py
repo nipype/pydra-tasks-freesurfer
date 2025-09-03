@@ -35,8 +35,8 @@ class MakeAverageSubject(shell.Task["MakeAverageSubject.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.make_average_subject import MakeAverageSubject
 
     >>> task = MakeAverageSubject()
-    >>> task.inputs.subjects_ids = ["s1", "s2"]
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.subjects_ids = ["s1", "s2"]
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'make_average_subject --out average --subjects s1 s2'
 

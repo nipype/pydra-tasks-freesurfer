@@ -63,20 +63,20 @@ class Aparc2Aseg(shell.Task["Aparc2Aseg.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.aparc_2_aseg import Aparc2Aseg
 
     >>> task = Aparc2Aseg()
-    >>> task.inputs.lh_white = Pial.mock("lh.pial")
-    >>> task.inputs.rh_white = File.mock()
-    >>> task.inputs.lh_pial = Pial.mock("lh.pial")
-    >>> task.inputs.rh_pial = File.mock()
-    >>> task.inputs.lh_ribbon = MghGz.mock("label.mgz")
-    >>> task.inputs.rh_ribbon = File.mock()
-    >>> task.inputs.ribbon = MghGz.mock("label.mgz")
-    >>> task.inputs.lh_annotation = File.mock()
-    >>> task.inputs.rh_annotation = Pial.mock("lh.pial")
-    >>> task.inputs.filled = File.mock()
-    >>> task.inputs.aseg = File.mock()
-    >>> task.inputs.ctxseg = File.mock()
-    >>> task.inputs.label_wm = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.lh_white = Pial.mock("lh.pial")
+    >>> task.rh_white = File.mock()
+    >>> task.lh_pial = Pial.mock("lh.pial")
+    >>> task.rh_pial = File.mock()
+    >>> task.lh_ribbon = MghGz.mock("label.mgz")
+    >>> task.rh_ribbon = File.mock()
+    >>> task.ribbon = MghGz.mock("label.mgz")
+    >>> task.lh_annotation = File.mock()
+    >>> task.rh_annotation = Pial.mock("lh.pial")
+    >>> task.filled = File.mock()
+    >>> task.aseg = File.mock()
+    >>> task.ctxseg = File.mock()
+    >>> task.label_wm = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

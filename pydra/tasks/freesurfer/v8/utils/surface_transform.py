@@ -23,11 +23,11 @@ def _format_arg(name, value, inputs, argstr):
         if inputs["out_file"] is not attrs.NOTHING:
             _, base, ext = split_filename(
                 _list_outputs(
-                    target_type=inputs["target_type"],
-                    source_annot_file=inputs["source_annot_file"],
                     out_file=inputs["out_file"],
-                    target_subject=inputs["target_subject"],
+                    source_annot_file=inputs["source_annot_file"],
                     source_file=inputs["source_file"],
+                    target_subject=inputs["target_subject"],
+                    target_type=inputs["target_type"],
                 )["out_file"]
             )
             if ext != filemap[value]:
@@ -56,11 +56,11 @@ def target_type_formatter(field, inputs):
 def _gen_filename(name, inputs):
     if name == "out_file":
         return _list_outputs(
-            target_type=inputs["target_type"],
-            source_annot_file=inputs["source_annot_file"],
             out_file=inputs["out_file"],
-            target_subject=inputs["target_subject"],
+            source_annot_file=inputs["source_annot_file"],
             source_file=inputs["source_file"],
+            target_subject=inputs["target_subject"],
+            target_type=inputs["target_type"],
         )[name]
     return None
 
@@ -124,11 +124,11 @@ class SurfaceTransform(shell.Task["SurfaceTransform.Outputs"]):
 
 
 def _list_outputs(
-    target_type=None,
-    source_annot_file=None,
     out_file=None,
-    target_subject=None,
+    source_annot_file=None,
     source_file=None,
+    target_subject=None,
+    target_type=None,
 ):
     outputs = {}
     outputs["out_file"] = out_file

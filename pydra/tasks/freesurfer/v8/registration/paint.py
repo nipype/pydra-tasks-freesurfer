@@ -37,10 +37,10 @@ class Paint(shell.Task["Paint.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.registration.paint import Paint
 
     >>> task = Paint()
-    >>> task.inputs.in_surf = Pial.mock("lh.pial")
-    >>> task.inputs.template = File.mock()
-    >>> task.inputs.averages = 5
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_surf = Pial.mock("lh.pial")
+    >>> task.template = File.mock()
+    >>> task.averages = 5
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

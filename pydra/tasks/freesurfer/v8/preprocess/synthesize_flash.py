@@ -35,13 +35,13 @@ class SynthesizeFLASH(shell.Task["SynthesizeFLASH.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.synthesize_flash import SynthesizeFLASH
 
     >>> task = SynthesizeFLASH()
-    >>> task.inputs.tr = 20
-    >>> task.inputs.flip_angle = 30
-    >>> task.inputs.te = 3
-    >>> task.inputs.t1_image = MghGz.mock("T1.mgz")
-    >>> task.inputs.pd_image = File.mock()
-    >>> task.inputs.out_file = "flash_30syn.mgz"
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.tr = 20
+    >>> task.flip_angle = 30
+    >>> task.te = 3
+    >>> task.t1_image = MghGz.mock("T1.mgz")
+    >>> task.pd_image = File.mock()
+    >>> task.out_file = "flash_30syn.mgz"
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

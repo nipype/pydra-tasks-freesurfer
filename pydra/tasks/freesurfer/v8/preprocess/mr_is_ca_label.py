@@ -22,15 +22,15 @@ class MRIsCALabel(shell.Task["MRIsCALabel.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.mr_is_ca_label import MRIsCALabel
 
     >>> task = MRIsCALabel()
-    >>> task.inputs.subject_id = "test"
-    >>> task.inputs.canonsurf = Pial.mock("lh.pial")
-    >>> task.inputs.classifier = File.mock()
-    >>> task.inputs.smoothwm = Pial.mock("lh.pial")
-    >>> task.inputs.curv = File.mock()
-    >>> task.inputs.sulc = Pial.mock("lh.pial")
-    >>> task.inputs.label = File.mock()
-    >>> task.inputs.aseg = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.subject_id = "test"
+    >>> task.canonsurf = Pial.mock("lh.pial")
+    >>> task.classifier = File.mock()
+    >>> task.smoothwm = Pial.mock("lh.pial")
+    >>> task.curv = File.mock()
+    >>> task.sulc = Pial.mock("lh.pial")
+    >>> task.label = File.mock()
+    >>> task.aseg = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mris_ca_label test lh lh.pial im1.nii lh.aparc.annot'
 

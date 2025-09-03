@@ -21,13 +21,13 @@ class EMRegister(shell.Task["EMRegister.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.registration.em_register import EMRegister
 
     >>> task = EMRegister()
-    >>> task.inputs.in_file = MghGz.mock("norm.mgz")
-    >>> task.inputs.template = File.mock()
-    >>> task.inputs.out_file = "norm_transform.lta"
-    >>> task.inputs.mask = File.mock()
-    >>> task.inputs.nbrspacing = 9
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("norm.mgz")
+    >>> task.template = File.mock()
+    >>> task.out_file = "norm_transform.lta"
+    >>> task.mask = File.mock()
+    >>> task.nbrspacing = 9
+    >>> task.transform = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

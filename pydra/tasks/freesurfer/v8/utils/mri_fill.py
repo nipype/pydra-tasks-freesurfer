@@ -47,10 +47,10 @@ class MRIFill(shell.Task["MRIFill.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.mri_fill import MRIFill
 
     >>> task = MRIFill()
-    >>> task.inputs.in_file = MghGz.mock("wm.mgz" # doctest: +SKIP)
-    >>> task.inputs.segmentation = File.mock()
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("wm.mgz" # doctest: +SKIP)
+    >>> task.segmentation = File.mock()
+    >>> task.transform = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

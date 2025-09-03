@@ -73,16 +73,16 @@ class MS_LDA(shell.Task["MS_LDA.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.model.ms__lda import MS_LDA
 
     >>> task = MS_LDA()
-    >>> task.inputs.lda_labels = [grey_label, white_label]
-    >>> task.inputs.weight_file = "weights.txt"
-    >>> task.inputs.vol_synth_file = "synth_out.mgz"
-    >>> task.inputs.label_file = MghGz.mock("label.mgz")
-    >>> task.inputs.mask_file = File.mock()
-    >>> task.inputs.shift = zero_value
-    >>> task.inputs.conform = True
-    >>> task.inputs.use_weights = True
-    >>> task.inputs.images = [MghGz.mock("FLASH1.mgz"), MghGz.mock("FLASH2.mgz"), MghGz.mock("FLASH3.mgz")]
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.lda_labels = [grey_label, white_label]
+    >>> task.weight_file = "weights.txt"
+    >>> task.vol_synth_file = "synth_out.mgz"
+    >>> task.label_file = MghGz.mock("label.mgz")
+    >>> task.mask_file = File.mock()
+    >>> task.shift = zero_value
+    >>> task.conform = True
+    >>> task.use_weights = True
+    >>> task.images = [MghGz.mock("FLASH1.mgz"), MghGz.mock("FLASH2.mgz"), MghGz.mock("FLASH3.mgz")]
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

@@ -38,11 +38,11 @@ class EditWMwithAseg(shell.Task["EditWMwithAseg.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.edit_w_mwith_aseg import EditWMwithAseg
 
     >>> task = EditWMwithAseg()
-    >>> task.inputs.in_file = MghGz.mock("T1.mgz")
-    >>> task.inputs.brain_file = File.mock()
-    >>> task.inputs.seg_file = MghGz.mock("aseg.mgz")
-    >>> task.inputs.keep_in = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("T1.mgz")
+    >>> task.brain_file = File.mock()
+    >>> task.seg_file = MghGz.mock("aseg.mgz")
+    >>> task.keep_in = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

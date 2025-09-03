@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 def _gen_filename(name, inputs):
     if name == "out_file":
         return _list_outputs(
-            hemi=inputs["hemi"], target=inputs["target"], out_file=inputs["out_file"]
+            hemi=inputs["hemi"], out_file=inputs["out_file"], target=inputs["target"]
         )[name]
     return None
 
@@ -26,10 +26,10 @@ def out_file_default(inputs):
 
 @shell.define(
     xor=[
+        ["fsgd_file", "subject_file", "subjects"],
+        ["fwhm", "num_iters"],
         ["fwhm_source", "num_iters_source"],
         ["surf_area", "surf_measure", "surf_measure_file"],
-        ["fwhm", "num_iters"],
-        ["fsgd_file", "subject_file", "subjects"],
     ]
 )
 class MRISPreproc(shell.Task["MRISPreproc.Outputs"]):
@@ -43,11 +43,11 @@ class MRISPreproc(shell.Task["MRISPreproc.Outputs"]):
     >>> from pydra.utils.typing import MultiInputObj
 
     >>> task = MRISPreproc()
-    >>> task.inputs.target = "fsaverage"
-    >>> task.inputs.fsgd_file = File.mock()
-    >>> task.inputs.subject_file = File.mock()
-    >>> task.inputs.vol_measure_file = [("cont1.nii", "register.dat"),                                            ("cont1a.nii", "register.dat")]
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.target = "fsaverage"
+    >>> task.fsgd_file = File.mock()
+    >>> task.subject_file = File.mock()
+    >>> task.vol_measure_file = [("cont1.nii", "register.dat"),                                            ("cont1a.nii", "register.dat")]
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -121,7 +121,7 @@ class MRISPreproc(shell.Task["MRISPreproc.Outputs"]):
         )
 
 
-def _list_outputs(hemi=None, target=None, out_file=None):
+def _list_outputs(hemi=None, out_file=None, target=None):
     outputs = {}
     outfile = out_file
     outputs["out_file"] = outfile

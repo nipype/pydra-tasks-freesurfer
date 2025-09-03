@@ -17,9 +17,9 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
         inputs["in_file"],
         inputs["out_name"],
         inputs=inputs["inputs"],
-        stdout=inputs["stdout"],
-        stderr=inputs["stderr"],
         output_dir=inputs["output_dir"],
+        stderr=inputs["stderr"],
+        stdout=inputs["stdout"],
     )
     return outputs
 
@@ -42,11 +42,11 @@ class MRIsExpand(shell.Task["MRIsExpand.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.mr_is_expand import MRIsExpand
 
     >>> task = MRIsExpand()
-    >>> task.inputs.in_file = White.mock("lh.white")
-    >>> task.inputs.distance = 0.5
-    >>> task.inputs.out_name = "graymid"
-    >>> task.inputs.thickness = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = White.mock("lh.white")
+    >>> task.distance = 0.5
+    >>> task.out_name = "graymid"
+    >>> task.thickness = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -102,7 +102,7 @@ class MRIsExpand(shell.Task["MRIsExpand.Outputs"]):
 
 
 def _associated_file(
-    in_file, out_name, inputs=None, stdout=None, stderr=None, output_dir=None
+    in_file, out_name, inputs=None, output_dir=None, stderr=None, stdout=None
 ):
     """Based on MRIsBuildFileName in freesurfer/utils/mrisurf.c
 

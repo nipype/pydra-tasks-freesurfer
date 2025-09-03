@@ -41,7 +41,7 @@ def surf_measure_file_formatter(field, inputs):
 def _gen_filename(name, inputs):
     if name == "out_file":
         return _list_outputs(
-            hemi=inputs["hemi"], target=inputs["target"], out_file=inputs["out_file"]
+            hemi=inputs["hemi"], out_file=inputs["out_file"], target=inputs["target"]
         )[name]
     return None
 
@@ -52,11 +52,11 @@ def out_file_default(inputs):
 
 @shell.define(
     xor=[
-        ["fwhm", "num_iters"],
+        ["fsgd_file", "subject_file", "subject_id", "subjects"],
         ["fsgd_file", "subject_file", "subjects"],
-        ["surf_area", "surf_measure", "surf_measure_file"],
+        ["fwhm", "num_iters"],
         ["fwhm_source", "num_iters_source"],
-        ["fsgd_file", "subject_file", "subjects", "subject_id"],
+        ["surf_area", "surf_measure", "surf_measure_file"],
     ]
 )
 class MRISPreprocReconAll(shell.Task["MRISPreprocReconAll.Outputs"]):
@@ -70,14 +70,14 @@ class MRISPreprocReconAll(shell.Task["MRISPreprocReconAll.Outputs"]):
     >>> from pydra.utils.typing import MultiInputObj
 
     >>> task = MRISPreprocReconAll()
-    >>> task.inputs.surf_measure_file = File.mock()
-    >>> task.inputs.lh_surfreg_target = File.mock()
-    >>> task.inputs.rh_surfreg_target = File.mock()
-    >>> task.inputs.target = "fsaverage"
-    >>> task.inputs.fsgd_file = File.mock()
-    >>> task.inputs.subject_file = File.mock()
-    >>> task.inputs.vol_measure_file = [("cont1.nii", "register.dat"),                                            ("cont1a.nii", "register.dat")]
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.surf_measure_file = File.mock()
+    >>> task.lh_surfreg_target = File.mock()
+    >>> task.rh_surfreg_target = File.mock()
+    >>> task.target = "fsaverage"
+    >>> task.fsgd_file = File.mock()
+    >>> task.subject_file = File.mock()
+    >>> task.vol_measure_file = [("cont1.nii", "register.dat"),                                            ("cont1a.nii", "register.dat")]
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -93,10 +93,10 @@ class MRISPreprocReconAll(shell.Task["MRISPreprocReconAll.Outputs"]):
         requires=["lh_surfreg_target", "rh_surfreg_target"],
         formatter="surfreg_files_formatter",
     )
-    lh_surfreg_target: File | None = shell.arg(
+    lh_surfreg_target: File = shell.arg(
         help="Implicit target surface registration file", requires=["surfreg_files"]
     )
-    rh_surfreg_target: File | None = shell.arg(
+    rh_surfreg_target: File = shell.arg(
         help="Implicit target surface registration file", requires=["surfreg_files"]
     )
     subject_id: ty.Any | None = shell.arg(
@@ -169,7 +169,7 @@ class MRISPreprocReconAll(shell.Task["MRISPreprocReconAll.Outputs"]):
         )
 
 
-def _list_outputs(hemi=None, target=None, out_file=None):
+def _list_outputs(hemi=None, out_file=None, target=None):
     outputs = {}
     outfile = out_file
     outputs["out_file"] = outfile

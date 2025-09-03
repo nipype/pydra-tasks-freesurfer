@@ -19,7 +19,7 @@ class ExtractMainComponent(shell.Task["ExtractMainComponent.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.extract_main_component import ExtractMainComponent
 
     >>> task = ExtractMainComponent()
-    >>> task.inputs.in_file = Pial.mock("lh.pial")
+    >>> task.in_file = Pial.mock("lh.pial")
     >>> task.cmdline
     'mris_extract_main_component lh.pial lh.maincmp'
 

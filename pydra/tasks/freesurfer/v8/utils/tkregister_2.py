@@ -23,8 +23,8 @@ def _format_arg(name, value, inputs, argstr):
     if name in ("fsl_out", "lta_out") and value is True:
         value = _list_outputs(
             fsl_out=inputs["fsl_out"],
-            reg_file=inputs["reg_file"],
             lta_out=inputs["lta_out"],
+            reg_file=inputs["reg_file"],
         )[f"{name[:3]}_file"]
 
     return argstr.format(**inputs)
@@ -85,8 +85,8 @@ def lta_file_callable(output_dir, inputs, stdout, stderr):
 
 @shell.define(
     xor=[
-        ["fstarg", "target_image"],
         ["fstal", "moving_image", "reg_file", "target_image"],
+        ["fstarg", "target_image"],
     ]
 )
 class Tkregister2(shell.Task["Tkregister2.Outputs"]):
@@ -101,25 +101,25 @@ class Tkregister2(shell.Task["Tkregister2.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.tkregister_2 import Tkregister2
 
     >>> task = Tkregister2()
-    >>> task.inputs.target_image = File.mock()
-    >>> task.inputs.moving_image = "T1.mgz"
-    >>> task.inputs.fsl_in_matrix = File.mock()
-    >>> task.inputs.xfm = File.mock()
-    >>> task.inputs.lta_in = File.mock()
-    >>> task.inputs.reg_file = "T1_to_native.dat"
-    >>> task.inputs.reg_header = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.target_image = File.mock()
+    >>> task.moving_image = "T1.mgz"
+    >>> task.fsl_in_matrix = File.mock()
+    >>> task.xfm = File.mock()
+    >>> task.lta_in = File.mock()
+    >>> task.reg_file = "T1_to_native.dat"
+    >>> task.reg_header = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'tkregister2 --mov T1.mgz --noedit --reg T1_to_native.dat --regheader --targ structural.nii'
 
 
     >>> task = Tkregister2()
-    >>> task.inputs.target_image = File.mock()
-    >>> task.inputs.moving_image = "epi.nii"
-    >>> task.inputs.fsl_in_matrix = File.mock()
-    >>> task.inputs.xfm = File.mock()
-    >>> task.inputs.lta_in = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.target_image = File.mock()
+    >>> task.moving_image = "epi.nii"
+    >>> task.fsl_in_matrix = File.mock()
+    >>> task.xfm = File.mock()
+    >>> task.lta_in = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'tkregister2 --fsl flirt.mat --mov epi.nii --noedit --reg register.dat'
 
@@ -131,7 +131,7 @@ class Tkregister2(shell.Task["Tkregister2.Outputs"]):
         help="target volume", argstr="--targ {target_image}"
     )
     fstarg: bool = shell.arg(help="use subject's T1 as reference", argstr="--fstarg")
-    moving_image: Nifti1 | MghGz | None = shell.arg(
+    moving_image: Nifti1 | MghGz = shell.arg(
         help="moving volume", argstr="--mov {moving_image}"
     )
     fsl_in_matrix: File = shell.arg(

@@ -36,11 +36,11 @@ class CARegister(shell.Task["CARegister.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.ca_register import CARegister
 
     >>> task = CARegister()
-    >>> task.inputs.in_file = MghGz.mock("norm.mgz")
-    >>> task.inputs.template = File.mock()
-    >>> task.inputs.mask = File.mock()
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("norm.mgz")
+    >>> task.template = File.mock()
+    >>> task.mask = File.mock()
+    >>> task.transform = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

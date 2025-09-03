@@ -98,7 +98,7 @@ def binary_file_default(inputs):
 
 
 @shell.define(
-    xor=[["wm_ven_csf", "max"], ["min", "max", "wm_ven_csf"], ["min", "wm_ven_csf"]]
+    xor=[["max", "min", "wm_ven_csf"], ["max", "wm_ven_csf"], ["min", "wm_ven_csf"]]
 )
 class Binarize(shell.Task["Binarize.Outputs"]):
     """
@@ -111,12 +111,12 @@ class Binarize(shell.Task["Binarize.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.model.binarize import Binarize
 
     >>> task = Binarize()
-    >>> task.inputs.in_file = Nifti1.mock("structural.nii")
-    >>> task.inputs.min = 10
-    >>> task.inputs.binary_file = "foo_out.nii"
-    >>> task.inputs.merge_file = File.mock()
-    >>> task.inputs.mask_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = Nifti1.mock("structural.nii")
+    >>> task.min = 10
+    >>> task.binary_file = "foo_out.nii"
+    >>> task.merge_file = File.mock()
+    >>> task.mask_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

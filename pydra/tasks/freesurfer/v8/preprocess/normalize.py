@@ -21,11 +21,11 @@ class Normalize(shell.Task["Normalize.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.normalize import Normalize
 
     >>> task = Normalize()
-    >>> task.inputs.in_file = MghGz.mock("T1.mgz")
-    >>> task.inputs.mask = File.mock()
-    >>> task.inputs.segmentation = File.mock()
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("T1.mgz")
+    >>> task.mask = File.mock()
+    >>> task.segmentation = File.mock()
+    >>> task.transform = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

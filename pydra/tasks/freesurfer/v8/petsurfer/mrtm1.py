@@ -229,17 +229,17 @@ def glm_dir_default(inputs):
 
 @shell.define(
     xor=[
-        ["weight_inv", "weighted_ls"],
-        ["weighted_ls", "weight_sqrt"],
-        ["design", "one_sample", "contrast", "fsgd"],
-        ["nii", "nii_gz"],
-        ["design", "fsgd", "one_sample"],
-        ["weight_inv", "weighted_ls", "weight_file", "weight_sqrt"],
-        ["prune_thresh", "no_prune"],
-        ["weight_file", "weighted_ls"],
-        ["fixed_fx_dof_file", "fixed_fx_dof"],
-        ["no_prune", "prune_thresh"],
+        ["contrast", "design", "fsgd", "one_sample"],
         ["cortex", "label_file"],
+        ["design", "fsgd", "one_sample"],
+        ["fixed_fx_dof", "fixed_fx_dof_file"],
+        ["nii", "nii_gz"],
+        ["no_prune", "prunethresh"],
+        ["noprune", "prune_thresh"],
+        ["weight_file", "weight_inv", "weight_sqrt", "weighted_ls"],
+        ["weight_file", "weighted_ls"],
+        ["weight_inv", "weighted_ls"],
+        ["weight_sqrt", "weighted_ls"],
     ]
 )
 class MRTM1(shell.Task["MRTM1.Outputs"]):
@@ -253,17 +253,17 @@ class MRTM1(shell.Task["MRTM1.Outputs"]):
     >>> from pydra.utils.typing import MultiOutputType
 
     >>> task = MRTM1()
-    >>> task.inputs.glm_dir = "mrtm"
-    >>> task.inputs.in_file = Nifti1.mock("tac.nii")
-    >>> task.inputs.design = File.mock()
-    >>> task.inputs.weighted_ls = File.mock()
-    >>> task.inputs.fixed_fx_var = File.mock()
-    >>> task.inputs.fixed_fx_dof_file = File.mock()
-    >>> task.inputs.weight_file = File.mock()
-    >>> task.inputs.mask_file = File.mock()
-    >>> task.inputs.label_file = File.mock()
-    >>> task.inputs.sim_done_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.glm_dir = "mrtm"
+    >>> task.in_file = Nifti1.mock("tac.nii")
+    >>> task.design = File.mock()
+    >>> task.weighted_ls = File.mock()
+    >>> task.fixed_fx_var = File.mock()
+    >>> task.fixed_fx_dof_file = File.mock()
+    >>> task.weight_file = File.mock()
+    >>> task.mask_file = File.mock()
+    >>> task.label_file = File.mock()
+    >>> task.sim_done_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

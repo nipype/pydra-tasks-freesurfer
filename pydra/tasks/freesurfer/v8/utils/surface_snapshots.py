@@ -79,9 +79,9 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
             f % stem,
             suffix="",
             inputs=inputs["inputs"],
-            stdout=inputs["stdout"],
-            stderr=inputs["stderr"],
             output_dir=inputs["output_dir"],
+            stderr=inputs["stderr"],
+            stdout=inputs["stdout"],
         )
         for f in snapshots
     ]
@@ -108,10 +108,10 @@ def tcl_script_default(inputs):
 
 @shell.define(
     xor=[
-        ["label_file", "label_name"],
-        ["show_gray_curv", "show_curv"],
+        ["annot_file", "annot_name"],
         ["identity_reg", "mni152_reg", "overlay_reg"],
-        ["annot_name", "annot_file"],
+        ["label_file", "label_name"],
+        ["show_curv", "show_gray_curv"],
     ]
 )
 class SurfaceSnapshots(shell.Task["SurfaceSnapshots.Outputs"]):
@@ -136,7 +136,7 @@ class SurfaceSnapshots(shell.Task["SurfaceSnapshots.Outputs"]):
     )
     show_curv: bool = shell.arg(help="show curvature", argstr="-curv")
     show_gray_curv: bool = shell.arg(help="show curvature in gray", argstr="-gray")
-    overlay: File | None = shell.arg(
+    overlay: File = shell.arg(
         help="load an overlay volume/surface",
         argstr="-overlay {overlay}",
         requires=["overlay_range"],
@@ -232,9 +232,9 @@ def _gen_fname(
     suffix="_fs",
     use_ext=True,
     inputs=None,
-    stdout=None,
-    stderr=None,
     output_dir=None,
+    stderr=None,
+    stdout=None,
 ):
     """Define a generic mapping for a single outfile
 

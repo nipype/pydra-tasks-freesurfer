@@ -52,10 +52,10 @@ class FuseSegmentations(shell.Task["FuseSegmentations.Outputs"]):
     >>> from pydra.utils.typing import MultiInputObj
 
     >>> task = FuseSegmentations()
-    >>> task.inputs.subject_id = "tp.long.A.template"
-    >>> task.inputs.out_file = "aseg.fused.mgz"
-    >>> task.inputs.in_segmentations_noCC = [MghGz.mock("aseg.mgz"), MghGz.mock("aseg.mgz")]
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.subject_id = "tp.long.A.template"
+    >>> task.out_file = "aseg.fused.mgz"
+    >>> task.in_segmentations_noCC = [MghGz.mock("aseg.mgz"), MghGz.mock("aseg.mgz")]
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

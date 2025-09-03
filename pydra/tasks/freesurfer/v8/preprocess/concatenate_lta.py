@@ -36,31 +36,31 @@ class ConcatenateLTA(shell.Task["ConcatenateLTA.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.concatenate_lta import ConcatenateLTA
 
     >>> task = ConcatenateLTA()
-    >>> task.inputs.in_lta1 = Lta.mock("lta1.lta")
-    >>> task.inputs.tal_source_file = File.mock()
-    >>> task.inputs.tal_template_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_lta1 = Lta.mock("lta1.lta")
+    >>> task.tal_source_file = File.mock()
+    >>> task.tal_template_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
 
     >>> task = ConcatenateLTA()
-    >>> task.inputs.in_lta1 = Lta.mock()
-    >>> task.inputs.in_lta2 = "identity.nofile"
-    >>> task.inputs.out_file = "inv1.lta"
-    >>> task.inputs.tal_source_file = File.mock()
-    >>> task.inputs.tal_template_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_lta1 = Lta.mock()
+    >>> task.in_lta2 = "identity.nofile"
+    >>> task.out_file = "inv1.lta"
+    >>> task.tal_source_file = File.mock()
+    >>> task.tal_template_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_concatenate_lta -invert1 lta1.lta identity.nofile inv1.lta'
 
 
     >>> task = ConcatenateLTA()
-    >>> task.inputs.in_lta1 = Lta.mock()
-    >>> task.inputs.out_type = "RAS2RAS"
-    >>> task.inputs.tal_source_file = File.mock()
-    >>> task.inputs.tal_template_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_lta1 = Lta.mock()
+    >>> task.out_type = "RAS2RAS"
+    >>> task.tal_source_file = File.mock()
+    >>> task.tal_template_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_concatenate_lta -invert1 -out_type 1 lta1.lta identity.nofile inv1.lta'
 
@@ -84,13 +84,13 @@ class ConcatenateLTA(shell.Task["ConcatenateLTA.Outputs"]):
     out_type: ty.Any = shell.arg(
         help="set final LTA type", formatter="out_type_formatter"
     )
-    tal_source_file: File | None = shell.arg(
+    tal_source_file: File = shell.arg(
         help="if in_lta2 is talairach.xfm, specify source for talairach",
         argstr="-tal {tal_source_file}",
         position=-5,
         requires=["tal_template_file"],
     )
-    tal_template_file: File | None = shell.arg(
+    tal_template_file: File = shell.arg(
         help="if in_lta2 is talairach.xfm, specify template for talairach",
         argstr="{tal_template_file}",
         position=-4,

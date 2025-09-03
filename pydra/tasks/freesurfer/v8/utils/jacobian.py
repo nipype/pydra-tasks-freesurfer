@@ -21,9 +21,9 @@ class Jacobian(shell.Task["Jacobian.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.jacobian import Jacobian
 
     >>> task = Jacobian()
-    >>> task.inputs.in_origsurf = Pial.mock("lh.pial")
-    >>> task.inputs.in_mappedsurf = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_origsurf = Pial.mock("lh.pial")
+    >>> task.in_mappedsurf = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

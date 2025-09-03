@@ -42,9 +42,9 @@ class GTMSeg(shell.Task["GTMSeg.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.petsurfer.gtm_seg import GTMSeg
 
     >>> task = GTMSeg()
-    >>> task.inputs.subject_id = "subject_id"
-    >>> task.inputs.colortable = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.subject_id = "subject_id"
+    >>> task.colortable = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

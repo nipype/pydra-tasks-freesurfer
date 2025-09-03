@@ -39,12 +39,12 @@ class Label2Annot(shell.Task["Label2Annot.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.model.label_2_annot import Label2Annot
 
     >>> task = Label2Annot()
-    >>> task.inputs.hemisphere = "lh"
-    >>> task.inputs.in_labels = ["lh.aparc.label"]
-    >>> task.inputs.out_annot = "test"
-    >>> task.inputs.orig = File.mock()
-    >>> task.inputs.color_table = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.hemisphere = "lh"
+    >>> task.in_labels = ["lh.aparc.label"]
+    >>> task.out_annot = "test"
+    >>> task.orig = File.mock()
+    >>> task.color_table = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

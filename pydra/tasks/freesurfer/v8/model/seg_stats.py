@@ -25,8 +25,8 @@ def _format_arg(name, value, inputs, argstr):
             fname = _list_outputs(
                 annot=inputs["annot"],
                 segmentation_file=inputs["segmentation_file"],
-                surf_label=inputs["surf_label"],
                 summary_file=inputs["summary_file"],
+                surf_label=inputs["surf_label"],
             )[name]
         else:
             fname = value
@@ -105,8 +105,8 @@ def _gen_filename(name, inputs):
         return _list_outputs(
             annot=inputs["annot"],
             segmentation_file=inputs["segmentation_file"],
-            surf_label=inputs["surf_label"],
             summary_file=inputs["summary_file"],
+            surf_label=inputs["surf_label"],
         )[name]
     return None
 
@@ -117,8 +117,8 @@ def summary_file_default(inputs):
 
 @shell.define(
     xor=[
-        ["segmentation_file", "surf_label", "annot"],
-        ["default_color_table", "color_table_file", "gca_color_table"],
+        ["annot", "segmentation_file", "surf_label"],
+        ["color_table_file", "default_color_table", "gca_color_table"],
     ]
 )
 class SegStats(shell.Task["SegStats.Outputs"]):
@@ -131,17 +131,17 @@ class SegStats(shell.Task["SegStats.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.model.seg_stats import SegStats
 
     >>> task = SegStats()
-    >>> task.inputs.segmentation_file = File.mock()
-    >>> task.inputs.annot = ("PWS04", "lh", "aparc")
-    >>> task.inputs.summary_file = "summary.stats"
-    >>> task.inputs.partial_volume_file = File.mock()
-    >>> task.inputs.in_file = File.mock()
-    >>> task.inputs.color_table_file = File.mock()
-    >>> task.inputs.gca_color_table = File.mock()
-    >>> task.inputs.mask_file = File.mock()
-    >>> task.inputs.brainmask_file = File.mock()
-    >>> task.inputs.in_intensity = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock(".")
+    >>> task.segmentation_file = File.mock()
+    >>> task.annot = ("PWS04", "lh", "aparc")
+    >>> task.summary_file = "summary.stats"
+    >>> task.partial_volume_file = File.mock()
+    >>> task.in_file = File.mock()
+    >>> task.color_table_file = File.mock()
+    >>> task.gca_color_table = File.mock()
+    >>> task.mask_file = File.mock()
+    >>> task.brainmask_file = File.mock()
+    >>> task.in_intensity = File.mock()
+    >>> task.subjects_dir = Directory.mock(".")
     >>> task.cmdline
     'None'
 

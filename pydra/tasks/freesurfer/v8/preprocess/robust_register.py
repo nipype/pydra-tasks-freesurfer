@@ -27,7 +27,7 @@ def _format_arg(name, value, inputs, argstr):
     )
     if name in options and isinstance(value, bool):
         value = _list_outputs(
-            target_file=inputs["target_file"], source_file=inputs["source_file"]
+            source_file=inputs["source_file"], target_file=inputs["target_file"]
         )[name]
 
     return argstr.format(**inputs)
@@ -132,13 +132,13 @@ class RobustRegister(shell.Task["RobustRegister.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.robust_register import RobustRegister
 
     >>> task = RobustRegister()
-    >>> task.inputs.source_file = Nifti1.mock("structural.nii")
-    >>> task.inputs.target_file = File.mock()
-    >>> task.inputs.in_xfm_file = File.mock()
-    >>> task.inputs.auto_sens = True
-    >>> task.inputs.mask_source = File.mock()
-    >>> task.inputs.mask_target = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.source_file = Nifti1.mock("structural.nii")
+    >>> task.target_file = File.mock()
+    >>> task.in_xfm_file = File.mock()
+    >>> task.auto_sens = True
+    >>> task.mask_source = File.mock()
+    >>> task.mask_target = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

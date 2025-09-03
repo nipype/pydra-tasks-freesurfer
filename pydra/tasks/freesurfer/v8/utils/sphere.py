@@ -21,9 +21,9 @@ class Sphere(shell.Task["Sphere.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.sphere import Sphere
 
     >>> task = Sphere()
-    >>> task.inputs.in_file = Pial.mock("lh.pial")
-    >>> task.inputs.in_smoothwm = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = Pial.mock("lh.pial")
+    >>> task.in_smoothwm = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

@@ -38,8 +38,8 @@ class SegmentWM(shell.Task["SegmentWM.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.segment_wm import SegmentWM
 
     >>> task = SegmentWM()
-    >>> task.inputs.in_file = MghGz.mock("norm.mgz")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("norm.mgz")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

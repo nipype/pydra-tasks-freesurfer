@@ -52,14 +52,14 @@ class FixTopology(shell.Task["FixTopology.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.fix_topology import FixTopology
 
     >>> task = FixTopology()
-    >>> task.inputs.in_orig = Orig.mock("lh.orig" # doctest: +SKIP)
-    >>> task.inputs.in_inflated = File.mock()
-    >>> task.inputs.in_brain = File.mock()
-    >>> task.inputs.in_wm = File.mock()
-    >>> task.inputs.subject_id = "10335"
-    >>> task.inputs.ga = True
-    >>> task.inputs.sphere = Nofix.mock("lh.qsphere.nofix" # doctest: +SKIP)
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_orig = Orig.mock("lh.orig" # doctest: +SKIP)
+    >>> task.in_inflated = File.mock()
+    >>> task.in_brain = File.mock()
+    >>> task.in_wm = File.mock()
+    >>> task.subject_id = "10335"
+    >>> task.ga = True
+    >>> task.sphere = Nofix.mock("lh.qsphere.nofix" # doctest: +SKIP)
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

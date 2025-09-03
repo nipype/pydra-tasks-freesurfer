@@ -42,11 +42,11 @@ def _gen_filename(name, inputs):
         return avg_subject
     elif name == "out_file":
         return _list_outputs(
+            hemisphere=inputs["hemisphere"],
             in_average=inputs["in_average"],
             out_file=inputs["out_file"],
             subject_id=inputs["subject_id"],
             subjects_dir=inputs["subjects_dir"],
-            hemisphere=inputs["hemisphere"],
         )[name]
     else:
         return None
@@ -72,13 +72,13 @@ class SphericalAverage(shell.Task["SphericalAverage.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.model.spherical_average import SphericalAverage
 
     >>> task = SphericalAverage()
-    >>> task.inputs.out_file = "test.out"
-    >>> task.inputs.in_surf = Pial.mock("lh.pial")
-    >>> task.inputs.fname = "lh.entorhinal"
-    >>> task.inputs.subject_id = "10335"
-    >>> task.inputs.in_orig = File.mock()
-    >>> task.inputs.threshold = 5
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.out_file = "test.out"
+    >>> task.in_surf = Pial.mock("lh.pial")
+    >>> task.fname = "lh.entorhinal"
+    >>> task.subject_id = "10335"
+    >>> task.in_orig = File.mock()
+    >>> task.threshold = 5
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -119,7 +119,7 @@ class SphericalAverage(shell.Task["SphericalAverage.Outputs"]):
 
 
 def _list_outputs(
-    in_average=None, out_file=None, subject_id=None, subjects_dir=None, hemisphere=None
+    hemisphere=None, in_average=None, out_file=None, subject_id=None, subjects_dir=None
 ):
     outputs = {}
     if out_file is not attrs.NOTHING:

@@ -35,8 +35,8 @@ class TalairachQC(shell.Task["TalairachQC.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.talairach_qc import TalairachQC
 
     >>> task = TalairachQC()
-    >>> task.inputs.log_file = File.mock("dirs.txt")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.log_file = File.mock("dirs.txt")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'tal_QC_AZS dirs.txt'
 

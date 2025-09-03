@@ -263,8 +263,8 @@ def seg_ctab_callable(output_dir, inputs, stdout, stderr):
 
 @shell.define(
     xor=[
-        ["reg_identity", "regheader", "reg_file"],
-        ["default_color_table", "color_table_file"],
+        ["color_table_file", "default_color_table"],
+        ["reg_file", "reg_identity", "regheader"],
         ["save_yhat", "save_yhat_with_noise"],
     ]
 )
@@ -279,29 +279,29 @@ class GTMPVC(shell.Task["GTMPVC.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.petsurfer.gtmpvc import GTMPVC
 
     >>> task = GTMPVC()
-    >>> task.inputs.in_file = NiftiGz.mock("sub-01_ses-baseline_pet.nii.gz")
-    >>> task.inputs.psf = 4
-    >>> task.inputs.segmentation = File.mock()
-    >>> task.inputs.reg_file = Lta.mock("sub-01_ses-baseline_pet_mean_reg.lta")
-    >>> task.inputs.mask_file = File.mock()
-    >>> task.inputs.auto_mask = (1, 0.1)
-    >>> task.inputs.color_table_file = File.mock()
-    >>> task.inputs.km_hb = ["11 12 50 51"]
-    >>> task.inputs.save_input = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = NiftiGz.mock("sub-01_ses-baseline_pet.nii.gz")
+    >>> task.psf = 4
+    >>> task.segmentation = File.mock()
+    >>> task.reg_file = Lta.mock("sub-01_ses-baseline_pet_mean_reg.lta")
+    >>> task.mask_file = File.mock()
+    >>> task.auto_mask = (1, 0.1)
+    >>> task.color_table_file = File.mock()
+    >>> task.km_hb = ["11 12 50 51"]
+    >>> task.save_input = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
 
     >>> task = GTMPVC()
-    >>> task.inputs.in_file = NiftiGz.mock("sub-01_ses-baseline_pet.nii.gz")
-    >>> task.inputs.segmentation = File.mock()
-    >>> task.inputs.reg_file = Lta.mock()
-    >>> task.inputs.regheader = True
-    >>> task.inputs.mask_file = File.mock()
-    >>> task.inputs.color_table_file = File.mock()
-    >>> task.inputs.mg = (0.5, ["ROI1", "ROI2"])
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = NiftiGz.mock("sub-01_ses-baseline_pet.nii.gz")
+    >>> task.segmentation = File.mock()
+    >>> task.reg_file = Lta.mock()
+    >>> task.regheader = True
+    >>> task.mask_file = File.mock()
+    >>> task.color_table_file = File.mock()
+    >>> task.mg = (0.5, ["ROI1", "ROI2"])
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_gtmpvc --i sub-01_ses-baseline_pet.nii.gz --mg 0.5 ROI1 ROI2 --o pvc --regheader --seg gtmseg.mgz'
 

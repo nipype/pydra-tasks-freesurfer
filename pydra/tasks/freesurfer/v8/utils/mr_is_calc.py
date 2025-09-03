@@ -27,7 +27,7 @@ def out_file_callable(output_dir, inputs, stdout, stderr):
     return outputs.get("out_file")
 
 
-@shell.define(xor=[["in_float", "in_int", "in_file2"]])
+@shell.define(xor=[["in_file2", "in_float", "in_int"]])
 class MRIsCalc(shell.Task["MRIsCalc.Outputs"]):
     """
     Examples
@@ -39,10 +39,10 @@ class MRIsCalc(shell.Task["MRIsCalc.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.mr_is_calc import MRIsCalc
 
     >>> task = MRIsCalc()
-    >>> task.inputs.in_file1 = Area.mock("lh.area" # doctest: +SKIP)
-    >>> task.inputs.action = "add"
-    >>> task.inputs.in_file2 = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file1 = Area.mock("lh.area" # doctest: +SKIP)
+    >>> task.action = "add"
+    >>> task.in_file2 = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

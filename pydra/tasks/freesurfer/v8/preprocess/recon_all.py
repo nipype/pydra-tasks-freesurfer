@@ -1,7 +1,7 @@
 import attrs
 from fileformats.generic import File
 import logging
-from pydra.tasks.freesurfer.v8.nipype_ports import FreeSurferSource
+from pydra.tasks.io.v8 import FreeSurferSource
 import os
 from pydra.compose import shell
 from pydra.utils.typing import MultiInputObj
@@ -88,9 +88,9 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
     else:
         subjects_dir = _gen_subjects_dir(
             inputs=inputs["inputs"],
-            stdout=inputs["stdout"],
-            stderr=inputs["stderr"],
             output_dir=inputs["output_dir"],
+            stderr=inputs["stderr"],
+            stdout=inputs["stdout"],
         )
 
     if inputs["hemi"] is not attrs.NOTHING:
@@ -409,34 +409,34 @@ def subjects_dir_default(inputs):
 
 @shell.define(
     xor=[
-        ["mri_pretess", "expert"],
-        ["mri_mask", "expert"],
-        ["mri_em_register", "expert"],
-        ["expert", "mri_remove_neck"],
-        ["mri_fill", "expert"],
-        ["mris_make_surfaces", "expert"],
-        ["mri_ca_register", "expert"],
-        ["mri_normalize", "expert"],
-        ["expert", "mris_anatomical_stats"],
-        ["expert", "mris_inflate"],
-        ["expert", "mri_tessellate"],
-        ["expert", "mris_sphere"],
-        ["mri_segment", "expert"],
-        ["expert", "mri_segstats"],
-        ["mri_watershed", "expert"],
-        ["expert", "mri_edit_wm_with_aseg"],
-        ["mris_surf2vol", "expert"],
-        ["mri_ca_normalize", "expert"],
-        ["mris_fix_topology", "expert"],
-        ["mris_smooth", "expert"],
-        ["expert", "talairach"],
-        ["longitudinal_timepoint_id", "base_template_id", "subject_id"],
-        ["expert", "mris_register"],
-        ["mrisp_paint", "expert"],
-        ["mri_aparc2aseg", "expert"],
+        ["base_template_id", "longitudinal_timepoint_id", "subject_id"],
+        ["expert", "mri_aparc2aseg"],
         ["expert", "mri_ca_label"],
-        ["mris_ca_label", "expert"],
-        ["use_T2", "use_FLAIR"],
+        ["expert", "mri_ca_normalize"],
+        ["expert", "mri_ca_register"],
+        ["expert", "mri_edit_wm_with_aseg"],
+        ["expert", "mri_em_register"],
+        ["expert", "mri_fill"],
+        ["expert", "mri_mask"],
+        ["expert", "mri_normalize"],
+        ["expert", "mri_pretess"],
+        ["expert", "mri_remove_neck"],
+        ["expert", "mri_segment"],
+        ["expert", "mri_segstats"],
+        ["expert", "mri_tessellate"],
+        ["expert", "mri_watershed"],
+        ["expert", "mris_anatomical_stats"],
+        ["expert", "mris_ca_label"],
+        ["expert", "mris_fix_topology"],
+        ["expert", "mris_inflate"],
+        ["expert", "mris_make_surfaces"],
+        ["expert", "mris_register"],
+        ["expert", "mris_smooth"],
+        ["expert", "mris_sphere"],
+        ["expert", "mris_surf2vol"],
+        ["expert", "mrisp_paint"],
+        ["expert", "talairach"],
+        ["use_FLAIR", "use_T2"],
     ]
 )
 class ReconAll(shell.Task["ReconAll.Outputs"]):
@@ -449,62 +449,62 @@ class ReconAll(shell.Task["ReconAll.Outputs"]):
     >>> from pydra.utils.typing import MultiInputObj
 
     >>> task = ReconAll()
-    >>> task.inputs.subject_id = "foo"
-    >>> task.inputs.T2_file = File.mock()
-    >>> task.inputs.FLAIR_file = File.mock()
-    >>> task.inputs.expert = File.mock()
-    >>> task.inputs.subjects_dir = "."
-    >>> task.inputs.flags = ["-cw256", "-qcache"]
+    >>> task.subject_id = "foo"
+    >>> task.T2_file = File.mock()
+    >>> task.FLAIR_file = File.mock()
+    >>> task.expert = File.mock()
+    >>> task.subjects_dir = "."
+    >>> task.flags = ["-cw256", "-qcache"]
     >>> task.cmdline
     'recon-all -all -i structural.nii -cw256 -qcache -subjid foo -sd .'
 
 
     >>> task = ReconAll()
-    >>> task.inputs.T2_file = File.mock()
-    >>> task.inputs.FLAIR_file = File.mock()
-    >>> task.inputs.expert = File.mock()
-    >>> task.inputs.flags = []
+    >>> task.T2_file = File.mock()
+    >>> task.FLAIR_file = File.mock()
+    >>> task.expert = File.mock()
+    >>> task.flags = []
     >>> task.cmdline
     'recon-all -all -i structural.nii -hemi lh -subjid foo -sd .'
 
 
     >>> task = ReconAll()
-    >>> task.inputs.directive = "autorecon-hemi"
-    >>> task.inputs.T2_file = File.mock()
-    >>> task.inputs.FLAIR_file = File.mock()
-    >>> task.inputs.expert = File.mock()
+    >>> task.directive = "autorecon-hemi"
+    >>> task.T2_file = File.mock()
+    >>> task.FLAIR_file = File.mock()
+    >>> task.expert = File.mock()
     >>> task.cmdline
     'recon-all -autorecon-hemi lh -i structural.nii -subjid foo -sd .'
 
 
     >>> task = ReconAll()
-    >>> task.inputs.subject_id = "foo"
-    >>> task.inputs.T2_file = File.mock()
-    >>> task.inputs.FLAIR_file = File.mock()
-    >>> task.inputs.hippocampal_subfields_T1 = False
-    >>> task.inputs.hippocampal_subfields_T2 = ( "structural.nii", "test")
-    >>> task.inputs.expert = File.mock()
-    >>> task.inputs.subjects_dir = "."
+    >>> task.subject_id = "foo"
+    >>> task.T2_file = File.mock()
+    >>> task.FLAIR_file = File.mock()
+    >>> task.hippocampal_subfields_T1 = False
+    >>> task.hippocampal_subfields_T2 = ( "structural.nii", "test")
+    >>> task.expert = File.mock()
+    >>> task.subjects_dir = "."
     >>> task.cmdline
     'recon-all -all -i structural.nii -hippocampal-subfields-T2 structural.nii test -subjid foo -sd .'
 
 
     >>> task = ReconAll()
-    >>> task.inputs.directive = "all"
-    >>> task.inputs.T2_file = File.mock()
-    >>> task.inputs.FLAIR_file = File.mock()
-    >>> task.inputs.expert = File.mock()
-    >>> task.inputs.base_template_id = "sub-template"
+    >>> task.directive = "all"
+    >>> task.T2_file = File.mock()
+    >>> task.FLAIR_file = File.mock()
+    >>> task.expert = File.mock()
+    >>> task.base_template_id = "sub-template"
     >>> task.cmdline
     'None'
 
 
     >>> task = ReconAll()
-    >>> task.inputs.directive = "all"
-    >>> task.inputs.T2_file = File.mock()
-    >>> task.inputs.FLAIR_file = File.mock()
-    >>> task.inputs.expert = File.mock()
-    >>> task.inputs.longitudinal_timepoint_id = "ses-1"
+    >>> task.directive = "all"
+    >>> task.T2_file = File.mock()
+    >>> task.FLAIR_file = File.mock()
+    >>> task.expert = File.mock()
+    >>> task.longitudinal_timepoint_id = "ses-1"
     >>> task.cmdline
     'None'
 
@@ -529,12 +529,12 @@ class ReconAll(shell.Task["ReconAll.Outputs"]):
         requires=["subject_id"],
         formatter="T1_files_formatter",
     )
-    T2_file: File | None = shell.arg(
+    T2_file: File = shell.arg(
         help="Convert T2 image to orig directory",
         argstr="-T2 {T2_file}",
         requires=["subject_id"],
     )
-    FLAIR_file: File | None = shell.arg(
+    FLAIR_file: File = shell.arg(
         help="Convert FLAIR image to orig directory",
         argstr="-FLAIR {FLAIR_file}",
         requires=["subject_id"],
@@ -769,7 +769,7 @@ class ReconAll(shell.Task["ReconAll.Outputs"]):
         )
 
 
-def _gen_subjects_dir(inputs=None, stdout=None, stderr=None, output_dir=None):
+def _gen_subjects_dir(inputs=None, output_dir=None, stderr=None, stdout=None):
     return output_dir
 
 

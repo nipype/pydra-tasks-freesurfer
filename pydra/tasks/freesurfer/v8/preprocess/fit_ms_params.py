@@ -43,9 +43,9 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
         out_dir = _gen_filename(
             "out_dir",
             inputs=inputs["inputs"],
-            stdout=inputs["stdout"],
-            stderr=inputs["stderr"],
             output_dir=inputs["output_dir"],
+            stderr=inputs["stderr"],
+            stdout=inputs["stdout"],
         )
     else:
         out_dir = inputs["out_dir"]
@@ -97,8 +97,8 @@ class FitMSParams(shell.Task["FitMSParams.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.fit_ms_params import FitMSParams
 
     >>> task = FitMSParams()
-    >>> task.inputs.in_files = [MghGz.mock("flash_05.mgz"), MghGz.mock("flash_30.mgz")]
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_files = [MghGz.mock("flash_05.mgz"), MghGz.mock("flash_30.mgz")]
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

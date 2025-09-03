@@ -15,11 +15,11 @@ logger = logging.getLogger(__name__)
 def _gen_filename(name, inputs):
     if name == "transformed_file":
         return _get_outfile(
-            target_file=inputs["target_file"],
-            transformed_file=inputs["transformed_file"],
             fs_target=inputs["fs_target"],
             inverse=inputs["inverse"],
             source_file=inputs["source_file"],
+            target_file=inputs["target_file"],
+            transformed_file=inputs["transformed_file"],
         )
     return None
 
@@ -30,17 +30,17 @@ def transformed_file_default(inputs):
 
 @shell.define(
     xor=[
+        ["fs_target", "tal", "target_file"],
         [
-            "subject",
-            "reg_file",
-            "lta_file",
-            "reg_header",
-            "mni_152_reg",
-            "xfm_reg_file",
-            "lta_inv_file",
             "fsl_reg_file",
+            "lta_file",
+            "lta_inv_file",
+            "mni_152_reg",
+            "reg_file",
+            "reg_header",
+            "subject",
+            "xfm_reg_file",
         ],
-        ["fs_target", "target_file", "tal"],
     ]
 )
 class ApplyVolTransform(shell.Task["ApplyVolTransform.Outputs"]):
@@ -54,16 +54,16 @@ class ApplyVolTransform(shell.Task["ApplyVolTransform.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.apply_vol_transform import ApplyVolTransform
 
     >>> task = ApplyVolTransform()
-    >>> task.inputs.source_file = Nifti1.mock("structural.nii")
-    >>> task.inputs.transformed_file = "struct_warped.nii"
-    >>> task.inputs.target_file = File.mock()
-    >>> task.inputs.reg_file = File.mock()
-    >>> task.inputs.lta_file = File.mock()
-    >>> task.inputs.lta_inv_file = File.mock()
-    >>> task.inputs.fsl_reg_file = File.mock()
-    >>> task.inputs.xfm_reg_file = File.mock()
-    >>> task.inputs.m3z_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.source_file = Nifti1.mock("structural.nii")
+    >>> task.transformed_file = "struct_warped.nii"
+    >>> task.target_file = File.mock()
+    >>> task.reg_file = File.mock()
+    >>> task.lta_file = File.mock()
+    >>> task.lta_inv_file = File.mock()
+    >>> task.fsl_reg_file = File.mock()
+    >>> task.xfm_reg_file = File.mock()
+    >>> task.m3z_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_vol2vol --fstarg --reg register.dat --mov structural.nii --o struct_warped.nii'
 
@@ -145,11 +145,11 @@ class ApplyVolTransform(shell.Task["ApplyVolTransform.Outputs"]):
 
 
 def _get_outfile(
-    target_file=None,
-    transformed_file=None,
     fs_target=None,
     inverse=None,
     source_file=None,
+    target_file=None,
+    transformed_file=None,
 ):
     outfile = transformed_file
     if outfile is attrs.NOTHING:

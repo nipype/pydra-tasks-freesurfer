@@ -7,7 +7,7 @@ import typing as ty
 logger = logging.getLogger(__name__)
 
 
-@shell.define(xor=[["seq_config", "run_info", "config"]])
+@shell.define(xor=[["config", "run_info", "seq_config"]])
 class UnpackSDICOMDir(shell.Task["UnpackSDICOMDir.Outputs"]):
     """
     Examples
@@ -17,14 +17,14 @@ class UnpackSDICOMDir(shell.Task["UnpackSDICOMDir.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.unpack_sdicom_dir import UnpackSDICOMDir
 
     >>> task = UnpackSDICOMDir()
-    >>> task.inputs.source_dir = Directory.mock(".")
-    >>> task.inputs.output_dir = Directory.mock()
-    >>> task.inputs.run_info = (5, "mprage", "nii", "struct")
-    >>> task.inputs.config = File.mock()
-    >>> task.inputs.seq_config = File.mock()
-    >>> task.inputs.scan_only = File.mock()
-    >>> task.inputs.log_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.source_dir = Directory.mock(".")
+    >>> task.output_dir = Directory.mock()
+    >>> task.run_info = (5, "mprage", "nii", "struct")
+    >>> task.config = File.mock()
+    >>> task.seq_config = File.mock()
+    >>> task.scan_only = File.mock()
+    >>> task.log_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'unpacksdcmdir -generic -targ . -run 5 mprage nii struct -src .'
 

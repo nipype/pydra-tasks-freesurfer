@@ -111,9 +111,9 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
             out_type=inputs["out_type"],
             source_file=inputs["source_file"],
             inputs=inputs["inputs"],
-            stdout=inputs["stdout"],
-            stderr=inputs["stderr"],
             output_dir=inputs["output_dir"],
+            stderr=inputs["stderr"],
+            stdout=inputs["stdout"],
         )
     )
     hitsfile = inputs["hits_file"]
@@ -126,9 +126,9 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
                 out_type=inputs["out_type"],
                 source_file=inputs["source_file"],
                 inputs=inputs["inputs"],
-                stdout=inputs["stdout"],
-                stderr=inputs["stderr"],
                 output_dir=inputs["output_dir"],
+                stderr=inputs["stderr"],
+                stdout=inputs["stdout"],
             )
     voxfile = inputs["vox_file"]
     if voxfile is not attrs.NOTHING:
@@ -161,11 +161,11 @@ def vox_file_callable(output_dir, inputs, stdout, stderr):
 def _gen_filename(name, inputs):
     if name == "out_file":
         return _list_outputs(
+            hemi=inputs["hemi"],
             hits_file=inputs["hits_file"],
             out_type=inputs["out_type"],
-            vox_file=inputs["vox_file"],
-            hemi=inputs["hemi"],
             source_file=inputs["source_file"],
+            vox_file=inputs["vox_file"],
         )[name]
     return None
 
@@ -176,9 +176,9 @@ def out_file_default(inputs):
 
 @shell.define(
     xor=[
-        ["reg_header", "reg_file", "mni152reg"],
-        ["reshape", "no_reshape"],
         ["cortex_mask", "mask_label"],
+        ["mni152reg", "reg_file", "reg_header"],
+        ["no_reshape", "reshape"],
         ["projection_stem", "sampling_method"],
     ]
 )
@@ -193,14 +193,14 @@ class SampleToSurface(shell.Task["SampleToSurface.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.sample_to_surface import SampleToSurface
 
     >>> task = SampleToSurface()
-    >>> task.inputs.source_file = NiftiGz.mock("cope1.nii.gz")
-    >>> task.inputs.reference_file = File.mock()
-    >>> task.inputs.hemi = "lh"
-    >>> task.inputs.reg_file = File.mock()
-    >>> task.inputs.sampling_method = "average"
-    >>> task.inputs.sampling_units = "frac"
-    >>> task.inputs.mask_label = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.source_file = NiftiGz.mock("cope1.nii.gz")
+    >>> task.reference_file = File.mock()
+    >>> task.hemi = "lh"
+    >>> task.reg_file = File.mock()
+    >>> task.sampling_method = "average"
+    >>> task.sampling_units = "frac"
+    >>> task.mask_label = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_vol2surf --hemi lh --o ...lh.cope1.mgz --reg register.dat --projfrac-avg 1.000 --mov cope1.nii.gz'
 
@@ -344,9 +344,9 @@ def _get_outfilename(
     out_type=None,
     source_file=None,
     inputs=None,
-    stdout=None,
-    stderr=None,
     output_dir=None,
+    stderr=None,
+    stdout=None,
 ):
     self_dict = {}
     outfile = getattr(self_dict["inputs"], opt)

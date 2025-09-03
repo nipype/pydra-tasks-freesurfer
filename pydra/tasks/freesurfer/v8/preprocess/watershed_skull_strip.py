@@ -40,10 +40,10 @@ class WatershedSkullStrip(shell.Task["WatershedSkullStrip.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.watershed_skull_strip import WatershedSkullStrip
 
     >>> task = WatershedSkullStrip()
-    >>> task.inputs.in_file = MghGz.mock("T1.mgz")
-    >>> task.inputs.brain_atlas = File.mock()
-    >>> task.inputs.transform = Lta.mock("transforms/talairach_with_skull.lta")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("T1.mgz")
+    >>> task.brain_atlas = File.mock()
+    >>> task.transform = Lta.mock("transforms/talairach_with_skull.lta")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

@@ -17,9 +17,9 @@ def _format_arg(opt, val, inputs, argstr):
 
     if opt in ("out_reg_file", "out_lta_file", "out_params_file") and val is True:
         val = _list_outputs(
+            out_lta_file=inputs["out_lta_file"],
             out_params_file=inputs["out_params_file"],
             out_reg_file=inputs["out_reg_file"],
-            out_lta_file=inputs["out_lta_file"],
         )[opt]
     elif opt == "reference_mask" and val is False:
         return "--no-ref-mask"
@@ -83,8 +83,8 @@ def out_params_file_callable(output_dir, inputs, stdout, stderr):
 @shell.define(
     xor=[
         ["brute_force_limit", "no_brute_force"],
-        ["reference_file", "subject_id"],
         ["brute_force_samples", "no_brute_force"],
+        ["reference_file", "subject_id"],
     ]
 )
 class MRICoreg(shell.Task["MRICoreg.Outputs"]):
@@ -97,36 +97,36 @@ class MRICoreg(shell.Task["MRICoreg.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.registration.mri_coreg import MRICoreg
 
     >>> task = MRICoreg()
-    >>> task.inputs.source_file = Nifti1.mock("moving1.nii")
-    >>> task.inputs.reference_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock(".")
+    >>> task.source_file = Nifti1.mock("moving1.nii")
+    >>> task.reference_file = File.mock()
+    >>> task.subjects_dir = Directory.mock(".")
     >>> task.cmdline
     'None'
 
 
     >>> task = MRICoreg()
-    >>> task.inputs.source_file = Nifti1.mock("moving1.nii")
-    >>> task.inputs.reference_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
-    >>> task.inputs.subject_id = "fsaverage"
+    >>> task.source_file = Nifti1.mock("moving1.nii")
+    >>> task.reference_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
+    >>> task.subject_id = "fsaverage"
     >>> task.cmdline
     'mri_coreg --s fsaverage --no-ref-mask --lta .../registration.lta --mov moving1.nii --sd .'
 
 
     >>> task = MRICoreg()
-    >>> task.inputs.source_file = Nifti1.mock()
-    >>> task.inputs.reference_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
-    >>> task.inputs.sep = [4]
+    >>> task.source_file = Nifti1.mock()
+    >>> task.reference_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
+    >>> task.sep = [4]
     >>> task.cmdline
     'mri_coreg --s fsaverage --no-ref-mask --lta .../registration.lta --sep 4 --mov moving1.nii --sd .'
 
 
     >>> task = MRICoreg()
-    >>> task.inputs.source_file = Nifti1.mock()
-    >>> task.inputs.reference_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
-    >>> task.inputs.sep = [4, 5]
+    >>> task.source_file = Nifti1.mock()
+    >>> task.reference_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
+    >>> task.sep = [4, 5]
     >>> task.cmdline
     'mri_coreg --s fsaverage --no-ref-mask --lta .../registration.lta --sep 4 --sep 5 --mov moving1.nii --sd .'
 

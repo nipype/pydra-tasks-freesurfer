@@ -21,8 +21,8 @@ class MRIsCombine(shell.Task["MRIsCombine.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.mr_is_combine import MRIsCombine
 
     >>> task = MRIsCombine()
-    >>> task.inputs.in_files = [Pial.mock("lh.pial"), Pial.mock("rh.pial")]
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_files = [Pial.mock("lh.pial"), Pial.mock("rh.pial")]
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mris_convert --combinesurfs lh.pial rh.pial bh.pial'
 

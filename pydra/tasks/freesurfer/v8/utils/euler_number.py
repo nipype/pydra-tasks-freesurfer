@@ -42,8 +42,8 @@ class EulerNumber(shell.Task["EulerNumber.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.euler_number import EulerNumber
 
     >>> task = EulerNumber()
-    >>> task.inputs.in_file = Pial.mock("lh.pial")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = Pial.mock("lh.pial")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

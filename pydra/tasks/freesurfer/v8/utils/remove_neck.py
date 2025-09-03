@@ -23,10 +23,10 @@ class RemoveNeck(shell.Task["RemoveNeck.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.remove_neck import RemoveNeck
 
     >>> task = RemoveNeck()
-    >>> task.inputs.in_file = MghGz.mock("norm.mgz")
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.template = TextMatrix.mock("trans.mat")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("norm.mgz")
+    >>> task.transform = File.mock()
+    >>> task.template = TextMatrix.mock("trans.mat")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_remove_neck norm.mgz trans.mat trans.mat norm_noneck.mgz'
 

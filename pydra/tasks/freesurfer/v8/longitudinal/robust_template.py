@@ -22,10 +22,10 @@ def _format_arg(name, value, inputs, argstr):
         return argstr.format(**{name: {"mean": 0, "median": 1}[value]})
     if name in ("transform_outputs", "scaled_intensity_outputs"):
         value = _list_outputs(
-            scaled_intensity_outputs=inputs["scaled_intensity_outputs"],
             in_files=inputs["in_files"],
-            transform_outputs=inputs["transform_outputs"],
             out_file=inputs["out_file"],
+            scaled_intensity_outputs=inputs["scaled_intensity_outputs"],
+            transform_outputs=inputs["transform_outputs"],
         )[name]
 
     return argstr.format(**inputs)
@@ -91,26 +91,26 @@ class RobustTemplate(shell.Task["RobustTemplate.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.longitudinal.robust_template import RobustTemplate
 
     >>> task = RobustTemplate()
-    >>> task.inputs.in_files = [Nifti1.mock("structural.nii"), Nifti1.mock("functional.nii")]
-    >>> task.inputs.out_file = "T1.nii"
-    >>> task.inputs.subsample_threshold = 200
-    >>> task.inputs.average_metric = "mean"
-    >>> task.inputs.fixed_timepoint = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_files = [Nifti1.mock("structural.nii"), Nifti1.mock("functional.nii")]
+    >>> task.out_file = "T1.nii"
+    >>> task.subsample_threshold = 200
+    >>> task.average_metric = "mean"
+    >>> task.fixed_timepoint = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
 
     >>> task = RobustTemplate()
-    >>> task.inputs.transform_outputs = ["structural.lta", "functional.lta"]
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.transform_outputs = ["structural.lta", "functional.lta"]
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
 
     >>> task = RobustTemplate()
-    >>> task.inputs.transform_outputs = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.transform_outputs = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

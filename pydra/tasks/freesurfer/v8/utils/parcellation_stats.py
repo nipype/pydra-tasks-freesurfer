@@ -16,14 +16,14 @@ logger = logging.getLogger(__name__)
 def _gen_filename(name, inputs):
     if name in ["out_table", "out_color"]:
         return _list_outputs(
-            out_table=inputs["out_table"],
-            subject_id=inputs["subject_id"],
-            surface=inputs["surface"],
+            hemisphere=inputs["hemisphere"],
+            in_annotation=inputs["in_annotation"],
             in_label=inputs["in_label"],
             out_color=inputs["out_color"],
-            in_annotation=inputs["in_annotation"],
+            out_table=inputs["out_table"],
+            subject_id=inputs["subject_id"],
             subjects_dir=inputs["subjects_dir"],
-            hemisphere=inputs["hemisphere"],
+            surface=inputs["surface"],
         )[name]
     return None
 
@@ -38,9 +38,9 @@ def out_table_default(inputs):
 
 @shell.define(
     xor=[
-        ["out_color", "in_annotation", "in_label"],
         ["in_annotation", "in_label"],
-        ["out_color", "in_label"],
+        ["in_annotatoin", "in_label", "out_color"],
+        ["in_label", "out_color"],
     ]
 )
 class ParcellationStats(shell.Task["ParcellationStats.Outputs"]):
@@ -56,24 +56,24 @@ class ParcellationStats(shell.Task["ParcellationStats.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.parcellation_stats import ParcellationStats
 
     >>> task = ParcellationStats()
-    >>> task.inputs.subject_id = "10335"
-    >>> task.inputs.wm = MghGz.mock("./../mri/wm.mgz" # doctest: +SKIP)
-    >>> task.inputs.lh_white = File.mock()
-    >>> task.inputs.rh_white = White.mock("rh.white" # doctest: +SKIP)
-    >>> task.inputs.lh_pial = File.mock()
-    >>> task.inputs.rh_pial = Pial.mock("lh.pial" # doctest: +SKIP)
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.thickness = File.mock()
-    >>> task.inputs.brainmask = MghGz.mock("./../mri/brainmask.mgz" # doctest: +SKIP)
-    >>> task.inputs.aseg = File.mock()
-    >>> task.inputs.ribbon = MghGz.mock("./../mri/ribbon.mgz" # doctest: +SKIP)
-    >>> task.inputs.cortex_label = File.mock()
-    >>> task.inputs.surface = "white"
-    >>> task.inputs.in_cortex = File.mock()
-    >>> task.inputs.in_annotation = File.mock()
-    >>> task.inputs.in_label = File.mock()
-    >>> task.inputs.out_color = "test.ctab"
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.subject_id = "10335"
+    >>> task.wm = MghGz.mock("./../mri/wm.mgz" # doctest: +SKIP)
+    >>> task.lh_white = File.mock()
+    >>> task.rh_white = White.mock("rh.white" # doctest: +SKIP)
+    >>> task.lh_pial = File.mock()
+    >>> task.rh_pial = Pial.mock("lh.pial" # doctest: +SKIP)
+    >>> task.transform = File.mock()
+    >>> task.thickness = File.mock()
+    >>> task.brainmask = MghGz.mock("./../mri/brainmask.mgz" # doctest: +SKIP)
+    >>> task.aseg = File.mock()
+    >>> task.ribbon = MghGz.mock("./../mri/ribbon.mgz" # doctest: +SKIP)
+    >>> task.cortex_label = File.mock()
+    >>> task.surface = "white"
+    >>> task.in_cortex = File.mock()
+    >>> task.in_annotation = File.mock()
+    >>> task.in_label = File.mock()
+    >>> task.out_color = "test.ctab"
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -131,13 +131,13 @@ class ParcellationStats(shell.Task["ParcellationStats.Outputs"]):
     subjects_dir: Directory = shell.arg(help="subjects directory")
 
     class Outputs(shell.Outputs):
-        out_table: File | None = shell.outarg(
+        out_table: Path = shell.outarg(
             help="Table output to tablefile",
             argstr="-f {out_table}",
             requires=["tabular_output"],
             path_template="out_table",
         )
-        out_color: File | None = shell.outarg(
+        out_color: Path | None = shell.outarg(
             help="Output annotation files's colortable to text file",
             argstr="-c {out_color}",
             path_template='"test.ctab"',
@@ -145,14 +145,14 @@ class ParcellationStats(shell.Task["ParcellationStats.Outputs"]):
 
 
 def _list_outputs(
-    out_table=None,
-    subject_id=None,
-    surface=None,
+    hemisphere=None,
+    in_annotation=None,
     in_label=None,
     out_color=None,
-    in_annotation=None,
+    out_table=None,
+    subject_id=None,
     subjects_dir=None,
-    hemisphere=None,
+    surface=None,
 ):
     outputs = {}
     if out_table is not attrs.NOTHING:

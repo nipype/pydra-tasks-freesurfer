@@ -22,10 +22,10 @@ class MRIPretess(shell.Task["MRIPretess.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.mri_pretess import MRIPretess
 
     >>> task = MRIPretess()
-    >>> task.inputs.in_filled = MghGz.mock("wm.mgz")
-    >>> task.inputs.in_norm = File.mock()
-    >>> task.inputs.nocorners = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_filled = MghGz.mock("wm.mgz")
+    >>> task.in_norm = File.mock()
+    >>> task.nocorners = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

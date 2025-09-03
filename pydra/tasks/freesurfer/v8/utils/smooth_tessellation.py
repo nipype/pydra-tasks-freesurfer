@@ -19,9 +19,9 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
         in_file=inputs["in_file"],
         out_file=inputs["out_file"],
         inputs=inputs["inputs"],
-        stdout=inputs["stdout"],
-        stderr=inputs["stderr"],
         output_dir=inputs["output_dir"],
+        stderr=inputs["stderr"],
+        stdout=inputs["stdout"],
     )
     return outputs
 
@@ -116,7 +116,7 @@ class SmoothTessellation(shell.Task["SmoothTessellation.Outputs"]):
 
 
 def _gen_outfilename(
-    in_file=None, out_file=None, inputs=None, stdout=None, stderr=None, output_dir=None
+    in_file=None, out_file=None, inputs=None, output_dir=None, stderr=None, stdout=None
 ):
     if out_file is not attrs.NOTHING:
         return os.path.abspath(out_file)

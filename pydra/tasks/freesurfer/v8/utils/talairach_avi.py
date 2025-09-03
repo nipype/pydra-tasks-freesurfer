@@ -58,8 +58,8 @@ class TalairachAVI(shell.Task["TalairachAVI.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.talairach_avi import TalairachAVI
 
     >>> task = TalairachAVI()
-    >>> task.inputs.in_file = MghGz.mock("norm.mgz")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("norm.mgz")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'talairach_avi --i norm.mgz --xfm trans.mat'
 

@@ -21,11 +21,11 @@ class MNIBiasCorrection(shell.Task["MNIBiasCorrection.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.mni_bias_correction import MNIBiasCorrection
 
     >>> task = MNIBiasCorrection()
-    >>> task.inputs.in_file = MghGz.mock("norm.mgz")
-    >>> task.inputs.protocol_iterations = 1000
-    >>> task.inputs.mask = File.mock()
-    >>> task.inputs.transform = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("norm.mgz")
+    >>> task.protocol_iterations = 1000
+    >>> task.mask = File.mock()
+    >>> task.transform = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

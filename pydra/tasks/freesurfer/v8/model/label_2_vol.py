@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 def _gen_filename(name, inputs):
     if name == "vol_label_file":
         return _list_outputs(
-            vol_label_file=inputs["vol_label_file"], aparc_aseg=inputs["aparc_aseg"]
+            aparc_aseg=inputs["aparc_aseg"], vol_label_file=inputs["vol_label_file"]
         )[name]
     return None
 
@@ -28,8 +28,8 @@ def vol_label_file_default(inputs):
 
 @shell.define(
     xor=[
-        ["aparc_aseg", "label_file", "annot_file", "seg_file"],
-        ["reg_header", "identity", "reg_file"],
+        ["annot_file", "aparc_aseg", "label_file", "seg_file"],
+        ["identity", "reg_file", "reg_header"],
     ]
 )
 class Label2Vol(shell.Task["Label2Vol.Outputs"]):
@@ -44,17 +44,17 @@ class Label2Vol(shell.Task["Label2Vol.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.model.label_2_vol import Label2Vol
 
     >>> task = Label2Vol()
-    >>> task.inputs.label_file = [Label.mock("c"), Label.mock("o"), Label.mock("r"), Label.mock("t"), Label.mock("e"), Label.mock("x"), Label.mock("."), Label.mock("l"), Label.mock("a"), Label.mock("b"), Label.mock("e"), Label.mock("l")]
-    >>> task.inputs.annot_file = File.mock()
-    >>> task.inputs.seg_file = File.mock()
-    >>> task.inputs.template_file = Nifti1.mock("structural.nii")
-    >>> task.inputs.reg_file = Dat.mock("register.dat")
-    >>> task.inputs.reg_header = File.mock()
-    >>> task.inputs.fill_thresh = 0.5
-    >>> task.inputs.vol_label_file = "foo_out.nii"
-    >>> task.inputs.label_hit_file = File.mock()
-    >>> task.inputs.map_label_stat = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.label_file = [Label.mock("c"), Label.mock("o"), Label.mock("r"), Label.mock("t"), Label.mock("e"), Label.mock("x"), Label.mock("."), Label.mock("l"), Label.mock("a"), Label.mock("b"), Label.mock("e"), Label.mock("l")]
+    >>> task.annot_file = File.mock()
+    >>> task.seg_file = File.mock()
+    >>> task.template_file = Nifti1.mock("structural.nii")
+    >>> task.reg_file = Dat.mock("register.dat")
+    >>> task.reg_header = File.mock()
+    >>> task.fill_thresh = 0.5
+    >>> task.vol_label_file = "foo_out.nii"
+    >>> task.label_hit_file = File.mock()
+    >>> task.map_label_stat = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -68,7 +68,7 @@ class Label2Vol(shell.Task["Label2Vol.Outputs"]):
     annot_file: File | None = shell.arg(
         help="surface annotation file",
         argstr="--annot {annot_file}",
-        requires=["subject_id", "hemi"],
+        requires=("subject_id", "hemi"),
     )
     seg_file: File | None = shell.arg(
         help="segmentation file", argstr="--seg {seg_file}"
@@ -99,7 +99,7 @@ class Label2Vol(shell.Task["Label2Vol.Outputs"]):
     proj: ty.Any = shell.arg(
         help="project along surface normal",
         argstr="--proj {proj[0]} {proj[1]} {proj[2]} {proj[3]}",
-        requires=["subject_id", "hemi"],
+        requires=("subject_id", "hemi"),
     )
     subject_id: str = shell.arg(help="subject id", argstr="--subject {subject_id}")
     hemi: ty.Any = shell.arg(help="hemisphere to use lh or rh", argstr="--hemi {hemi}")
@@ -128,7 +128,7 @@ class Label2Vol(shell.Task["Label2Vol.Outputs"]):
         )
 
 
-def _list_outputs(vol_label_file=None, aparc_aseg=None):
+def _list_outputs(aparc_aseg=None, vol_label_file=None):
     self_dict = {}
     outputs = {}
     outfile = vol_label_file

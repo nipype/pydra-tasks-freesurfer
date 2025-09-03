@@ -28,3 +28,6 @@ import yaml
 
 
 logger = logging.getLogger(__name__)
+
+
+config = NipypeConfig()

@@ -41,14 +41,14 @@ class CALabel(shell.Task["CALabel.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.ca_label import CALabel
 
     >>> task = CALabel()
-    >>> task.inputs.in_file = MghGz.mock("norm.mgz")
-    >>> task.inputs.transform = TextMatrix.mock("trans.mat")
-    >>> task.inputs.template = File.mock()
-    >>> task.inputs.in_vol = File.mock()
-    >>> task.inputs.intensities = File.mock()
-    >>> task.inputs.label = File.mock()
-    >>> task.inputs.aseg = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("norm.mgz")
+    >>> task.transform = TextMatrix.mock("trans.mat")
+    >>> task.template = File.mock()
+    >>> task.in_vol = File.mock()
+    >>> task.intensities = File.mock()
+    >>> task.label = File.mock()
+    >>> task.aseg = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

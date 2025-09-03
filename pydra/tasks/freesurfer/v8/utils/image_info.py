@@ -35,9 +35,9 @@ def aggregate_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
             field,
             ", ",
             inputs=inputs["inputs"],
-            stdout=inputs["stdout"],
-            stderr=inputs["stderr"],
             output_dir=inputs["output_dir"],
+            stderr=inputs["stderr"],
+            stdout=inputs["stdout"],
         )
         if fieldval.endswith(" msec"):
             fieldval = fieldval[:-5]
@@ -47,9 +47,9 @@ def aggregate_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
         info,
         "voxel sizes",
         inputs=inputs["inputs"],
-        stdout=inputs["stdout"],
-        stderr=inputs["stderr"],
         output_dir=inputs["output_dir"],
+        stderr=inputs["stderr"],
+        stdout=inputs["stdout"],
     )
     vox = tuple(vox.split(", "))
     outputs["vox_sizes"] = vox
@@ -57,9 +57,9 @@ def aggregate_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
         info,
         "dimensions",
         inputs=inputs["inputs"],
-        stdout=inputs["stdout"],
-        stderr=inputs["stderr"],
         output_dir=inputs["output_dir"],
+        stderr=inputs["stderr"],
+        stdout=inputs["stdout"],
     )
     dim = tuple(int(d) for d in dim.split(" x "))
     outputs["dimensions"] = dim
@@ -68,17 +68,17 @@ def aggregate_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
         info,
         "Orientation",
         inputs=inputs["inputs"],
-        stdout=inputs["stdout"],
-        stderr=inputs["stderr"],
         output_dir=inputs["output_dir"],
+        stderr=inputs["stderr"],
+        stdout=inputs["stdout"],
     )
     outputs["ph_enc_dir"] = info_regexp(
         info,
         "PhEncDir",
         inputs=inputs["inputs"],
-        stdout=inputs["stdout"],
-        stderr=inputs["stderr"],
         output_dir=inputs["output_dir"],
+        stderr=inputs["stderr"],
+        stdout=inputs["stdout"],
     )
 
     ftype, dtype = re.findall(r"%s\s*:\s+(.+?)\n" % "type", info)

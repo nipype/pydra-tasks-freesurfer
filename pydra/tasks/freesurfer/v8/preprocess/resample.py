@@ -36,9 +36,9 @@ class Resample(shell.Task["Resample.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.resample import Resample
 
     >>> task = Resample()
-    >>> task.inputs.in_file = Nifti1.mock("structural.nii")
-    >>> task.inputs.voxel_size = (2.1, 2.1, 2.1)
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = Nifti1.mock("structural.nii")
+    >>> task.voxel_size = (2.1, 2.1, 2.1)
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'mri_convert -vs 2.10 2.10 2.10 -i structural.nii -o resampled.nii'
 

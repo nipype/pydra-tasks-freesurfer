@@ -21,11 +21,11 @@ class RelabelHypointensities(shell.Task["RelabelHypointensities.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.relabel_hypointensities import RelabelHypointensities
 
     >>> task = RelabelHypointensities()
-    >>> task.inputs.lh_white = Pial.mock("lh.pial")
-    >>> task.inputs.rh_white = File.mock()
-    >>> task.inputs.aseg = File.mock()
-    >>> task.inputs.surf_directory = Directory.mock(".")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.lh_white = Pial.mock("lh.pial")
+    >>> task.rh_white = File.mock()
+    >>> task.aseg = File.mock()
+    >>> task.surf_directory = Directory.mock(".")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

@@ -31,12 +31,12 @@ def aggregate_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
     needed_outputs = ["out_rotation"]
 
     predicted_outputs = _list_outputs(
-        out_rotation=inputs["out_rotation"],
         out_file=inputs["out_file"],
+        out_rotation=inputs["out_rotation"],
         inputs=inputs["inputs"],
-        stdout=inputs["stdout"],
-        stderr=inputs["stderr"],
         output_dir=inputs["output_dir"],
+        stderr=inputs["stderr"],
+        stdout=inputs["stdout"],
     )
     for name in ["out_file", "out_rotation"]:
         out_file = predicted_outputs[name]
@@ -87,10 +87,10 @@ class SegmentCC(shell.Task["SegmentCC.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.segment_cc import SegmentCC
 
     >>> task = SegmentCC()
-    >>> task.inputs.in_file = MghGz.mock("aseg.mgz")
-    >>> task.inputs.in_norm = File.mock()
-    >>> task.inputs.out_rotation = "cc.lta"
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("aseg.mgz")
+    >>> task.in_norm = File.mock()
+    >>> task.out_rotation = "cc.lta"
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

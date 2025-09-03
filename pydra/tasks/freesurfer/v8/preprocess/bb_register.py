@@ -126,7 +126,7 @@ def out_reg_file_default(inputs):
     return _gen_filename("out_reg_file", inputs=inputs)
 
 
-@shell.define(xor=[["reg_middle_frame", "reg_frame"], ["init_reg_file", "init"]])
+@shell.define(xor=[["init", "init_reg_file"], ["reg_frame", "reg_middle_frame"]])
 class BBRegister(shell.Task["BBRegister.Outputs"]):
     """
     Examples
@@ -138,13 +138,13 @@ class BBRegister(shell.Task["BBRegister.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.bb_register import BBRegister
 
     >>> task = BBRegister()
-    >>> task.inputs.init = "header"
-    >>> task.inputs.init_reg_file = File.mock()
-    >>> task.inputs.subject_id = "me"
-    >>> task.inputs.source_file = Nifti1.mock("structural.nii")
-    >>> task.inputs.contrast_type = "t2"
-    >>> task.inputs.intermediate_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.init = "header"
+    >>> task.init_reg_file = File.mock()
+    >>> task.subject_id = "me"
+    >>> task.source_file = Nifti1.mock("structural.nii")
+    >>> task.contrast_type = "t2"
+    >>> task.intermediate_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'bbregister --t2 --init-header --reg structural_bbreg_me.dat --mov structural.nii --s me'
 

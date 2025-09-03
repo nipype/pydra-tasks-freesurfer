@@ -22,14 +22,14 @@ class Label2Label(shell.Task["Label2Label.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.model.label_2_label import Label2Label
 
     >>> task = Label2Label()
-    >>> task.inputs.hemisphere = "lh"
-    >>> task.inputs.sphere_reg = Pial.mock("lh.pial")
-    >>> task.inputs.white = File.mock()
-    >>> task.inputs.source_sphere_reg = File.mock()
-    >>> task.inputs.source_white = Pial.mock("lh.pial")
-    >>> task.inputs.source_label = File.mock()
-    >>> task.inputs.source_subject = "fsaverage"
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.hemisphere = "lh"
+    >>> task.sphere_reg = Pial.mock("lh.pial")
+    >>> task.white = File.mock()
+    >>> task.source_sphere_reg = File.mock()
+    >>> task.source_white = Pial.mock("lh.pial")
+    >>> task.source_label = File.mock()
+    >>> task.source_subject = "fsaverage"
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

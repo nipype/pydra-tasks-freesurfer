@@ -41,12 +41,12 @@ class CANormalize(shell.Task["CANormalize.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.preprocess.ca_normalize import CANormalize
 
     >>> task = CANormalize()
-    >>> task.inputs.in_file = MghGz.mock("T1.mgz")
-    >>> task.inputs.atlas = File.mock()
-    >>> task.inputs.transform = TextMatrix.mock("trans.mat" # in practice use .lta transforms)
-    >>> task.inputs.mask = File.mock()
-    >>> task.inputs.long_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("T1.mgz")
+    >>> task.atlas = File.mock()
+    >>> task.transform = TextMatrix.mock("trans.mat" # in practice use .lta transforms)
+    >>> task.mask = File.mock()
+    >>> task.long_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

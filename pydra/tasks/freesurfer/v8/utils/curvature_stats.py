@@ -34,13 +34,13 @@ class CurvatureStats(shell.Task["CurvatureStats.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.curvature_stats import CurvatureStats
 
     >>> task = CurvatureStats()
-    >>> task.inputs.surface = File.mock()
-    >>> task.inputs.curvfile1 = File.mock()
-    >>> task.inputs.curvfile2 = Pial.mock("lh.pial")
-    >>> task.inputs.hemisphere = "lh"
-    >>> task.inputs.out_file = "lh.curv.stats"
-    >>> task.inputs.min_max = True
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.surface = File.mock()
+    >>> task.curvfile1 = File.mock()
+    >>> task.curvfile2 = Pial.mock("lh.pial")
+    >>> task.hemisphere = "lh"
+    >>> task.out_file = "lh.curv.stats"
+    >>> task.min_max = True
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

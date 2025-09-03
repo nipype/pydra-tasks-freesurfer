@@ -19,6 +19,7 @@ from .nipype_ports import (
     _cifs_table,
     _generate_cifs_table,
     _parse_mount_table,
+    config,
     copyfile,
     ensure_list,
     fmlogger,

@@ -15,10 +15,10 @@ logger = logging.getLogger(__name__)
 def _gen_filename(name, inputs):
     if name == "out_file":
         return _list_outputs(
-            in_file=inputs["in_file"],
             fwhm=inputs["fwhm"],
-            smooth_iters=inputs["smooth_iters"],
+            in_file=inputs["in_file"],
             out_file=inputs["out_file"],
+            smooth_iters=inputs["smooth_iters"],
         )[name]
     return None
 
@@ -27,7 +27,7 @@ def out_file_default(inputs):
     return _gen_filename("out_file", inputs=inputs)
 
 
-@shell.define(xor=[["smooth_iters", "fwhm"]])
+@shell.define(xor=[["fwhm", "smooth_iters"]])
 class SurfaceSmooth(shell.Task["SurfaceSmooth.Outputs"]):
     """
     Examples
@@ -39,9 +39,9 @@ class SurfaceSmooth(shell.Task["SurfaceSmooth.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.surface_smooth import SurfaceSmooth
 
     >>> task = SurfaceSmooth()
-    >>> task.inputs.in_file = MghGz.mock("lh.cope1.mgz")
-    >>> task.inputs.hemi = "lh"
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = MghGz.mock("lh.cope1.mgz")
+    >>> task.hemi = "lh"
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -78,7 +78,7 @@ class SurfaceSmooth(shell.Task["SurfaceSmooth.Outputs"]):
         )
 
 
-def _list_outputs(in_file=None, fwhm=None, smooth_iters=None, out_file=None):
+def _list_outputs(fwhm=None, in_file=None, out_file=None, smooth_iters=None):
     outputs = {}
     outputs["out_file"] = out_file
     if outputs["out_file"] is attrs.NOTHING:

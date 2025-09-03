@@ -57,7 +57,7 @@ def rh_ribbon_callable(output_dir, inputs, stdout, stderr):
     return outputs.get("rh_ribbon")
 
 
-@shell.define(xor=[["in_aseg", "aseg"]])
+@shell.define(xor=[["aseg", "in_aseg"]])
 class VolumeMask(shell.Task["VolumeMask.Outputs"]):
     """
     Examples
@@ -68,16 +68,16 @@ class VolumeMask(shell.Task["VolumeMask.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.volume_mask import VolumeMask
 
     >>> task = VolumeMask()
-    >>> task.inputs.left_whitelabel = 2
-    >>> task.inputs.right_whitelabel = 41
-    >>> task.inputs.lh_pial = Pial.mock("lh.pial")
-    >>> task.inputs.rh_pial = File.mock()
-    >>> task.inputs.lh_white = Pial.mock("lh.pial")
-    >>> task.inputs.rh_white = File.mock()
-    >>> task.inputs.aseg = File.mock()
-    >>> task.inputs.subject_id = "10335"
-    >>> task.inputs.in_aseg = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.left_whitelabel = 2
+    >>> task.right_whitelabel = 41
+    >>> task.lh_pial = Pial.mock("lh.pial")
+    >>> task.rh_pial = File.mock()
+    >>> task.lh_white = Pial.mock("lh.pial")
+    >>> task.rh_white = File.mock()
+    >>> task.aseg = File.mock()
+    >>> task.subject_id = "10335"
+    >>> task.in_aseg = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

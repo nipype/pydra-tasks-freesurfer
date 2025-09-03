@@ -28,7 +28,7 @@ def curv_formatter(field, inputs):
 
 def _gen_filename(name, inputs):
     if name == "out_file":
-        return _list_outputs(out_file=inputs["out_file"], in_surf=inputs["in_surf"])[
+        return _list_outputs(in_surf=inputs["in_surf"], out_file=inputs["out_file"])[
             name
         ]
     return None
@@ -50,12 +50,12 @@ class Register(shell.Task["Register.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.registration.register import Register
 
     >>> task = Register()
-    >>> task.inputs.in_surf = Pial.mock("lh.pial")
-    >>> task.inputs.target = File.mock()
-    >>> task.inputs.in_sulc = Pial.mock("lh.pial")
-    >>> task.inputs.out_file = "lh.pial.reg"
-    >>> task.inputs.in_smoothwm = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_surf = Pial.mock("lh.pial")
+    >>> task.target = File.mock()
+    >>> task.in_sulc = Pial.mock("lh.pial")
+    >>> task.out_file = "lh.pial.reg"
+    >>> task.in_smoothwm = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -98,7 +98,7 @@ class Register(shell.Task["Register.Outputs"]):
         )
 
 
-def _list_outputs(out_file=None, in_surf=None):
+def _list_outputs(in_surf=None, out_file=None):
     outputs = {}
     if out_file is not attrs.NOTHING:
         outputs["out_file"] = os.path.abspath(out_file)

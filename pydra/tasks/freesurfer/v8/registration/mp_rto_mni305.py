@@ -43,9 +43,9 @@ def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
             _get_fname(
                 inputs["in_file"],
                 inputs=inputs["inputs"],
-                stdout=inputs["stdout"],
-                stderr=inputs["stderr"],
                 output_dir=inputs["output_dir"],
+                stderr=inputs["stderr"],
+                stdout=inputs["stdout"],
             ),
             "to",
             inputs["target"],
@@ -81,10 +81,10 @@ class MPRtoMNI305(shell.Task["MPRtoMNI305.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.registration.mp_rto_mni305 import MPRtoMNI305
 
     >>> task = MPRtoMNI305()
-    >>> task.inputs.reference_dir = Directory.mock()
-    >>> task.inputs.target = "structural.nii"
-    >>> task.inputs.in_file = File.mock()
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.reference_dir = Directory.mock()
+    >>> task.target = "structural.nii"
+    >>> task.in_file = File.mock()
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
@@ -109,5 +109,5 @@ class MPRtoMNI305(shell.Task["MPRtoMNI305.Outputs"]):
         )
 
 
-def _get_fname(fname, inputs=None, stdout=None, stderr=None, output_dir=None):
+def _get_fname(fname, inputs=None, output_dir=None, stderr=None, stdout=None):
     return split_filename(fname)[1]

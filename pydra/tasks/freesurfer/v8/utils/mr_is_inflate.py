@@ -29,7 +29,7 @@ def out_sulc_callable(output_dir, inputs, stdout, stderr):
     return outputs.get("out_sulc")
 
 
-@shell.define(xor=[["out_sulc", "no_save_sulc"]])
+@shell.define(xor=[["no_save_sulc", "out_sulc"]])
 class MRIsInflate(shell.Task["MRIsInflate.Outputs"]):
     """
     Examples
@@ -41,8 +41,8 @@ class MRIsInflate(shell.Task["MRIsInflate.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.mr_is_inflate import MRIsInflate
 
     >>> task = MRIsInflate()
-    >>> task.inputs.in_file = Pial.mock("lh.pial")
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.in_file = Pial.mock("lh.pial")
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 

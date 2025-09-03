@@ -9,7 +9,7 @@ from pydra.compose import shell
 logger = logging.getLogger(__name__)
 
 
-@shell.define(xor=[["subject_id", "reg_file"], ["mkmask", "source_file"]])
+@shell.define(xor=[["mkmask", "source_file"], ["reg_file", "subject_id"]])
 class Surface2VolTransform(shell.Task["Surface2VolTransform.Outputs"]):
     """
     Examples
@@ -21,11 +21,11 @@ class Surface2VolTransform(shell.Task["Surface2VolTransform.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.surface_2_vol_transform import Surface2VolTransform
 
     >>> task = Surface2VolTransform()
-    >>> task.inputs.source_file = MghGz.mock("lh.cope1.mgz")
-    >>> task.inputs.hemi = "lh"
-    >>> task.inputs.reg_file = File.mock()
-    >>> task.inputs.template_file = File.mock()
-    >>> task.inputs.subjects_dir = "."
+    >>> task.source_file = MghGz.mock("lh.cope1.mgz")
+    >>> task.hemi = "lh"
+    >>> task.reg_file = File.mock()
+    >>> task.template_file = File.mock()
+    >>> task.subjects_dir = "."
     >>> task.cmdline
     'mri_surf2vol --hemi lh --volreg register.mat --surfval lh.cope1.mgz --sd . --template cope1.nii.gz --outvol lh.cope1_asVol.nii --vtxvol lh.cope1_asVol_vertex.nii'
 

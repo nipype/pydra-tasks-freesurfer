@@ -228,17 +228,17 @@ def glm_dir_default(inputs):
 
 @shell.define(
     xor=[
-        ["weight_inv", "weighted_ls"],
-        ["weighted_ls", "weight_sqrt"],
-        ["design", "one_sample", "contrast", "fsgd"],
-        ["nii", "nii_gz"],
-        ["design", "fsgd", "one_sample"],
-        ["weight_inv", "weighted_ls", "weight_file", "weight_sqrt"],
-        ["prune_thresh", "no_prune"],
-        ["weight_file", "weighted_ls"],
-        ["fixed_fx_dof_file", "fixed_fx_dof"],
-        ["no_prune", "prune_thresh"],
+        ["contrast", "design", "fsgd", "one_sample"],
         ["cortex", "label_file"],
+        ["design", "fsgd", "one_sample"],
+        ["fixed_fx_dof", "fixed_fx_dof_file"],
+        ["nii", "nii_gz"],
+        ["no_prune", "prunethresh"],
+        ["noprune", "prune_thresh"],
+        ["weight_file", "weight_inv", "weight_sqrt", "weighted_ls"],
+        ["weight_file", "weighted_ls"],
+        ["weight_inv", "weighted_ls"],
+        ["weight_sqrt", "weighted_ls"],
     ]
 )
 class OneSampleTTest(shell.Task["OneSampleTTest.Outputs"]):

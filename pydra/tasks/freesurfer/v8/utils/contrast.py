@@ -59,14 +59,14 @@ class Contrast(shell.Task["Contrast.Outputs"]):
     >>> from pydra.tasks.freesurfer.v8.utils.contrast import Contrast
 
     >>> task = Contrast()
-    >>> task.inputs.subject_id = "10335"
-    >>> task.inputs.thickness = File.mock()
-    >>> task.inputs.white = White.mock("lh.white" # doctest: +SKIP)
-    >>> task.inputs.annotation = Annot.mock("../label/lh.aparc.annot" # doctest: +SKIP)
-    >>> task.inputs.cortex = File.mock()
-    >>> task.inputs.orig = File.mock()
-    >>> task.inputs.rawavg = MghGz.mock("../mri/rawavg.mgz" # doctest: +SKIP)
-    >>> task.inputs.subjects_dir = Directory.mock()
+    >>> task.subject_id = "10335"
+    >>> task.thickness = File.mock()
+    >>> task.white = White.mock("lh.white" # doctest: +SKIP)
+    >>> task.annotation = Annot.mock("../label/lh.aparc.annot" # doctest: +SKIP)
+    >>> task.cortex = File.mock()
+    >>> task.orig = File.mock()
+    >>> task.rawavg = MghGz.mock("../mri/rawavg.mgz" # doctest: +SKIP)
+    >>> task.subjects_dir = Directory.mock()
     >>> task.cmdline
     'None'
 
