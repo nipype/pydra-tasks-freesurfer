@@ -39,7 +39,7 @@ def out_table_default(inputs):
 @shell.define(
     xor=[
         ["in_annotation", "in_label"],
-        ["in_annotatoin", "in_label", "out_color"],
+        ["in_annotation", "in_label", "out_color"],
         ["in_label", "out_color"],
     ]
 )
@@ -131,13 +131,13 @@ class ParcellationStats(shell.Task["ParcellationStats.Outputs"]):
     subjects_dir: Directory = shell.arg(help="subjects directory")
 
     class Outputs(shell.Outputs):
-        out_table: Path = shell.outarg(
+        out_table: File | None = shell.outarg(
             help="Table output to tablefile",
             argstr="-f {out_table}",
             requires=["tabular_output"],
             path_template="out_table",
         )
-        out_color: Path | None = shell.outarg(
+        out_color: File | None = shell.outarg(
             help="Output annotation files's colortable to text file",
             argstr="-c {out_color}",
             path_template='"test.ctab"',

@@ -1,7 +1,7 @@
 import attrs
 from fileformats.generic import File
 import logging
-from pydra.tasks.io.v8 import FreeSurferSource
+from pydra.tasks.freesurfer.v8.nipype_ports.interfaces.io import FreeSurferSource
 import os
 from pydra.compose import shell
 from pydra.utils.typing import MultiInputObj
@@ -529,12 +529,12 @@ class ReconAll(shell.Task["ReconAll.Outputs"]):
         requires=["subject_id"],
         formatter="T1_files_formatter",
     )
-    T2_file: File = shell.arg(
+    T2_file: File | None = shell.arg(
         help="Convert T2 image to orig directory",
         argstr="-T2 {T2_file}",
         requires=["subject_id"],
     )
-    FLAIR_file: File = shell.arg(
+    FLAIR_file: File | None = shell.arg(
         help="Convert FLAIR image to orig directory",
         argstr="-FLAIR {FLAIR_file}",
         requires=["subject_id"],

@@ -136,7 +136,7 @@ class SurfaceSnapshots(shell.Task["SurfaceSnapshots.Outputs"]):
     )
     show_curv: bool = shell.arg(help="show curvature", argstr="-curv")
     show_gray_curv: bool = shell.arg(help="show curvature in gray", argstr="-gray")
-    overlay: File = shell.arg(
+    overlay: File | None = shell.arg(
         help="load an overlay volume/surface",
         argstr="-overlay {overlay}",
         requires=["overlay_range"],
