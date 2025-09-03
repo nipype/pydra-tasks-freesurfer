@@ -75,7 +75,7 @@ class Concatenate(shell.Task["Concatenate.Outputs"]):
         help="Multiply input by an ascii matrix in file",
         argstr="--mtx {multiply_matrix_file}",
     )
-    combine: bool = shell.arg(
+    combine_: bool = shell.arg(
         help="Combine non-zero values into single frame volume", argstr="--combine"
     )
     keep_dtype: bool = shell.arg(

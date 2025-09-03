@@ -2,7 +2,6 @@ from fileformats.generic import File
 from hashlib import md5
 import hashlib
 import logging
-from .. import config
 from pydra.tasks.freesurfer.v8.nipype_ports.utils.misc import is_container
 import os
 import os.path as op
