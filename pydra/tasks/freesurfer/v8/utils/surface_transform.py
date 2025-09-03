@@ -105,7 +105,7 @@ class SurfaceTransform(shell.Task["SurfaceTransform.Outputs"]):
         requires=["source_file"],
     )
     target_type: ty.Any = shell.arg(
-        help="output format", formatter="target_type_formatter"
+        help="output format", formatter=target_type_formatter
     )
     reshape: bool = shell.arg(
         help="reshape output surface to conform with Nifti", argstr="--reshape"
