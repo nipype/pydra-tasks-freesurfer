@@ -68,7 +68,7 @@ class Label2Vol(shell.Task["Label2Vol.Outputs"]):
     annot_file: File | None = shell.arg(
         help="surface annotation file",
         argstr="--annot {annot_file}",
-        requires=("subject_id", "hemi"),
+        requires=["subject_id", "hemi"],
     )
     seg_file: File | None = shell.arg(
         help="segmentation file", argstr="--seg {seg_file}"
@@ -99,7 +99,7 @@ class Label2Vol(shell.Task["Label2Vol.Outputs"]):
     proj: ty.Any = shell.arg(
         help="project along surface normal",
         argstr="--proj {proj[0]} {proj[1]} {proj[2]} {proj[3]}",
-        requires=("subject_id", "hemi"),
+        requires=["subject_id", "hemi"],
     )
     subject_id: str = shell.arg(help="subject id", argstr="--subject {subject_id}")
     hemi: ty.Any = shell.arg(help="hemisphere to use lh or rh", argstr="--hemi {hemi}")
