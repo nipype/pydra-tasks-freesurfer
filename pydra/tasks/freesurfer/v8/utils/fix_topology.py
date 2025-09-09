@@ -94,7 +94,7 @@ class FixTopology(shell.Task["FixTopology.Outputs"]):
         help="No documentation. Direct questions to analysis-bugs@nmr.mgh.harvard.edu",
         argstr="-mgz",
     )
-    sphere: Nofix = shell.arg(help="Sphere input file", formatter="sphere_formatter")
+    sphere: Nofix = shell.arg(help="Sphere input file", formatter=sphere_formatter)
     subjects_dir: Directory = shell.arg(help="subjects directory")
 
     class Outputs(shell.Outputs):

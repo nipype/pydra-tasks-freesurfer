@@ -73,7 +73,7 @@ class AddXFormToHeader(shell.Task["AddXFormToHeader.Outputs"]):
     executable = "mri_add_xform_to_header"
     in_file: MghGz = shell.arg(help="input volume", argstr="{in_file}", position=-2)
     transform: File = shell.arg(
-        help="xfm file", position=-3, formatter="transform_formatter"
+        help="xfm file", position=-3, formatter=transform_formatter
     )
     out_file: Path = shell.arg(
         help="output volume", argstr="{out_file}", position=-1, default="output.mgz"

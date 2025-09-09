@@ -95,7 +95,7 @@ class MPRtoMNI305(shell.Task["MPRtoMNI305.Outputs"]):
     reference_dir: Directory | None = shell.arg(help="TODO", default="")
     target: ty.Any | None = shell.arg(help="input atlas file", default="")
     in_file: File = shell.arg(
-        help="the input file prefix for MPRtoMNI305", formatter="in_file_formatter"
+        help="the input file prefix for MPRtoMNI305", formatter=in_file_formatter
     )
     subjects_dir: Directory = shell.arg(help="subjects directory")
 

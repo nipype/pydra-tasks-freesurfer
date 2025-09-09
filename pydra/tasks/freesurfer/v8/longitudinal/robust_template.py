@@ -152,7 +152,7 @@ class RobustTemplate(shell.Task["RobustTemplate.Outputs"]):
     )
     average_metric: ty.Any = shell.arg(
         help="construct template from: 0 Mean, 1 Median (default)",
-        formatter="average_metric_formatter",
+        formatter=average_metric_formatter,
     )
     initial_timepoint: int = shell.arg(
         help="use TP# for special init (default random), 0: no init",

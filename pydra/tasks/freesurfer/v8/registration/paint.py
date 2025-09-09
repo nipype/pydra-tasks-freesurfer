@@ -54,7 +54,7 @@ class Paint(shell.Task["Paint.Outputs"]):
         position=-2,
     )
     template: File = shell.arg(
-        help="Template file", position=-3, formatter="template_formatter"
+        help="Template file", position=-3, formatter=template_formatter
     )
     template_param: int = shell.arg(help="Frame number of the input template")
     averages: int = shell.arg(help="Average curvature patterns", argstr="-a {averages}")

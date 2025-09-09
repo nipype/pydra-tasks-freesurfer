@@ -143,7 +143,7 @@ class Tkregister2(shell.Task["Tkregister2.Outputs"]):
     )
     lta_in: File = shell.arg(
         help="use a matrix in MNI coordinates as initial registration",
-        formatter="lta_in_formatter",
+        formatter=lta_in_formatter,
     )
     invert_lta_in: bool = shell.arg(
         help="Invert input LTA before applying", requires=["lta_in"]

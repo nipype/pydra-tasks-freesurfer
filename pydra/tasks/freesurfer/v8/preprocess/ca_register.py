@@ -80,7 +80,7 @@ class CARegister(shell.Task["CARegister.Outputs"]):
     )
     l_files: list[File] = shell.arg(
         help="undocumented flag used in longitudinal processing",
-        formatter="l_files_formatter",
+        formatter=l_files_formatter,
     )
     num_threads: int = shell.arg(help="allows for specifying more threads")
     subjects_dir: Directory = shell.arg(help="subjects directory")

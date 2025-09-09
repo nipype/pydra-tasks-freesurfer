@@ -89,7 +89,7 @@ class Aparc2Aseg(shell.Task["Aparc2Aseg.Outputs"]):
     )
     out_file: Path = shell.arg(
         help="Full path of file to save the output segmentation in",
-        formatter="out_file_formatter",
+        formatter=out_file_formatter,
     )
     lh_white: Pial = shell.arg(help="Input file must be <subject_id>/surf/lh.white")
     rh_white: File = shell.arg(help="Input file must be <subject_id>/surf/rh.white")
@@ -111,7 +111,7 @@ class Aparc2Aseg(shell.Task["Aparc2Aseg.Outputs"]):
     filled: File = shell.arg(
         help="Implicit input filled file. Only required with FS v5.3."
     )
-    aseg: File = shell.arg(help="Input aseg file", formatter="aseg_formatter")
+    aseg: File = shell.arg(help="Input aseg file", formatter=aseg_formatter)
     volmask: bool = shell.arg(help="Volume mask flag", argstr="--volmask")
     ctxseg: File = shell.arg(help="", argstr="--ctxseg {ctxseg}")
     label_wm: bool = shell.arg(

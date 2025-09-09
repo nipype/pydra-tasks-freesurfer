@@ -224,7 +224,7 @@ class SampleToSurface(shell.Task["SampleToSurface.Outputs"]):
     reg_header: bool = shell.arg(
         help="register based on header geometry",
         requires=["subject_id"],
-        formatter="reg_header_formatter",
+        formatter=reg_header_formatter,
     )
     mni152reg: bool = shell.arg(
         help="source volume is in MNI152 space", argstr="--mni152reg"
@@ -240,12 +240,12 @@ class SampleToSurface(shell.Task["SampleToSurface.Outputs"]):
     override_reg_subj: bool = shell.arg(
         help="override the subject in the reg file header",
         requires=["subject_id"],
-        formatter="override_reg_subj_formatter",
+        formatter=override_reg_subj_formatter,
     )
     sampling_method: ty.Any | None = shell.arg(
         help="how to sample -- at a point or at the max or average over a range",
         requires=["sampling_range", "sampling_units"],
-        formatter="sampling_method_formatter",
+        formatter=sampling_method_formatter,
     )
     sampling_range: ty.Any = shell.arg(
         help="sampling range - a point or a tuple of (min, max, step)"
@@ -286,7 +286,7 @@ class SampleToSurface(shell.Task["SampleToSurface.Outputs"]):
     surf_reg: ty.Any = shell.arg(
         help="use surface registration to target subject",
         requires=["target_subject"],
-        formatter="surf_reg_formatter",
+        formatter=surf_reg_formatter,
     )
     ico_order: int = shell.arg(
         help="icosahedron order when target_subject is 'ico'",
@@ -309,9 +309,7 @@ class SampleToSurface(shell.Task["SampleToSurface.Outputs"]):
     frame: int = shell.arg(
         help="save only one frame (0-based)", argstr="--frame {frame}"
     )
-    out_type: ty.Any = shell.arg(
-        help="output file type", formatter="out_type_formatter"
-    )
+    out_type: ty.Any = shell.arg(help="output file type", formatter=out_type_formatter)
     hits_file: ty.Any = shell.arg(
         help="save image with number of hits at each voxel",
         argstr="--srchit {hits_file}",

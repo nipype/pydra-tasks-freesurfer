@@ -263,7 +263,7 @@ class SegStats(shell.Task["SegStats.Outputs"]):
         argstr="--euler",
     )
     in_intensity: File = shell.arg(
-        help="Undocumented input norm.mgz file", formatter="in_intensity_formatter"
+        help="Undocumented input norm.mgz file", formatter=in_intensity_formatter
     )
     intensity_units: ty.Any = shell.arg(
         help="Intensity units",

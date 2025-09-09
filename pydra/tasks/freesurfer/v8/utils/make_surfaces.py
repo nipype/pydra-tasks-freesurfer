@@ -163,7 +163,7 @@ class MakeSurfaces(shell.Task["MakeSurfaces.Outputs"]):
         default="subject_id",
     )
     in_orig: Pial = shell.arg(
-        help="Implicit input file <hemisphere>.orig", formatter="in_orig_formatter"
+        help="Implicit input file <hemisphere>.orig", formatter=in_orig_formatter
     )
     in_wm: File = shell.arg(help="Implicit input file wm.mgz")
     in_filled: MghGz = shell.arg(help="Implicit input file filled.mgz")

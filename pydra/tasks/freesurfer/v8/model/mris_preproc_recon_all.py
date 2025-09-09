@@ -86,12 +86,12 @@ class MRISPreprocReconAll(shell.Task["MRISPreprocReconAll.Outputs"]):
 
     executable = "mris_preproc"
     surf_measure_file: File | None = shell.arg(
-        help="file necessary for surfmeas", formatter="surf_measure_file_formatter"
+        help="file necessary for surfmeas", formatter=surf_measure_file_formatter
     )
     surfreg_files: list[File] = shell.arg(
         help="lh and rh input surface registration files",
         requires=["lh_surfreg_target", "rh_surfreg_target"],
-        formatter="surfreg_files_formatter",
+        formatter=surfreg_files_formatter,
     )
     lh_surfreg_target: File | None = shell.arg(
         help="Implicit target surface registration file", requires=["surfreg_files"]

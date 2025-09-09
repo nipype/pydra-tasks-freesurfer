@@ -76,7 +76,7 @@ class Curvature(shell.Task["Curvature.Outputs"]):
     in_file: Pial = shell.arg(
         help="Input file for Curvature",
         position=-2,
-        formatter="in_file_formatter",
+        formatter=in_file_formatter,
         copy_mode="File.CopyMode.copy",
     )
     threshold: float = shell.arg(

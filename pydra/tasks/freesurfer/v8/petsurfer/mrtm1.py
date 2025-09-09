@@ -351,7 +351,7 @@ class MRTM1(shell.Task["MRTM1.Outputs"]):
     surf: bool = shell.arg(
         help="analysis is on a surface mesh",
         requires=["subject_id", "hemi"],
-        formatter="surf_formatter",
+        formatter=surf_formatter,
     )
     subject_id: str = shell.arg(help="subject id for surface geometry")
     hemi: ty.Any = shell.arg(help="surface hemisphere")

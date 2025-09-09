@@ -166,7 +166,7 @@ class MRICoreg(shell.Task["MRICoreg.Outputs"]):
     reference_mask: ty.Any = shell.arg(
         help="mask reference volume with given mask, or None if ``False``",
         position=2,
-        formatter="reference_mask_formatter",
+        formatter=reference_mask_formatter,
     )
     source_mask: str = shell.arg(
         help="mask source file with given mask", argstr="--mov-mask"

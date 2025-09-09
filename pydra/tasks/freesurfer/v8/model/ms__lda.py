@@ -117,7 +117,7 @@ class MS_LDA(shell.Task["MS_LDA.Outputs"]):
     )
     use_weights: bool = shell.arg(
         help="Use the weights from a previously generated weight file",
-        formatter="use_weights_formatter",
+        formatter=use_weights_formatter,
     )
     images: list[MghGz] = shell.arg(
         help="list of input FLASH images", argstr="{images}", position=-1

@@ -143,7 +143,7 @@ class MRIsConvert(shell.Task["MRIsConvert.Outputs"]):
     out_file: Path | None = shell.arg(
         help="output filename or True to generate one",
         position=-1,
-        formatter="out_file_formatter",
+        formatter=out_file_formatter,
     )
     out_datatype: ty.Any | None = shell.arg(
         help="These file formats are supported:  ASCII:       .ascICO: .ico, .tri GEO: .geo STL: .stl VTK: .vtk GIFTI: .gii MGH surface-encoded 'volume': .mgh, .mgz"

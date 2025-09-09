@@ -81,7 +81,7 @@ class Register(shell.Task["Register.Outputs"]):
     curv: bool = shell.arg(
         help="Use smoothwm curvature for final alignment",
         requires=["in_smoothwm"],
-        formatter="curv_formatter",
+        formatter=curv_formatter,
     )
     in_smoothwm: File = shell.arg(
         help="Undocumented input file ${SUBJECTS_DIR}/surf/{hemisphere}.smoothwm ",

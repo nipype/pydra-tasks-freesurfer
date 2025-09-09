@@ -90,7 +90,7 @@ class SphericalAverage(shell.Task["SphericalAverage.Outputs"]):
         help="Average subject", argstr="{in_average}", position=-2
     )
     in_surf: Pial = shell.arg(
-        help="Input surface file", position=-3, formatter="in_surf_formatter"
+        help="Input surface file", position=-3, formatter=in_surf_formatter
     )
     hemisphere: ty.Any = shell.arg(
         help="Input hemisphere", argstr="{hemisphere}", position=-4
@@ -104,7 +104,7 @@ class SphericalAverage(shell.Task["SphericalAverage.Outputs"]):
     subject_id: ty.Any = shell.arg(help="Output subject id", argstr="-o {subject_id}")
     erode: int = shell.arg(help="Undocumented", argstr="-erode {erode}")
     in_orig: File = shell.arg(
-        help="Original surface filename", formatter="in_orig_formatter"
+        help="Original surface filename", formatter=in_orig_formatter
     )
     threshold: float = shell.arg(help="Undocumented", argstr="-t {threshold:.1}")
     subjects_dir: Directory = shell.arg(help="subjects directory")

@@ -82,7 +82,7 @@ class ConcatenateLTA(shell.Task["ConcatenateLTA.Outputs"]):
     )
     invert_out: bool = shell.arg(help="invert output LTA", argstr="-invertout")
     out_type: ty.Any = shell.arg(
-        help="set final LTA type", formatter="out_type_formatter"
+        help="set final LTA type", formatter=out_type_formatter
     )
     tal_source_file: File | None = shell.arg(
         help="if in_lta2 is talairach.xfm, specify source for talairach",

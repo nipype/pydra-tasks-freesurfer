@@ -113,7 +113,7 @@ class VolumeMask(shell.Task["VolumeMask.Outputs"]):
         default="subject_id",
     )
     in_aseg: File | None = shell.arg(
-        help="Input aseg file for VolumeMask", formatter="in_aseg_formatter"
+        help="Input aseg file for VolumeMask", formatter=in_aseg_formatter
     )
     save_ribbon: bool = shell.arg(
         help="option to save just the ribbon for the hemispheres in the format ?h.ribbon.mgz",

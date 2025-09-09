@@ -515,19 +515,19 @@ class ReconAll(shell.Task["ReconAll.Outputs"]):
     subject_id: str = shell.arg(help="subject name", argstr="-subjid {subject_id}")
     directive: ty.Any = shell.arg(
         help="process directive",
-        formatter="directive_formatter",
+        formatter=directive_formatter,
         position=1,
         default="all",
     )
     hemi: ty.Any = shell.arg(
         help="hemisphere to process",
         requires=["subject_id"],
-        formatter="hemi_formatter",
+        formatter=hemi_formatter,
     )
     T1_files: list[File] = shell.arg(
         help="name of T1 file to process",
         requires=["subject_id"],
-        formatter="T1_files_formatter",
+        formatter=T1_files_formatter,
     )
     T2_file: File | None = shell.arg(
         help="Convert T2 image to orig directory",
@@ -568,12 +568,12 @@ class ReconAll(shell.Task["ReconAll.Outputs"]):
     hippocampal_subfields_T1: bool = shell.arg(
         help="segment hippocampal subfields using input T1 scan",
         requires=["subject_id"],
-        formatter="hippocampal_subfields_T1_formatter",
+        formatter=hippocampal_subfields_T1_formatter,
     )
     hippocampal_subfields_T2: ty.Any = shell.arg(
         help="segment hippocampal subfields using T2 scan, identified by ID (may be combined with hippocampal_subfields_T1)",
         requires=["subject_id"],
-        formatter="hippocampal_subfields_T2_formatter",
+        formatter=hippocampal_subfields_T2_formatter,
     )
     expert: File | None = shell.arg(
         help="Set parameters using expert file", argstr="-expert {expert}"

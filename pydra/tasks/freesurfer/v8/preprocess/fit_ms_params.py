@@ -109,7 +109,7 @@ class FitMSParams(shell.Task["FitMSParams.Outputs"]):
     in_files: list[MghGz] = shell.arg(
         help="list of FLASH images (must be in mgh format)",
         position=-2,
-        formatter="in_files_formatter",
+        formatter=in_files_formatter,
     )
     tr_list: list[int] = shell.arg(help="list of TRs of the input files (in msec)")
     te_list: list[float] = shell.arg(help="list of TEs of the input files (in msec)")

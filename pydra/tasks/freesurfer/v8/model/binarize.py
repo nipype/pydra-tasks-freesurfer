@@ -146,12 +146,10 @@ class Binarize(shell.Task["Binarize.Outputs"]):
     wm_ven_csf: bool = shell.arg(
         help="WM and ventricular CSF, including choroid (not 4th)", argstr="--wm+vcsf"
     )
-    out_type: ty.Any = shell.arg(
-        help="output file type", formatter="out_type_formatter"
-    )
+    out_type: ty.Any = shell.arg(help="output file type", formatter=out_type_formatter)
     count_file: ty.Any = shell.arg(
         help="save number of hits in ascii file (hits, ntotvox, pct)",
-        formatter="count_file_formatter",
+        formatter=count_file_formatter,
     )
     bin_val: int = shell.arg(
         help="set vox within thresh to val (default is 1)", argstr="--binval {bin_val}"

@@ -274,7 +274,7 @@ class SegStatsReconAll(shell.Task["SegStatsReconAll.Outputs"]):
     )
     brainmask_file: File = shell.arg(
         help="Load brain mask and compute the volume of the brain as the non-zero voxels in this volume",
-        formatter="brainmask_file_formatter",
+        formatter=brainmask_file_formatter,
     )
     etiv: bool = shell.arg(help="Compute ICV from talairach transform", argstr="--etiv")
     etiv_only: ty.Any = shell.arg(
@@ -307,7 +307,7 @@ class SegStatsReconAll(shell.Task["SegStatsReconAll.Outputs"]):
         argstr="--euler",
     )
     in_intensity: File = shell.arg(
-        help="Undocumented input norm.mgz file", formatter="in_intensity_formatter"
+        help="Undocumented input norm.mgz file", formatter=in_intensity_formatter
     )
     intensity_units: ty.Any = shell.arg(
         help="Intensity units",

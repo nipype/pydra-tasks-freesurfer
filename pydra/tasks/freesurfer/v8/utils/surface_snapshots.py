@@ -155,7 +155,7 @@ class SurfaceSnapshots(shell.Task["SurfaceSnapshots.Outputs"]):
     )
     overlay_range: ty.Any = shell.arg(
         help="overlay range--either min, (min, max) or (min, mid, max)",
-        formatter="overlay_range_formatter",
+        formatter=overlay_range_formatter,
     )
     overlay_range_offset: float = shell.arg(
         help="overlay range will be symmetric around offset value",
@@ -176,7 +176,7 @@ class SurfaceSnapshots(shell.Task["SurfaceSnapshots.Outputs"]):
     )
     annot_name: ty.Any | None = shell.arg(
         help="name of annotation to display (must be in $subject/label directory",
-        formatter="annot_name_formatter",
+        formatter=annot_name_formatter,
     )
     label_file: File | None = shell.arg(
         help="path to label file to display", argstr="-label {label_file}"
@@ -214,7 +214,7 @@ class SurfaceSnapshots(shell.Task["SurfaceSnapshots.Outputs"]):
         requires=["screenshot_stem"],
     )
     tcl_script: File = shell.arg(
-        help="override default screenshot script", formatter="tcl_script_formatter"
+        help="override default screenshot script", formatter=tcl_script_formatter
     )
     subjects_dir: Directory = shell.arg(help="subjects directory")
 
