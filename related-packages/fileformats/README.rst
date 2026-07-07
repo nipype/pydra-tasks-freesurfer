@@ -13,7 +13,7 @@ Quick Installation
 
 This extension can be installed for Python 3 using *pip*::
 
-    $ pip3 install fileformats-medimage-freesurfer
+    $ pip3 install fileformats-vendor-freesurfer
 
 This will install the format extensions and dependent base packages.
 
