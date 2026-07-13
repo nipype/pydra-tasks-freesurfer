@@ -50,7 +50,7 @@ jobs:
         git rebase auto-conv
 
     - name: Create pull request
-      uses: peter-evans/create-pull-request@v4
+      uses: peter-evans/create-pull-request@v8
       with:
         branch: main-rebase
         title: 'Rebase main on auto-conv'
