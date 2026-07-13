@@ -59,7 +59,7 @@ jobs:
         commit-message: 'Rebase main on auto-conv'
         labels: auto-conv
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: converted-nipype
         path: pydra/tasks/ants/v2
