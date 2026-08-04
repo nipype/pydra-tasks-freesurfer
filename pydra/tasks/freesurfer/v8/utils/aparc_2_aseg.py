@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 def _format_arg(name, value, inputs, argstr):
-    if value is None:
+    if value is None or value is False:
         return ""
 
     if name == "aseg":
@@ -28,11 +28,24 @@ def _format_arg(name, value, inputs, argstr):
 
 
 def aseg_formatter(field, inputs):
-    return _format_arg("aseg", field, inputs, argstr="--aseg {aseg}")
+    value = inputs["aseg"] if isinstance(inputs, dict) else inputs.aseg
+    return _format_arg("aseg", value, inputs, argstr="--aseg {aseg}")
 
 
 def out_file_formatter(field, inputs):
-    return _format_arg("out_file", field, inputs, argstr="--o {out_file}")
+    value = inputs["out_file"] if isinstance(inputs, dict) else inputs.out_file
+    return _format_arg("out_file", value, inputs, argstr="--o {out_file}")
+
+
+def ctxseg_formatter(field, inputs):
+    value = inputs["ctxseg"] if isinstance(inputs, dict) else inputs.ctxseg
+    if value is None or value is False:
+        return ""
+    return f"--ctxseg {value}"
+
+
+def _no_cmdline(field, inputs):
+    return ""
 
 
 def _list_outputs(inputs=None, stdout=None, stderr=None, output_dir=None):
@@ -87,10 +100,14 @@ class Aparc2Aseg(shell.Task["Aparc2Aseg.Outputs"]):
     subject_id: ty.Any | None = shell.arg(
         help="Subject being processed", argstr="--s {subject_id}", default=False
     )
+    annot: str | None = shell.arg(
+        help="Annotation short name; mri_aparc2aseg looks for <subject>/label/?h.<annot>.annot",
+        argstr="--annot {annot}",
+        default=None,
+    )
     out_file: Path = shell.arg(
         help="Full path of file to save the output segmentation in",
-        formatter="out_file_formatter",
-        default=False,
+        formatter=out_file_formatter,
     )
     lh_white: ty.Any | None = shell.arg(
         help="Input file must be <subject_id>/surf/lh.white",
@@ -122,9 +139,11 @@ class Aparc2Aseg(shell.Task["Aparc2Aseg.Outputs"]):
     )
     lh_annotation: ty.Any = shell.arg(
         help="Input file must be <subject_id>/label/lh.aparc.annot",
+        formatter=_no_cmdline,
     )
     rh_annotation: ty.Any = shell.arg(
         help="Input file must be <subject_id>/label/rh.aparc.annot",
+        formatter=_no_cmdline,
     )
     filled: ty.Any | None = shell.arg(
         help="Implicit input filled file. Only required with FS v5.3.",
@@ -132,7 +151,7 @@ class Aparc2Aseg(shell.Task["Aparc2Aseg.Outputs"]):
     )
     aseg: ty.Any | None = shell.arg(
         help="Input aseg file",
-        formatter="aseg_formatter",
+        formatter=aseg_formatter,
         default=False,
     )
     volmask: bool | None = shell.arg(
@@ -142,7 +161,7 @@ class Aparc2Aseg(shell.Task["Aparc2Aseg.Outputs"]):
     )
     ctxseg: ty.Any | None = shell.arg(
         help="",
-        argstr="--ctxseg {ctxseg}",
+        formatter=ctxseg_formatter,
         default=False,
     )
     label_wm: bool | None = shell.arg(

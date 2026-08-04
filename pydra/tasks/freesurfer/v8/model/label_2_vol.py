@@ -5,8 +5,6 @@ from fileformats.vendor.freesurfer.medimage import Dat, Label
 import logging
 from pydra.tasks.freesurfer.v8.nipype_ports.utils.filemanip import fname_presuffix
 import os
-from pathlib import Path
-from pathlib import Path
 from pydra.compose import shell
 import typing as ty
 
@@ -149,10 +147,11 @@ class Label2Vol(shell.Task["Label2Vol.Outputs"]):
     # subjects_dir: Directory | None = shell.arg(help="subjects directory")
 
     class Outputs(shell.Outputs):
-        vol_label_file: Path = shell.outarg(
+        vol_label_file: File | bool = shell.outarg(
             help="output volume",
             argstr="--o {vol_label_file}",
-            path_template='"vol_label_file.nii"',
+            path_template="vol_label_file.nii.gz",
+            default=True,
         )
 
 
