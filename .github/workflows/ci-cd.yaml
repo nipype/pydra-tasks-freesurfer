@@ -110,7 +110,7 @@ jobs:
     - name: Run tox
       run: tox -v --exit-and-dump-after 1200
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v7
       with:
         fail_ci_if_error: false
         token: ${{ secrets.CODECOV_TOKEN }}
